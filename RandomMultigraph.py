@@ -1,5 +1,5 @@
 from queue import PriorityQueue
-
+import time
 import numpy as np
 
 """
@@ -72,7 +72,6 @@ class Multigraph:
         :param node2: Destination node.
         :param cost: Edge cost.
         """
-        print(self.get_nodes())
 
         if len(self.mg[node1]) < 1 or not node2 in self.mg[node1]:
             self.mg[node1][node2] = {0: cost}
@@ -204,7 +203,7 @@ def rand_weighted_multigraph(n_nodes,
                              probability=0.2,
                              num_max_multiple_edges=1,
                              max_weight=50,
-                             decimals=2,
+                             decimals=0,
                              fl_unweighted=False,
                              fl_diag=True):
     """
@@ -228,7 +227,7 @@ def rand_weighted_undirected_multigraph(n_nodes,
                                         probability=0.2,
                                         num_max_multiple_edges=1,
                                         max_weight=50,
-                                        decimals=2,
+                                        decimals=0,
                                         fl_unweighted=False,
                                         fl_diag=True):
     """
@@ -265,19 +264,6 @@ def print_adj_list_mg(mg):
         print("")
 
 
-if __name__ == '__main__':
-    graph = rand_weighted_multigraph(10)
-    print_adj_list_mg(graph)
-    print("________________")
-    graph = rand_weighted_multigraph(10, fl_diag=False)
-    print_adj_list_mg(graph)
-    print("________________")
-    graph = rand_weighted_undirected_multigraph(10)
-    print_adj_list_mg(graph)
-    print("________________")
-    graph = rand_weighted_undirected_multigraph(10, fl_diag=False)
-    print_adj_list_mg(graph)
-
 """
 III. Distancias Mínimas en Multigrafos.
 """
@@ -288,11 +274,106 @@ III. Distancias Mínimas en Multigrafos.
 def dijkstra_mg(mg, u):
     """
     Function that applies Dijkstra algorithm for minimum distance computation from a node.
-    :param mg: Multigraph (Dict of Dict of Dict)
-    :param u: Selected node
+    :param mg: Multigraph (Dict of Dict of Dict).
+    :param u: Selected node.
+    :return: Distance and Previous node dictionaries
     """
-    d_prev = {}
-    d_prev[u] = u
+    previous = {u: u}
 
-    d_dist = {v: np.inf for v in mg.keys()}
-    print("dijkstra")
+    distance = {v: np.inf for v in mg.keys()}
+    distance[u] = 0
+    visited = {v: False for v in mg.keys()}
+
+    q = PriorityQueue()
+    q.put((0, u))
+
+    while not q.empty():
+        _, v = q.get()
+        if not visited[v]:
+            visited[v] = True
+            for z in mg[v].keys():
+                for k in mg[v][z]:
+                    if visited[z] is False and distance[z] > distance[v] + mg[v][z][k]:
+                        distance[z] = distance[v] + mg[v][z][k]
+                        previous[z] = v
+                        q.put((distance[z], z))
+
+    return distance, previous
+
+
+def min_paths(d_prev):
+    """
+    Calculation of the path to traverse from the first node to every other node in the graph.
+    :param d_prev: List with previous nodes required to traverse to get to selected node.
+    :return: Dictionary with lists of shortest path to every node from the origin.
+    """
+    d_path = {}
+
+    for vertex in d_prev:
+        previous = [vertex, d_prev[vertex]]
+        i = 1
+
+        while previous[i] is not 0:
+            previous.append(d_prev[previous[i]])
+            i += 1
+
+        previous.reverse()
+        d_path[vertex] = previous
+
+    return d_path
+
+
+def time_dijkstra_mg(n_graphs,
+                     n_nodes_ini,
+                     n_nodes_fin,
+                     step,
+                     prob=0.2):
+    # Storage for times
+    countertime = {}
+
+    # Generate n_graphs to measure
+    for graph_number in range(n_graphs):
+
+        # Storage of measurements for every node count.
+        nodes_time = {}
+        for n_nodes in range(n_nodes_ini, n_nodes_fin, step):
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability=prob)
+
+            # Time measurement for every vertex
+            counter = 0
+            for vertex in mg.keys():
+                start = time.time()
+                dijkstra_mg(mg, vertex)
+                end = time.time()
+                counter += (end-start)
+
+            # Mean of Dijkstra time for each vertex
+            nodes_time[n_nodes] = counter / len(mg)
+        # Save for this graph size
+        countertime[graph_number] = nodes_time
+
+    print(countertime)
+
+
+if __name__ == '__main__':
+    # GRAFOS
+    """
+    graph = rand_weighted_multigraph(10)
+    print_adj_list_mg(graph)
+    print("________________")
+    graph = rand_weighted_multigraph(10, fl_diag=False)
+    print_adj_list_mg(graph)
+    print("________________")
+    graph = rand_weighted_undirected_multigraph(10)
+    print_adj_list_mg(graph)
+    print("________________")"""
+    graph = rand_weighted_undirected_multigraph(10, fl_diag=False)
+    # print_adj_list_mg(graph)
+
+    # DISTANCIAS MÍNIMAS
+    dist, prev = dijkstra_mg(graph, 0)
+
+    paths = min_paths(prev)
+    # print(paths)
+    time_dijkstra_mg(5, 1000, 1300, 100)
