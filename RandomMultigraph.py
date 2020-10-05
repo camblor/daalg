@@ -353,7 +353,34 @@ def time_dijkstra_mg(n_graphs,
         # Save for this graph size
         countertime[graph_number] = nodes_time
 
-    print(countertime)
+    return countertime
+
+
+"""
+IV. Dijkstra vs Floyd-Warshall
+"""
+def dijkstra_all_pairs(g):
+    matrix = []
+
+    for node in g:
+        distance, _ = dijkstra_mg(g, node)
+        matrix.append(distance.items())
+    
+    return matrix
+
+def dg_2_ma(g):
+    matrix = dijkstra_all_pairs(g)
+    adjacencymat = []
+
+    for row in matrix:
+        adjrow = []
+        for item in row:
+            if item[1] is not np.inf:
+                adjrow.append(1)
+            else:
+                adjrow.append(0)
+        adjacencymat.append(adjrow)
+    print(adjacencymat)
 
 
 if __name__ == '__main__':
@@ -376,4 +403,9 @@ if __name__ == '__main__':
 
     paths = min_paths(prev)
     # print(paths)
-    time_dijkstra_mg(5, 1000, 1300, 100)
+    time_dijkstra_mg(1, 500, 1000, 100)
+
+    # IV. Dijkstra vs Floyd-Warshall
+    matrix = dijkstra_all_pairs(graph)
+    #print(matrix)
+    adjacencymat = dg_2_ma(graph)
