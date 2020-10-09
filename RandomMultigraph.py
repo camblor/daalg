@@ -346,7 +346,7 @@ def time_dijkstra_mg(n_graphs,
                 start = time.time()
                 dijkstra_mg(mg, vertex)
                 end = time.time()
-                counter += (end-start)
+                counter += (end - start)
 
             # Mean of Dijkstra time for each vertex
             nodes_time[n_nodes] = counter / len(mg)
@@ -359,14 +359,17 @@ def time_dijkstra_mg(n_graphs,
 """
 IV. Dijkstra vs Floyd-Warshall
 """
+
+
 def dijkstra_all_pairs(g):
     matrix = []
 
     for node in g:
         distance, _ = dijkstra_mg(g, node)
         matrix.append(distance.items())
-    
+
     return matrix
+
 
 def dg_2_ma(g):
     matrix = dijkstra_all_pairs(g)
@@ -375,13 +378,21 @@ def dg_2_ma(g):
     for row in matrix:
         adjrow = []
         for item in row:
-            if item[1] is not np.inf:
-                adjrow.append(1)
-            else:
-                adjrow.append(0)
+            adjrow.append(item[1])
         adjacencymat.append(adjrow)
-    print(adjacencymat)
+    return adjacencymat
 
+def floyd_warshall(ma_g): #n=no. of vertex
+    dist = []
+    n = len(ma_g)
+    for i in range(n):
+        dist[i] = []
+
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                dist[i][j] = min(ma_g[i][j] ,ma_g[i][k]+ ma_g[k][j])
+    return dist
 
 if __name__ == '__main__':
     # GRAFOS
@@ -407,5 +418,8 @@ if __name__ == '__main__':
 
     # IV. Dijkstra vs Floyd-Warshall
     matrix = dijkstra_all_pairs(graph)
-    #print(matrix)
+    # print(matrix)
     adjacencymat = dg_2_ma(graph)
+    print(adjacencymat)
+    testing = floyd_warshall(adjacencymat)
+    print(testing)
