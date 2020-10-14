@@ -249,53 +249,49 @@ def dijkstra_mg(mg, u):
 
     # Dijkstra algorithm implementation.
     while not q.empty():
-        # Obtains next node from the queue.
-        current = q.get()
 
-        # Checks if we need to visit this node.
-        if not visited[current]:
-            # Marks the node as visited.
-            visited[current] = True
+        current = q.get()  # Obtains next node from the queue.
 
-            # Iterates through every destiny from current node.
-            for dest, routes in mg[current].items():
-                # Iterates through every edge to destiny.
-                for route in routes:
+        if not visited[current]:  # Checks if we need to visit this node.
+
+            visited[current] = True  # Marks the node as visited.
+
+            for dest, routes in mg[current].items():  # Iterates through every destiny from current node.
+
+                for route in routes:  # Iterates through every edge to destiny.
+
                     # Stores direct and traveling distance for comparison
                     current_distance = distance[dest]
                     traveling_distance = distance[current] + mg[current][dest][route]
 
                     # If (destiny node has not been visited + current distance is higher than the traveling distance)
                     if visited[dest] is False and current_distance > traveling_distance:
-                        # Update distance to the traveling distance
-                        distance[dest] = traveling_distance
+                        distance[dest] = traveling_distance  # Update distance to the traveling distance
 
-                        # Update previous node to destination as current node.
-                        previous[dest] = current
+                        previous[dest] = current  # Update previous node to destination as current node.
 
-                        # Puts destiny node into the Priority Queue for further exploration
-                        q.put(dest)
+                        q.put(dest)  # Inserts destiny node into the Priority Queue once again for further exploration.
+
     return distance, previous
 
 
 def min_paths(d_prev):
     """
     Calculation of the path to traverse from the first node to every other node in the graph.
-    :param d_prev: List with previous nodes required to traverse to get to selected node.
+    :param d_prev: Dictionary with previous nodes required to traverse to get to selected node.
     :return: Dictionary with lists of shortest path to every node from the origin.
     """
-    d_path = {}
+    d_path = {}  # Dictionary Initialization
 
     for vertex in d_prev:
-        previous = [vertex, d_prev[vertex]]
+        previous = [vertex, d_prev[vertex]]  # Get the previous node in the path to the selected node.
         i = 1
-
-        while previous[i] is not 0:
-            previous.append(d_prev[previous[i]])
+        while previous[i] is not 0:  # While we haven't arrived the origin.
+            previous.append(d_prev[previous[i]])  # Add the node we are traversing to the path.
             i += 1
 
-        previous.reverse()
-        d_path[vertex] = previous
+        previous.reverse()  # Reverse the path for data representation.
+        d_path[vertex] = previous  # Store the data into our dictionary
 
     return d_path
 
@@ -305,30 +301,44 @@ def time_dijkstra_mg(n_graphs,
                      n_nodes_fin,
                      step,
                      prob=0.2):
-    # Storage for times
-    countertime = {}
+    """
+    Generated a given number of described graphs and computes Dijkstra algorithm for every node for every graph.
+    :param n_graphs: Number of graphs used in the measurement.
+    :param n_nodes_ini: Initial value for the number of nodes interval.
+    :param n_nodes_fin: Final value for the number of nodes interval.
+    :param step: Step between numbers of nodes in the interval.
+    :param prob: Probability to generate edges between two given nodes.
+    :return: Mean of the time elapsed in Dijkstra computations.
+    """
+    countertime = np.zeros(n_graphs)  # Storage for times
 
-    # Generate n_graphs to measure
-    for graph_number in range(n_graphs):
+    for graph_number in range(n_graphs):  # Generate n_graphs to measure
 
-        # Storage of measurements for every node count.
-        nodes_time = {}
-        for n_nodes in range(n_nodes_ini, n_nodes_fin, step):
-            # Graph generation
-            mg = rand_weighted_multigraph(n_nodes, probability=prob)
+        nodes_time = {}  # Storage of measurements for every node count
 
-            # Time measurement for every vertex
-            counter = 0
-            for vertex in mg.keys():
-                start = time.time()
-                dijkstra_mg(mg, vertex)
-                end = time.time()
-                counter += (end - start)
+        for n_nodes in np.arange(n_nodes_ini, n_nodes_fin, step):  # Simulation with given interval
 
-            # Mean of Dijkstra time for each vertex
-            nodes_time[n_nodes] = counter / len(mg)
-        # Save for this graph size
-        countertime[graph_number] = nodes_time
+            mg = rand_weighted_multigraph(n_nodes, probability=prob)  # Graph generation
+
+            counter = 0  # Time measurement for every vertex
+
+            for node in mg.keys():  # Compute Dijkstra for every node in the graph.
+
+                start = time.time()  # Start time counter
+                dijkstra_mg(mg, node)  # Compute Dijkstra for this node.
+                end = time.time()  # End time counter
+
+                counter += (end - start)  # Get time difference == Computing time for Dijkstra for this node.
+
+            nodes_time[n_nodes] = counter / len(mg)  # Mean of Dijkstra time for each vertex
+
+        counter = 0
+        for meantime in nodes_time:
+            counter += meantime
+
+        countertime[graph_number] = counter / len(nodes_time)  # Save for this graph size
+
+    print(countertime)
 
     return countertime
 
@@ -339,39 +349,95 @@ IV. Dijkstra vs Floyd-Warshall
 
 
 def dijkstra_all_pairs(g):
-    matrix = []
+    """
+    Generates a matrix with all the results from Dijkstra Algorithm for every node in the given graph
+    :param g: Given graph
+    :return: Matrix with distances between two nodes represented in cells.
+    """
+    n = len(g)  # Get |g|
+    matrix = np.full((n, n), np.inf)  # Generates the NumPy Matrix
 
-    for node in g:
-        distance, _ = dijkstra_mg(g, node)
-        matrix.append(distance.items())
-    print(matrix)
+    for node in np.arange(n):  # Traverses node index
+
+        distance, _ = dijkstra_mg(g, node)  # Gets the distance
+
+        for destination in np.arange(n):  # Traverses possible destinations
+            matrix[node][destination] = distance[destination]  # Saves the distance in the correct cell.
+
     return matrix
 
 
 def dg_2_ma(g):
-    n = len(g)
-    adj = np.zeros((n, n))
+    """
+    Computes the adjacency matrix of a given graph.
+    :param g: Given graph
+    :return: Adjacency matrix of the graph
+    """
 
-    i = 0
-    for destinations in g.values():
-        for destination, cost in destinations.items():
-            adj[i][destination] = cost[0]
-        i += 1
+    n = len(g)  # Get |g|
 
-    return adj
+    matrix = np.full((n, n), np.inf)  # Prepare matrix with NumPy
+
+    for node in np.arange(n):  # Iterates node index
+        matrix[node][node] = 0  # Sets the value to same node to 0.
+
+        for destination, cost in g[node].items():  # Iterates through destinations
+            matrix[node][destination] = cost[0]  # Updates the matrix with destination cost.
+
+    return matrix
 
 
 def floyd_warshall(ma_g):
-    dist = []
+    print(ma_g)
+    result = np.copy(ma_g)
     n = len(ma_g)
-    for i in range(n):
-        dist[i] = []
 
     for k in range(n):
         for i in range(n):
             for j in range(n):
-                dist[i][j] = min(ma_g[i][j], ma_g[i][k] + ma_g[k][j])
-    return dist
+                result[i][j] = min(ma_g[i][j], ma_g[i][k] + ma_g[k][j])
+    """print("-----")
+    print(result)
+    print("____")"""
+    return result
+
+
+def time_dijkstra_mg_all_pairs(n_graphs,
+                               n_nodes_ini,
+                               n_nodes_fin,
+                               step,
+                               num_max_multiple_edges=1,
+                               probability=0.5):
+    """
+    Generated a given number of described graphs and computes Dijkstra All-Pairs for every node in every graph.
+    :param n_graphs: Number of graphs used in the measurement.
+    :param n_nodes_ini: Initial value for the number of nodes interval.
+    :param n_nodes_fin: Final value for the number of nodes interval.
+    :param step: Step between numbers of nodes in the interval.
+    :param prob: Probability to generate edges between two given nodes.
+    :return: Mean of the time elapsed in Dijkstra computations.
+    """
+    noderange = np.arange(n_nodes_ini, n_nodes_fin, step) # Storage for graph sizes
+    countertime = np.zeros((n_graphs, len(noderange)))  # Storage for times
+
+    for graph_number in range(n_graphs):  # Generate n_graphs to measure
+
+        nodes_time = {}  # Storage of measurements for every node count
+
+        for n_nodes in noderange:  # Simulation with given interval
+            mg = rand_weighted_multigraph(n_nodes, num_max_multiple_edges=num_max_multiple_edges,
+                                          probability=probability)
+
+            start = time.time()  # Start time counter
+            dijkstra_all_pairs(mg)  # Compute Dijkstra for this node.
+            end = time.time()  # End time counter
+
+            graph_size = int((n_nodes-n_nodes_ini) / step)
+            countertime[graph_number][graph_size]= (end - start)  # Get time spent on Dijkstra ALL PAIRS
+
+    print(countertime)
+
+    return countertime
 
 
 if __name__ == '__main__':
