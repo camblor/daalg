@@ -99,39 +99,13 @@ class Multigraph:
         """
         return self.max_weight
 
-    def generate_adjlist(self):
-        """
-        Generates the adjacency list
-        :return: adjacency list
-        """
-
-        keys = self.get_nodes().keys()
-
-        # Iterates for every node
-        for key in keys:
-            # Creates the adjacency node list
-            self.adjlist[key] = {}
-            # Appends the connections into the list
-            for vertex in set(self.get_edges(key).keys()):
-                # Base case
-                if not self.adjlist[key]:
-                    temp1 = AdjNode(vertex)
-                    self.adjlist[key] = temp1
-                # General case
-                else:
-                    temp2 = AdjNode(vertex)
-                    temp1.next = temp2
-                    temp1 = temp2
-
-        return self.adjlist
-
     def __str__(self):
         return str(self.mg)
 
 
 def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
     """
-    Edge generation method, applying probability for computations, for a given multigraph.
+    Edge generation method, applying probability to computations for a given multigraph.
     :param mg: Multigraph structure
     :param fl_diag: Allow/Deny self-connected edges
     :param probability: Edge probability
@@ -140,31 +114,37 @@ def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
     """
 
     # Nodes of the graph
-    nodes = mg.get_nodes().keys()
-
+    nodes = list(mg.get_nodes().keys())
     for node in nodes:
         # Enabled/Disabled Self-linked edges
+
         if fl_diag:
             # NumPy chooses nodes to link from current node
             linked = np.random.choice(list(nodes), mg.get_num_max_multiple_edges())
+
         else:
-            availablenodes = [x for x in nodes if x != node]
+            # Temporary remove the node for election
+            nodes.remove(node)
             # NumPy chooses nodes to link from current node
-            linked = np.random.choice(availablenodes, mg.get_num_max_multiple_edges())
+            linked = np.random.choice(nodes, mg.get_num_max_multiple_edges())
+
+
+            # Return the node to list
+            nodes.append(node)
+            nodes.sort()
 
         # Edges creation
         for lnode in linked:
 
             # Applying probability to edge generation
-            if np.random.uniform(0, 1) < probability:
+            if np.random.uniform() < probability:
 
                 # Setting weight of the edge
                 if fl_unweighted:
                     weight = 1
                 else:
-                    step = 1 / (10 ** mg.get_decimals())
-                    decimal_range = np.arange(0, mg.get_max_weight(), step)
-                    weight = round(np.random.choice(decimal_range), mg.get_decimals())
+                    # Select a number between 0 and maximum weight with uniform probability and truncate it
+                    weight = round(np.random.uniform(0, mg.get_max_weight()), mg.get_decimals())
 
                 # Creates the edges
                 mg.set_edge(node, lnode, weight)
@@ -174,34 +154,9 @@ def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
                     mg.set_edge(lnode, node, weight)
 
 
-def generate_adjlist(mg):
-    """
-    Generation for the adjacency list for a given multigraph.
-    :param mg: Multigraph.
-    :return: Adjacency list of the multigraph.
-    """
-    adjlist = {}
-    # Iterates for every node
-    for key in mg:
-        # Creates the adjacency node list
-        adjlist[key] = {}
-        # Appends the connections into the list
-        for vertex in set(mg[key]):
-            # Base case
-            if not adjlist[key]:
-                temp1 = AdjNode(vertex)
-                adjlist[key] = temp1
-            # General case
-            else:
-                temp2 = AdjNode(vertex)
-                temp1.next = temp2
-                temp1 = temp2
-    return adjlist
-
-
 def rand_weighted_multigraph(n_nodes,
-                             probability=0.2,
-                             num_max_multiple_edges=1,
+                             probability=0.6,
+                             num_max_multiple_edges=2,
                              max_weight=50,
                              decimals=0,
                              fl_unweighted=False,
@@ -217,8 +172,13 @@ def rand_weighted_multigraph(n_nodes,
     :param fl_diag: Flag for enabling/disabling self-linked nodes.
     :return: Directed multigraph constructed with given parameters.
     """
+
     fl_directed = True
+
+    # Creation of the Multigraph Object
     mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+
+    # Multigraph Random Generation
     edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
     return mg.get_nodes()
 
@@ -253,23 +213,18 @@ def print_adj_list_mg(mg):
     :param mg: Multigraph to print
     """
 
-    adjlist = generate_adjlist(mg)
-
-    for key in adjlist:
-        print(str(key) + ":", end="")
-        temp = adjlist[key]
-        while temp:
-            print(" -> {}".format(temp.vertex), end="")
-            temp = temp.next
+    for key, value in mg.items():
+        print(str(key), end="")
+        for destiny in sorted(value.keys()):
+            print(" - {}".format(destiny), end="")
         print("")
+    print("")
 
 
 """
 III. Distancias Mínimas en Multigrafos.
 """
 
-
-# TODO queue = PriorityQueue()
 
 def dijkstra_mg(mg, u):
     """
@@ -278,26 +233,52 @@ def dijkstra_mg(mg, u):
     :param u: Selected node.
     :return: Distance and Previous node dictionaries
     """
+
+    n = len(mg)
+
+    # Previous node initialization
     previous = {u: u}
 
-    distance = {v: np.inf for v in mg.keys()}
+
+    # Distance dictionary creation and initialization
+    distance = {v: np.inf for v in mg}
     distance[u] = 0
-    visited = {v: False for v in mg.keys()}
 
+    # Visited dictionary creation and initialization
+    visited = {v: False for v in mg}
+
+    # Priority queue object creation.
     q = PriorityQueue()
-    q.put((0, u))
-
+    q.put(u)
+    for node in mg.values():
+        print(node)
+    print("")
+    # Dijkstra algorithm implementation.
     while not q.empty():
-        _, v = q.get()
-        if not visited[v]:
-            visited[v] = True
-            for z in mg[v].keys():
-                for k in mg[v][z]:
-                    if visited[z] is False and distance[z] > distance[v] + mg[v][z][k]:
-                        distance[z] = distance[v] + mg[v][z][k]
-                        previous[z] = v
-                        q.put((distance[z], z))
+        # Obtains next node from the queue.
+        current = q.get()
 
+        # Checks if we need to visit this node.
+        if not visited[current]:
+            # Marks the node as visited.
+            visited[current] = True
+
+            # Iterates through every destiny from current node.
+            for dest, routes in mg[current].items():
+                # Iterates through every edge to destiny.
+                for route in routes:
+                    # Stores direct and traveling distance for comparison
+                    current_distance = distance[dest]
+                    traveling_distance = distance[current] + mg[current][dest][route]
+
+                    # If (destiny node has not been visited + current distance is higher than the traveling distance)
+                    if visited[dest] is False and current_distance > traveling_distance:
+                        # Update distance to the traveling distance
+                        distance[dest] = traveling_distance
+                        previous[dest] = current
+                        q.put(dest)
+    print(distance)
+    print(previous)
     return distance, previous
 
 
@@ -367,22 +348,24 @@ def dijkstra_all_pairs(g):
     for node in g:
         distance, _ = dijkstra_mg(g, node)
         matrix.append(distance.items())
-
+    print(matrix)
     return matrix
 
 
 def dg_2_ma(g):
-    matrix = dijkstra_all_pairs(g)
-    adjacencymat = []
+    n = len(g)
+    adj = np.zeros((n, n))
 
-    for row in matrix:
-        adjrow = []
-        for item in row:
-            adjrow.append(item[1])
-        adjacencymat.append(adjrow)
-    return adjacencymat
+    i = 0
+    for destinations in g.values():
+        for destination, cost in destinations.items():
+            adj[i][destination] = cost[0]
+        i += 1
 
-def floyd_warshall(ma_g): #n=no. of vertex
+    return adj
+
+
+def floyd_warshall(ma_g):
     dist = []
     n = len(ma_g)
     for i in range(n):
@@ -391,27 +374,29 @@ def floyd_warshall(ma_g): #n=no. of vertex
     for k in range(n):
         for i in range(n):
             for j in range(n):
-                dist[i][j] = min(ma_g[i][j] ,ma_g[i][k]+ ma_g[k][j])
+                dist[i][j] = min(ma_g[i][j], ma_g[i][k] + ma_g[k][j])
     return dist
+
 
 if __name__ == '__main__':
     # GRAFOS
-    """
     graph = rand_weighted_multigraph(10)
     print_adj_list_mg(graph)
+    """
+    
     print("________________")
     graph = rand_weighted_multigraph(10, fl_diag=False)
     print_adj_list_mg(graph)
     print("________________")
     graph = rand_weighted_undirected_multigraph(10)
     print_adj_list_mg(graph)
-    print("________________")"""
+    print("________________")
     graph = rand_weighted_undirected_multigraph(10, fl_diag=False)
     # print_adj_list_mg(graph)
 
-    # DISTANCIAS MÍNIMAS
+    # DISTANCIAS MÍNIMAS"""
     dist, prev = dijkstra_mg(graph, 0)
-
+    """
     paths = min_paths(prev)
     # print(paths)
     time_dijkstra_mg(1, 500, 1000, 100)
@@ -423,3 +408,4 @@ if __name__ == '__main__':
     print(adjacencymat)
     testing = floyd_warshall(adjacencymat)
     print(testing)
+    """
