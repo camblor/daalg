@@ -128,7 +128,6 @@ def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
             # NumPy chooses nodes to link from current node
             linked = np.random.choice(nodes, mg.get_num_max_multiple_edges())
 
-
             # Return the node to list
             nodes.append(node)
             nodes.sort()
@@ -234,11 +233,8 @@ def dijkstra_mg(mg, u):
     :return: Distance and Previous node dictionaries
     """
 
-    n = len(mg)
-
     # Previous node initialization
     previous = {u: u}
-
 
     # Distance dictionary creation and initialization
     distance = {v: np.inf for v in mg}
@@ -250,9 +246,7 @@ def dijkstra_mg(mg, u):
     # Priority queue object creation.
     q = PriorityQueue()
     q.put(u)
-    for node in mg.values():
-        print(node)
-    print("")
+
     # Dijkstra algorithm implementation.
     while not q.empty():
         # Obtains next node from the queue.
@@ -275,10 +269,12 @@ def dijkstra_mg(mg, u):
                     if visited[dest] is False and current_distance > traveling_distance:
                         # Update distance to the traveling distance
                         distance[dest] = traveling_distance
+
+                        # Update previous node to destination as current node.
                         previous[dest] = current
+
+                        # Puts destiny node into the Priority Queue for further exploration
                         q.put(dest)
-    print(distance)
-    print(previous)
     return distance, previous
 
 
