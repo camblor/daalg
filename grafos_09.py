@@ -10,7 +10,9 @@ II. MULTI-GRAPHS
 class Multigraph:
     """
     Class for multigraph representation.
-    Its main purpose is to store all the variables needed during multigraph generation.
+    ___________________________________
+    Its main purpose is to store all the variables needed
+    during multigraph generation.
     """
 
     def __init__(self, n_nodes, decimals, num_max_multiple_edges, max_weight):
@@ -60,14 +62,15 @@ class Multigraph:
         :param cost: Edge cost.
         """
 
-        if len(self.mg[node1]) < 1 or not node2 in self.mg[node1]:
+        if (len(self.mg[node1]) < 1) or (node2 not in self.mg[node1]):
             self.mg[node1][node2] = {0: cost}
         else:
             self.mg[node1][node2][len(self.mg[node1][node2])] = cost
 
     def get_num_max_multiple_edges(self):
         """
-        Gets the maximum number of edges for each node in the current multigraph
+        Gets the maximum number of edges for each node
+        in the current multigraph
         :return: Maximum number of edges for each node.
         """
         return self.num_max_multiple_edges
@@ -92,7 +95,8 @@ class Multigraph:
 
 def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
     """
-    Edge generation method, applying probability to computations for a given multigraph.
+    Edge generation method, applying probability to computations
+    for a given multigraph.
     :param mg: Multigraph structure
     :param fl_diag: Allow/Deny self-connected edges
     :param probability: Edge probability
@@ -107,7 +111,9 @@ def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
         if not fl_diag:  # When disabled self-linked-edges
             nodes.remove(node)
 
-        linked = np.random.choice(list(nodes), mg.get_num_max_multiple_edges())  # NumPy chooses nodes to link
+        # NumPy chooses nodes to link
+        linked = np.random.choice(list(nodes),
+                                  mg.get_num_max_multiple_edges())
 
         if not fl_diag:  # When disabled self-linked-edges
             nodes.append(node)  # Return the node to list
@@ -116,24 +122,31 @@ def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
         # EDGE CREATION
 
         for lnode in linked:  # For every selected node
-
-            if np.random.uniform() < probability:  # Numpy randomly generates edges according to probability
+            # Numpy randomly generates edges according to probability
+            if np.random.uniform() < probability:
                 # Setting weight of the edge
 
                 if fl_unweighted:  # When disabled graph weight
                     weight = 1
                 else:
-                    # Select a number between 0 and maximum weight with uniform probability. Truncate to decimals.
-                    weight = round(np.random.uniform(0, mg.get_max_weight()), mg.get_decimals())
+                    # Select a number between 0 and maximum weight with
+                    # uniform probability. Truncate to decimals.
+                    weight = round(np.random.uniform(0,
+                                                     mg.get_max_weight()),
+                                   mg.get_decimals())
 
-                mg.set_edge(node, lnode, weight)  # Creates each individual edge
+                mg.set_edge(node, lnode, weight)  # Creates each edge
 
-                if not fl_directed:  # If undirected graph, connect both nodes.
+                if not fl_directed:  # If undirected graph, connect both nodes
                     mg.set_edge(lnode, node, weight)
 
 
-def rand_weighted_multigraph(n_nodes, probability=0.6, num_max_multiple_edges=2, max_weight=50, decimals=0,
-                             fl_unweighted=False, fl_diag=True):
+def rand_weighted_multigraph(n_nodes, probability=0.6,
+                             num_max_multiple_edges=2,
+                             max_weight=50,
+                             decimals=0,
+                             fl_unweighted=False,
+                             fl_diag=True):
     """
     Function that generates a directed multigraph with given parameters.
     :param n_nodes: Number of nodes of the graph.
@@ -147,18 +160,23 @@ def rand_weighted_multigraph(n_nodes, probability=0.6, num_max_multiple_edges=2,
     """
 
     fl_directed = True
-
-    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)  # Creation of the Multigraph Object
-
-    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)  # Multigraph Random Generation
+    # Creation of the Multigraph Object
+    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+    # Multigraph Random Generation
+    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
 
     mg = mg.get_nodes()  # Gets Multigraph dictionary structure
 
     return mg
 
 
-def rand_weighted_undirected_multigraph(n_nodes, probability=0.2, num_max_multiple_edges=1, max_weight=50,
-                                        decimals=0, fl_unweighted=False, fl_diag=True):
+def rand_weighted_undirected_multigraph(n_nodes,
+                                        probability=0.2,
+                                        num_max_multiple_edges=1,
+                                        max_weight=50,
+                                        decimals=0,
+                                        fl_unweighted=False,
+                                        fl_diag=True):
     """
     Function that generates an undirected multigraph with given parameters.
     :param n_nodes: Number of nodes of the graph.
@@ -176,20 +194,6 @@ def rand_weighted_undirected_multigraph(n_nodes, probability=0.2, num_max_multip
     return mg.get_nodes()
 
 
-def print_adj_list_mg(mg):
-    """
-    Print the adjacency list for a given multigraph
-    :param mg: Multigraph to print
-    """
-
-    for key, value in mg.items():
-        print(str(key), end="")
-        for destiny in sorted(value.keys()):
-            print(" - {}".format(destiny), end="")
-        print("")
-    print("")
-
-
 """
 III. Minimum distances in Multigraphs.
 """
@@ -197,7 +201,8 @@ III. Minimum distances in Multigraphs.
 
 def dijkstra_mg(mg, u):
     """
-    Function that applies Dijkstra algorithm for minimum distance computation from a node.
+    Function that applies Dijkstra algorithm for minimum
+    distance computation from a node.
     :param mg: Multigraph (Dict of Dict of Dict).
     :param u: Selected node.
     :return: Distance and Previous node dictionaries
@@ -224,39 +229,46 @@ def dijkstra_mg(mg, u):
         if not visited[current]:  # Checks if we need to visit this node.
 
             visited[current] = True  # Marks the node as visited.
-
-            for dest, routes in mg[current].items():  # Iterates through every destiny from current node.
-
-                for route in routes:  # Iterates through every edge to destiny.
+            # Iterates through every destiny from current node.
+            for dest, routes in mg[current].items():
+                # Iterates through every edge to destiny.
+                for route in routes:
 
                     # Stores direct and traveling distance for comparison
                     current_distance = distance[dest]
-                    traveling_distance = distance[current] + mg[current][dest][route]
+                    traveling_distance = distance[current]
+                    traveling_distance += mg[current][dest][route]
 
-                    # If (destiny node has not been visited + current distance is higher than the traveling distance)
-                    if visited[dest] is False and current_distance > traveling_distance:
-                        distance[dest] = traveling_distance  # Update distance to the traveling distance
-
-                        previous[dest] = current  # Update previous node to destination as current node.
-
-                        q.put((distance[dest], dest))  # Inserts next node for Dijkstra.
+                    # If (destiny node has not been visited +
+                    # current distance is higher than the traveling distance)
+                    if not visited[dest] and \
+                            current_distance > traveling_distance:
+                        # Update distance to the traveling distance
+                        distance[dest] = traveling_distance
+                        # Update previous node to destination as current node.
+                        previous[dest] = current
+                        # Inserts next node for Dijkstra.
+                        q.put((distance[dest], dest))
 
     return distance, previous
 
 
 def min_paths(d_prev):
     """
-    Calculation of the path to traverse from the first node to every other node in the graph.
-    :param d_prev: Dictionary with previous nodes required to traverse to get to selected node.
-    :return: Dictionary with lists of shortest path to every node from the origin.
+    Calculation of the path to traverse from the
+    first node to every other node in the graph.
+    :param d_prev: Dictionary with previous nodes required to traverse.
+    :return: Dictionary with lists of shortest path to all node from origin
     """
     d_path = {}  # Dictionary Initialization
 
     for vertex in d_prev:
-        previous = [vertex, d_prev[vertex]]  # Get the previous node in the path to the selected node.
+        # Get the previous node in the path to the selected node.
+        previous = [vertex, d_prev[vertex]]
         i = 1
         while previous[i] is not 0:  # While we haven't arrived the origin.
-            previous.append(d_prev[previous[i]])  # Add the node we are traversing to the path.
+            # Add the node we are traversing to the path.
+            previous.append(d_prev[previous[i]])
             i += 1
 
         previous.reverse()  # Reverse the path for data representation.
@@ -267,7 +279,8 @@ def min_paths(d_prev):
 
 def time_dijkstra_mg(n_graphs, n_nodes_ini, n_nodes_fin, step, prob=0.2):
     """
-    Generated a given number of described graphs and computes Dijkstra algorithm for every node for every graph.
+    Generated a given number of described graphs and computes
+    Dijkstra algorithm for every node for every graph.
     :param n_graphs: Number of graphs used in the measurement.
     :param n_nodes_ini: Initial value for the number of nodes interval.
     :param n_nodes_fin: Final value for the number of nodes interval.
@@ -276,20 +289,23 @@ def time_dijkstra_mg(n_graphs, n_nodes_ini, n_nodes_fin, step, prob=0.2):
     :return: Mean of the time elapsed in Dijkstra computations.
     """
     countertime = []  # Storage for times
-
-    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):  # Simulation with given interval
+    # Simulation with given interval
+    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):
         counter = 0
         for graph_number in range(n_graphs):  # Generate n_graphs to measure
-            mg = rand_weighted_multigraph(n_nodes, probability=prob)  # Graph generation
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability=prob)
 
             start = time.time()  # Start time counter
-            for node in mg.keys():  # Compute Dijkstra for every node in the graph.
+
+            # Compute Dijkstra for every node in the graph.
+            for node in mg.keys():
                 dijkstra_mg(mg, node)  # Compute Dijkstra for this node.
             end = time.time()  # End time counter
 
             counter += end - start  # Store result
-
-        countertime.append(counter / (n_graphs * n_nodes))  # Save for this number of nodes
+        # Save for this number of nodes
+        countertime.append(counter / (n_graphs * n_nodes))
 
     return countertime
 
@@ -301,7 +317,8 @@ IV. Dijkstra vs Floyd-Warshall
 
 def dijkstra_all_pairs(g):
     """
-    Generates a matrix with all the results from Dijkstra Algorithm for every node in the given graph
+    Generates a matrix with all the results from
+    Dijkstra Algorithm for every node in the given graph
     :param g: Given graph
     :return: Matrix with distances between two nodes represented in cells.
     """
@@ -313,7 +330,8 @@ def dijkstra_all_pairs(g):
         distance, _ = dijkstra_mg(g, node)  # Gets the distance
 
         for destination in np.arange(n):  # Traverses possible destinations
-            result[node][destination] = distance[destination]  # Saves the distance in the correct cell.
+            # Saves the distance in the correct cell.
+            result[node][destination] = distance[destination]
 
     return result
 
@@ -331,16 +349,17 @@ def dg_2_ma(g):
 
     for node in np.arange(n):  # Iterates node index
         adjmat[node][node] = 0  # Sets the value to same node to 0.
-
-        for destination, cost in g[node].items():  # Iterates through destinations
-            adjmat[node][destination] = cost[0]  # Updates the matrix with destination cost.
+        # Iterates through destinations
+        for destination, cost in g[node].items():
+            # Updates the matrix with destination cost.
+            adjmat[node][destination] = cost[0]
 
     return adjmat
 
 
 def floyd_warshall(ma_g):
     """
-    Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph.
+    Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph
     :param ma_g: Adjacency Matrix
     :return: Matrix with minimum costs.
     """
@@ -351,14 +370,21 @@ def floyd_warshall(ma_g):
     for k in range(n):  # For every 1D
         for i in range(n):  # For every 2D
             for j in range(n):  # For every 3D
-                result[i][j] = min(result[i][j], result[i][k] + result[k][j])  # Compare the cost with other paths
+                # Compare the cost with other paths
+                result[i][j] = min(result[i][j], result[i][k] + result[k][j])
 
     return result
 
 
-def time_dijkstra_mg_all_pairs(n_graphs, n_nodes_ini, n_nodes_fin, step, num_max_multiple_edges=1, probability=0.5):
+def time_dijkstra_mg_all_pairs(n_graphs,
+                               n_nodes_ini,
+                               n_nodes_fin,
+                               step,
+                               num_max_multiple_edges=1,
+                               probability=0.5):
     """
-    Generated a given number of described graphs and computes Dijkstra All-Pairs for every node in every graph.
+    Generated a given number of described graphs and
+    computes Dijkstra All-Pairs for every node in every graph.
     :param n_graphs: Number of graphs used in the measurement.
     :param n_nodes_ini: Initial value for the number of nodes interval.
     :param n_nodes_fin: Final value for the number of nodes interval.
@@ -368,12 +394,14 @@ def time_dijkstra_mg_all_pairs(n_graphs, n_nodes_ini, n_nodes_fin, step, num_max
     :return: Mean of the time elapsed in Dijkstra computations.
     """
     countertime = []  # Storage for times
-    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):  # Simulation with given interval
+    # Simulation with given interval
+    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):
 
         counter = 0  # Time counter variable
         for graph_number in range(n_graphs):  # Generate n_graphs to measure
-            mg = rand_weighted_multigraph(n_nodes, num_max_multiple_edges=num_max_multiple_edges,
-                                          probability=probability)  # Graph generation
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability,
+                                          num_max_multiple_edges)
 
             start = time.time()  # Start time counter
             dijkstra_all_pairs(mg)  # Compute Dijkstra for this node.
@@ -386,27 +414,35 @@ def time_dijkstra_mg_all_pairs(n_graphs, n_nodes_ini, n_nodes_fin, step, num_max
     return countertime
 
 
-def time_floyd_warshall(n_graphs, n_nodes_ini, n_nodes_fin, step, probability=0.5):
+def time_floyd_warshall(n_graphs,
+                        n_nodes_ini,
+                        n_nodes_fin,
+                        step,
+                        probability=0.5):
     """
-    Generated a given number of described graphs and computes Dijkstra All-Pairs for every node in every graph.
+    Generated a given number of described graphs and
+    computes Floyd_Warshall for every node in every graph.
     :param n_graphs: Number of graphs used in the measurement.
     :param n_nodes_ini: Initial value for the number of nodes interval.
     :param n_nodes_fin: Final value for the number of nodes interval.
     :param step: Step between numbers of nodes in the interval.
     :param probability: Probability to generate edges between two given nodes.
-    :return: Mean of the time elapsed in Dijkstra computations.
+    :return: Mean of the time elapsed in Floyd-Warshall computations.
     """
     countertime = []  # Storage for times
-    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):  # Simulation with given interval
+    # Simulation with given interval
+    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):
 
         counter = 0  # Time counter variable
         for graph_number in range(n_graphs):  # Generate n_graphs to measure
-            mg = rand_weighted_multigraph(n_nodes, probability=probability)  # Graph generation
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability=probability)
 
             adjmatrix = dg_2_ma(mg)  # Obtain the adjacency matrix.
 
+            # Execute Floyd Warshall time measurement.
             start = time.time()  # Start time counter
-            floyd_warshall(adjmatrix)  # Execute Floyd Warshall to the adjacency matrix.
+            floyd_warshall(adjmatrix)
             end = time.time()  # End time counter
 
             counter += end - start  # Store time difference
@@ -417,38 +453,8 @@ def time_floyd_warshall(n_graphs, n_nodes_ini, n_nodes_fin, step, probability=0.
 
 
 if __name__ == '__main__':
-    # GRAFOS
-    # graph = rand_weighted_multigraph(10)
-    # print_adj_list_mg(graph)
     graph = rand_weighted_multigraph(10)
     matrix = dg_2_ma(graph)
     print(matrix)
     res = floyd_warshall(matrix)
     print(res)
-    """
-    
-    print("________________")
-    graph = rand_weighted_multigraph(10, fl_diag=False)
-    print_adj_list_mg(graph)
-    print("________________")
-    graph = rand_weighted_undirected_multigraph(10)
-    print_adj_list_mg(graph)
-    print("________________")
-    graph = rand_weighted_undirected_multigraph(10, fl_diag=False)
-    # print_adj_list_mg(graph)
-
-    # DISTANCIAS MÍNIMAS"""
-    # dist, prev = dijkstra_mg(graph, 0)
-    """
-    paths = min_paths(prev)
-    # print(paths)
-    time_dijkstra_mg(1, 500, 1000, 100)
-
-    # IV. Dijkstra vs Floyd-Warshall
-    matrix = dijkstra_all_pairs(graph)
-    # print(matrix)
-    adjacencymat = dg_2_ma(graph)
-    print(adjacencymat)
-    testing = floyd_warshall(adjacencymat)
-    print(testing)
-    """
