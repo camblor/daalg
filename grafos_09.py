@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+
+"""
+Graphs module - Practica 1
+"""
+
 from queue import PriorityQueue
 import time
 import numpy as np
@@ -5,7 +11,6 @@ import numpy as np
 """
 II. MULTI-GRAPHS
 """
-
 
 class Multigraph:
     """
@@ -18,10 +23,13 @@ class Multigraph:
     def __init__(self, n_nodes, decimals, num_max_multiple_edges, max_weight):
         """
         Constructor method for a multigraph with given parameters.
-        :param n_nodes: Total number of nodes of the graph.
-        :param decimals: Decimal digits in weight.
-        :param num_max_multiple_edges: Maximum number of edges for each node.
-        :param max_weight: Maximum weight of an edge
+        
+        Parameters
+        ----------
+            n_nodes: Total number of nodes of the graph.
+            decimals: Decimal digits in weight.
+            num_max_multiple_edges: Maximum number of edges for each node.
+            max_weight: Maximum weight of an edge
         """
 
         # Multigraph Creation
@@ -42,24 +50,30 @@ class Multigraph:
     def get_nodes(self):
         """
         Get list of nodes
-        :return: list of nodes
         """
         return self.mg
 
     def get_edges(self, node):
         """
         Gets the edges from a given node
-        :param node: given node
-        :return: edges from given node
+
+        Parameters
+        ----------
+             node: given node
+
+        Returns edges from given node.
         """
         return self.mg[node]
 
     def set_edge(self, node1, node2, cost):
         """
         Creates an edge between two nodes with a given cost.
-        :param node1: Origin node.
-        :param node2: Destination node.
-        :param cost: Edge cost.
+
+        Parameters
+        ----------
+             node1: Origin node.
+             node2: Destination node.
+             cost: Edge cost.
         """
 
         if (len(self.mg[node1]) < 1) or (node2 not in self.mg[node1]):
@@ -71,21 +85,18 @@ class Multigraph:
         """
         Gets the maximum number of edges for each node
         in the current multigraph
-        :return: Maximum number of edges for each node.
         """
         return self.num_max_multiple_edges
 
     def get_decimals(self):
         """
         Gets the decimal digits number
-        :return: Decimal digits number
         """
         return self.decimals
 
     def get_max_weight(self):
         """
         Gets the maximum weight of the graph.
-        :return: Maximum Weight.
         """
         return self.max_weight
 
@@ -97,11 +108,13 @@ def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
     """
     Edge generation method, applying probability to computations
     for a given multigraph.
-    :param mg: Multigraph structure
-    :param fl_diag: Allow/Deny self-connected edges
-    :param probability: Edge probability
-    :param fl_unweighted: Flag that signals if a graph is or isn't unweighted
-    :param fl_directed: Flag that signals if a graph is or isn't undirected
+
+    Parameters
+    ----------
+        mg: Multigraph structure
+        fl_diag: Allow/Deny self-connected edges
+        probability: Edge probability
+        fl_unweighted: Flag that signals if a graph is or isn't unweighted
     """
 
     nodes = list(mg.get_nodes().keys())  # Nodes of the graph
@@ -149,14 +162,17 @@ def rand_weighted_multigraph(n_nodes, probability=0.6,
                              fl_diag=True):
     """
     Function that generates a directed multigraph with given parameters.
-    :param n_nodes: Number of nodes of the graph.
-    :param probability: Probability of edges between nodes.
-    :param num_max_multiple_edges: Maximum number of edges for each node.
-    :param max_weight: Maximum weight of an edge.
-    :param decimals: Number of decimal digits in weights.
-    :param fl_unweighted: Flag for classifying weighted/unweighted graph.
-    :param fl_diag: Flag for enabling/disabling self-linked nodes.
-    :return: Directed multigraph constructed with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Directed multigraph constructed with given parameters.
     """
 
     fl_directed = True
@@ -179,20 +195,38 @@ def rand_weighted_undirected_multigraph(n_nodes,
                                         fl_diag=True):
     """
     Function that generates an undirected multigraph with given parameters.
-    :param n_nodes: Number of nodes of the graph.
-    :param probability: Probability of edges between nodes.
-    :param num_max_multiple_edges: Maximum number of edges for each node.
-    :param max_weight: Maximum weight of an edge.
-    :param decimals: Number of decimal digits in weights.
-    :param fl_unweighted: Flag for classifying weighted/unweighted graph.
-    :param fl_diag: Flag for enabling/disabling self-linked nodes.
-    :return: Undirected multigraph constructed with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Undirected multigraph constructed with given parameters.
     """
     mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
     fl_directed = False
     edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
     return mg.get_nodes()
 
+def print_adj_list_mg(mg):
+    """
+    Print the adjacency list for a given multigraph
+
+    Parameters
+    ----------
+        mg: Multigraph to print
+    """
+
+    for key, value in mg.items():
+        print(str(key), end="")
+        for destiny in sorted(value.keys()):
+            print(" - {}".format(destiny), end="")
+        print("")
+    print("")
 
 """
 III. Minimum distances in Multigraphs.
@@ -203,9 +237,12 @@ def dijkstra_mg(mg, u):
     """
     Function that applies Dijkstra algorithm for minimum
     distance computation from a node.
-    :param mg: Multigraph (Dict of Dict of Dict).
-    :param u: Selected node.
-    :return: Distance and Previous node dictionaries
+
+    Parameters
+    ----------
+        mg: Multigraph (Dict of Dict of Dict).
+        u: Selected node.
+    Returns Distance and Previous node dictionaries
     """
 
     # Previous node initialization
@@ -257,8 +294,11 @@ def min_paths(d_prev):
     """
     Calculation of the path to traverse from the
     first node to every other node in the graph.
-    :param d_prev: Dictionary with previous nodes required to traverse.
-    :return: Dictionary with lists of shortest path to all node from origin
+
+    Parameters
+    ----------
+        d_prev: Dictionary with previous nodes required to traverse.
+    Returns Dictionary with lists of shortest path to all node from origin
     """
     d_path = {}  # Dictionary Initialization
 
@@ -281,12 +321,15 @@ def time_dijkstra_mg(n_graphs, n_nodes_ini, n_nodes_fin, step, prob=0.2):
     """
     Generated a given number of described graphs and computes
     Dijkstra algorithm for every node for every graph.
-    :param n_graphs: Number of graphs used in the measurement.
-    :param n_nodes_ini: Initial value for the number of nodes interval.
-    :param n_nodes_fin: Final value for the number of nodes interval.
-    :param step: Step between numbers of nodes in the interval.
-    :param prob: Probability to generate edges between two given nodes.
-    :return: Mean of the time elapsed in Dijkstra computations.
+
+    Parameters
+    ----------
+        n_graphs: Number of graphs used in the measurement.
+        n_nodes_ini: Initial value for the number of nodes interval.
+        n_nodes_fin: Final value for the number of nodes interval.
+        step: Step between numbers of nodes in the interval.
+        prob: Probability to generate edges between two given nodes.
+    Returns Mean of the time elapsed in Dijkstra computations.
     """
     countertime = []  # Storage for times
     # Simulation with given interval
@@ -319,8 +362,11 @@ def dijkstra_all_pairs(g):
     """
     Generates a matrix with all the results from
     Dijkstra Algorithm for every node in the given graph
-    :param g: Given graph
-    :return: Matrix with distances between two nodes represented in cells.
+
+    Parameters
+    ----------
+        g: Given graph
+    Returns Matrix with distances between two nodes represented in cells.
     """
     n = len(g)  # Get |g|
     result = np.full((n, n), np.inf)  # Generates the NumPy Matrix
@@ -339,8 +385,11 @@ def dijkstra_all_pairs(g):
 def dg_2_ma(g):
     """
     Computes the adjacency matrix of a given graph.
-    :param g: Given graph
-    :return: Adjacency matrix of the graph
+
+    Parameters
+    ----------
+        g: Given graph
+    Returns Adjacency matrix of the graph
     """
 
     n = len(g)  # Get |g|
@@ -359,9 +408,12 @@ def dg_2_ma(g):
 
 def floyd_warshall(ma_g):
     """
-    Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph
-    :param ma_g: Adjacency Matrix
-    :return: Matrix with minimum costs.
+    Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph.
+    
+    Parameters
+    ----------
+        ma_g: Adjacency Matrix
+    Returns Matrix with minimum costs.
     """
 
     result = np.copy(ma_g)  # Save matrix variable
@@ -385,13 +437,16 @@ def time_dijkstra_mg_all_pairs(n_graphs,
     """
     Generated a given number of described graphs and
     computes Dijkstra All-Pairs for every node in every graph.
-    :param n_graphs: Number of graphs used in the measurement.
-    :param n_nodes_ini: Initial value for the number of nodes interval.
-    :param n_nodes_fin: Final value for the number of nodes interval.
-    :param step: Step between numbers of nodes in the interval.
-    :param num_max_multiple_edges: Maximum number of edges per node.
-    :param probability: Probability to generate edges between two given nodes.
-    :return: Mean of the time elapsed in Dijkstra computations.
+
+    Parameters
+    ----------
+        n_graphs: Number of graphs used in the measurement.
+        n_nodes_ini: Initial value for the number of nodes interval.
+        n_nodes_fin: Final value for the number of nodes interval.
+        step: Step between numbers of nodes in the interval.
+        num_max_multiple_edges: Maximum number of edges per node.
+        probability: Probability to generate edges between two given nodes.
+    Returns Mean of the time elapsed in Dijkstra computations.
     """
     countertime = []  # Storage for times
     # Simulation with given interval
@@ -422,12 +477,15 @@ def time_floyd_warshall(n_graphs,
     """
     Generated a given number of described graphs and
     computes Floyd_Warshall for every node in every graph.
-    :param n_graphs: Number of graphs used in the measurement.
-    :param n_nodes_ini: Initial value for the number of nodes interval.
-    :param n_nodes_fin: Final value for the number of nodes interval.
-    :param step: Step between numbers of nodes in the interval.
-    :param probability: Probability to generate edges between two given nodes.
-    :return: Mean of the time elapsed in Floyd-Warshall computations.
+
+    Parameters
+    ----------
+        n_graphs: Number of graphs used in the measurement.
+        n_nodes_ini: Initial value for the number of nodes interval.
+        n_nodes_fin: Final value for the number of nodes interval.
+        step: Step between numbers of nodes in the interval.
+        probability: Probability to generate edges between two given nodes.
+    Returns Mean of the time elapsed in Floyd-Warshall computations.
     """
     countertime = []  # Storage for times
     # Simulation with given interval

@@ -1,0 +1,1435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>grafos_09 API documentation</title>
+<meta name="description" content="Graphs module - Practica 1" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>grafos_09</code></h1>
+</header>
+<section id="section-intro">
+<p>Graphs module - Practica 1</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#!/usr/bin/env python3
+
+&#34;&#34;&#34;
+Graphs module - Practica 1
+&#34;&#34;&#34;
+
+from queue import PriorityQueue
+import time
+import numpy as np
+
+&#34;&#34;&#34;
+II. MULTI-GRAPHS
+&#34;&#34;&#34;
+
+class Multigraph:
+    &#34;&#34;&#34;
+    Class for multigraph representation.
+    ___________________________________
+    Its main purpose is to store all the variables needed
+    during multigraph generation.
+    &#34;&#34;&#34;
+
+    def __init__(self, n_nodes, decimals, num_max_multiple_edges, max_weight):
+        &#34;&#34;&#34;
+        Constructor method for a multigraph with given parameters.
+        
+        Parameters
+        ----------
+            n_nodes: Total number of nodes of the graph.
+            decimals: Decimal digits in weight.
+            num_max_multiple_edges: Maximum number of edges for each node.
+            max_weight: Maximum weight of an edge
+        &#34;&#34;&#34;
+
+        # Multigraph Creation
+        self.mg = {}
+        for node in range(n_nodes):
+            self.mg[node] = {}
+
+        # Setting of parameters
+        self.num_max_multiple_edges = num_max_multiple_edges
+        self.max_weight = max_weight
+
+        # Adjacency list creation
+        self.adjlist = {}
+
+        # Decimal digits
+        self.decimals = decimals
+
+    def get_nodes(self):
+        &#34;&#34;&#34;
+        Get list of nodes
+        &#34;&#34;&#34;
+        return self.mg
+
+    def get_edges(self, node):
+        &#34;&#34;&#34;
+        Gets the edges from a given node
+
+        Parameters
+        ----------
+             node: given node
+
+        Returns edges from given node.
+        &#34;&#34;&#34;
+        return self.mg[node]
+
+    def set_edge(self, node1, node2, cost):
+        &#34;&#34;&#34;
+        Creates an edge between two nodes with a given cost.
+
+        Parameters
+        ----------
+             node1: Origin node.
+             node2: Destination node.
+             cost: Edge cost.
+        &#34;&#34;&#34;
+
+        if (len(self.mg[node1]) &lt; 1) or (node2 not in self.mg[node1]):
+            self.mg[node1][node2] = {0: cost}
+        else:
+            self.mg[node1][node2][len(self.mg[node1][node2])] = cost
+
+    def get_num_max_multiple_edges(self):
+        &#34;&#34;&#34;
+        Gets the maximum number of edges for each node
+        in the current multigraph
+        &#34;&#34;&#34;
+        return self.num_max_multiple_edges
+
+    def get_decimals(self):
+        &#34;&#34;&#34;
+        Gets the decimal digits number
+        &#34;&#34;&#34;
+        return self.decimals
+
+    def get_max_weight(self):
+        &#34;&#34;&#34;
+        Gets the maximum weight of the graph.
+        &#34;&#34;&#34;
+        return self.max_weight
+
+    def __str__(self):
+        return str(self.mg)
+
+
+def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
+    &#34;&#34;&#34;
+    Edge generation method, applying probability to computations
+    for a given multigraph.
+
+    Parameters
+    ----------
+        mg: Multigraph structure
+        fl_diag: Allow/Deny self-connected edges
+        probability: Edge probability
+        fl_unweighted: Flag that signals if a graph is or isn&#39;t unweighted
+    &#34;&#34;&#34;
+
+    nodes = list(mg.get_nodes().keys())  # Nodes of the graph
+    for node in nodes:
+        # EDGE SELECTION
+
+        if not fl_diag:  # When disabled self-linked-edges
+            nodes.remove(node)
+
+        # NumPy chooses nodes to link
+        linked = np.random.choice(list(nodes),
+                                  mg.get_num_max_multiple_edges())
+
+        if not fl_diag:  # When disabled self-linked-edges
+            nodes.append(node)  # Return the node to list
+            nodes.sort()  # Sort the list
+
+        # EDGE CREATION
+
+        for lnode in linked:  # For every selected node
+            # Numpy randomly generates edges according to probability
+            if np.random.uniform() &lt; probability:
+                # Setting weight of the edge
+
+                if fl_unweighted:  # When disabled graph weight
+                    weight = 1
+                else:
+                    # Select a number between 0 and maximum weight with
+                    # uniform probability. Truncate to decimals.
+                    weight = round(np.random.uniform(0,
+                                                     mg.get_max_weight()),
+                                   mg.get_decimals())
+
+                mg.set_edge(node, lnode, weight)  # Creates each edge
+
+                if not fl_directed:  # If undirected graph, connect both nodes
+                    mg.set_edge(lnode, node, weight)
+
+
+def rand_weighted_multigraph(n_nodes, probability=0.6,
+                             num_max_multiple_edges=2,
+                             max_weight=50,
+                             decimals=0,
+                             fl_unweighted=False,
+                             fl_diag=True):
+    &#34;&#34;&#34;
+    Function that generates a directed multigraph with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Directed multigraph constructed with given parameters.
+    &#34;&#34;&#34;
+
+    fl_directed = True
+    # Creation of the Multigraph Object
+    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+    # Multigraph Random Generation
+    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
+
+    mg = mg.get_nodes()  # Gets Multigraph dictionary structure
+
+    return mg
+
+
+def rand_weighted_undirected_multigraph(n_nodes,
+                                        probability=0.2,
+                                        num_max_multiple_edges=1,
+                                        max_weight=50,
+                                        decimals=0,
+                                        fl_unweighted=False,
+                                        fl_diag=True):
+    &#34;&#34;&#34;
+    Function that generates an undirected multigraph with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Undirected multigraph constructed with given parameters.
+    &#34;&#34;&#34;
+    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+    fl_directed = False
+    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
+    return mg.get_nodes()
+
+def print_adj_list_mg(mg):
+    &#34;&#34;&#34;
+    Print the adjacency list for a given multigraph
+
+    Parameters
+    ----------
+        mg: Multigraph to print
+    &#34;&#34;&#34;
+
+    for key, value in mg.items():
+        print(str(key), end=&#34;&#34;)
+        for destiny in sorted(value.keys()):
+            print(&#34; - {}&#34;.format(destiny), end=&#34;&#34;)
+        print(&#34;&#34;)
+    print(&#34;&#34;)
+
+&#34;&#34;&#34;
+III. Minimum distances in Multigraphs.
+&#34;&#34;&#34;
+
+
+def dijkstra_mg(mg, u):
+    &#34;&#34;&#34;
+    Function that applies Dijkstra algorithm for minimum
+    distance computation from a node.
+
+    Parameters
+    ----------
+        mg: Multigraph (Dict of Dict of Dict).
+        u: Selected node.
+    Returns Distance and Previous node dictionaries
+    &#34;&#34;&#34;
+
+    # Previous node initialization
+    previous = {u: u}
+
+    # Distance dictionary creation and initialization
+    distance = {v: np.inf for v in mg}
+    distance[u] = 0
+
+    # Visited dictionary creation and initialization
+    visited = {v: False for v in mg}
+
+    # Priority queue object creation.
+    q = PriorityQueue()
+    q.put((0, u))
+
+    # Dijkstra algorithm implementation.
+    while not q.empty():
+
+        _, current = q.get()  # Obtains next node from the queue.
+        if not visited[current]:  # Checks if we need to visit this node.
+
+            visited[current] = True  # Marks the node as visited.
+            # Iterates through every destiny from current node.
+            for dest, routes in mg[current].items():
+                # Iterates through every edge to destiny.
+                for route in routes:
+
+                    # Stores direct and traveling distance for comparison
+                    current_distance = distance[dest]
+                    traveling_distance = distance[current]
+                    traveling_distance += mg[current][dest][route]
+
+                    # If (destiny node has not been visited +
+                    # current distance is higher than the traveling distance)
+                    if not visited[dest] and \
+                            current_distance &gt; traveling_distance:
+                        # Update distance to the traveling distance
+                        distance[dest] = traveling_distance
+                        # Update previous node to destination as current node.
+                        previous[dest] = current
+                        # Inserts next node for Dijkstra.
+                        q.put((distance[dest], dest))
+
+    return distance, previous
+
+
+def min_paths(d_prev):
+    &#34;&#34;&#34;
+    Calculation of the path to traverse from the
+    first node to every other node in the graph.
+
+    Parameters
+    ----------
+        d_prev: Dictionary with previous nodes required to traverse.
+    Returns Dictionary with lists of shortest path to all node from origin
+    &#34;&#34;&#34;
+    d_path = {}  # Dictionary Initialization
+
+    for vertex in d_prev:
+        # Get the previous node in the path to the selected node.
+        previous = [vertex, d_prev[vertex]]
+        i = 1
+        while previous[i] is not 0:  # While we haven&#39;t arrived the origin.
+            # Add the node we are traversing to the path.
+            previous.append(d_prev[previous[i]])
+            i += 1
+
+        previous.reverse()  # Reverse the path for data representation.
+        d_path[vertex] = previous  # Store the data into our dictionary
+
+    return d_path
+
+
+def time_dijkstra_mg(n_graphs, n_nodes_ini, n_nodes_fin, step, prob=0.2):
+    &#34;&#34;&#34;
+    Generated a given number of described graphs and computes
+    Dijkstra algorithm for every node for every graph.
+
+    Parameters
+    ----------
+        n_graphs: Number of graphs used in the measurement.
+        n_nodes_ini: Initial value for the number of nodes interval.
+        n_nodes_fin: Final value for the number of nodes interval.
+        step: Step between numbers of nodes in the interval.
+        prob: Probability to generate edges between two given nodes.
+    Returns Mean of the time elapsed in Dijkstra computations.
+    &#34;&#34;&#34;
+    countertime = []  # Storage for times
+    # Simulation with given interval
+    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):
+        counter = 0
+        for graph_number in range(n_graphs):  # Generate n_graphs to measure
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability=prob)
+
+            start = time.time()  # Start time counter
+
+            # Compute Dijkstra for every node in the graph.
+            for node in mg.keys():
+                dijkstra_mg(mg, node)  # Compute Dijkstra for this node.
+            end = time.time()  # End time counter
+
+            counter += end - start  # Store result
+        # Save for this number of nodes
+        countertime.append(counter / (n_graphs * n_nodes))
+
+    return countertime
+
+
+&#34;&#34;&#34;
+IV. Dijkstra vs Floyd-Warshall
+&#34;&#34;&#34;
+
+
+def dijkstra_all_pairs(g):
+    &#34;&#34;&#34;
+    Generates a matrix with all the results from
+    Dijkstra Algorithm for every node in the given graph
+
+    Parameters
+    ----------
+        g: Given graph
+    Returns Matrix with distances between two nodes represented in cells.
+    &#34;&#34;&#34;
+    n = len(g)  # Get |g|
+    result = np.full((n, n), np.inf)  # Generates the NumPy Matrix
+
+    for node in np.arange(n):  # Traverses node index
+
+        distance, _ = dijkstra_mg(g, node)  # Gets the distance
+
+        for destination in np.arange(n):  # Traverses possible destinations
+            # Saves the distance in the correct cell.
+            result[node][destination] = distance[destination]
+
+    return result
+
+
+def dg_2_ma(g):
+    &#34;&#34;&#34;
+    Computes the adjacency matrix of a given graph.
+
+    Parameters
+    ----------
+        g: Given graph
+    Returns Adjacency matrix of the graph
+    &#34;&#34;&#34;
+
+    n = len(g)  # Get |g|
+
+    adjmat = np.full((n, n), np.inf)  # Prepare matrix with NumPy
+
+    for node in np.arange(n):  # Iterates node index
+        adjmat[node][node] = 0  # Sets the value to same node to 0.
+        # Iterates through destinations
+        for destination, cost in g[node].items():
+            # Updates the matrix with destination cost.
+            adjmat[node][destination] = cost[0]
+
+    return adjmat
+
+
+def floyd_warshall(ma_g):
+    &#34;&#34;&#34;
+    Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph.
+    
+    Parameters
+    ----------
+        ma_g: Adjacency Matrix
+    Returns Matrix with minimum costs.
+    &#34;&#34;&#34;
+
+    result = np.copy(ma_g)  # Save matrix variable
+    n = len(ma_g)  # Store number of rows (square matrix)
+
+    for k in range(n):  # For every 1D
+        for i in range(n):  # For every 2D
+            for j in range(n):  # For every 3D
+                # Compare the cost with other paths
+                result[i][j] = min(result[i][j], result[i][k] + result[k][j])
+
+    return result
+
+
+def time_dijkstra_mg_all_pairs(n_graphs,
+                               n_nodes_ini,
+                               n_nodes_fin,
+                               step,
+                               num_max_multiple_edges=1,
+                               probability=0.5):
+    &#34;&#34;&#34;
+    Generated a given number of described graphs and
+    computes Dijkstra All-Pairs for every node in every graph.
+
+    Parameters
+    ----------
+        n_graphs: Number of graphs used in the measurement.
+        n_nodes_ini: Initial value for the number of nodes interval.
+        n_nodes_fin: Final value for the number of nodes interval.
+        step: Step between numbers of nodes in the interval.
+        num_max_multiple_edges: Maximum number of edges per node.
+        probability: Probability to generate edges between two given nodes.
+    Returns Mean of the time elapsed in Dijkstra computations.
+    &#34;&#34;&#34;
+    countertime = []  # Storage for times
+    # Simulation with given interval
+    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):
+
+        counter = 0  # Time counter variable
+        for graph_number in range(n_graphs):  # Generate n_graphs to measure
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability,
+                                          num_max_multiple_edges)
+
+            start = time.time()  # Start time counter
+            dijkstra_all_pairs(mg)  # Compute Dijkstra for this node.
+            end = time.time()  # End time counter
+
+            counter += end - start  # Store time difference
+
+        countertime.append(counter / n_graphs)  # Append to given size times.
+
+    return countertime
+
+
+def time_floyd_warshall(n_graphs,
+                        n_nodes_ini,
+                        n_nodes_fin,
+                        step,
+                        probability=0.5):
+    &#34;&#34;&#34;
+    Generated a given number of described graphs and
+    computes Floyd_Warshall for every node in every graph.
+
+    Parameters
+    ----------
+        n_graphs: Number of graphs used in the measurement.
+        n_nodes_ini: Initial value for the number of nodes interval.
+        n_nodes_fin: Final value for the number of nodes interval.
+        step: Step between numbers of nodes in the interval.
+        probability: Probability to generate edges between two given nodes.
+    Returns Mean of the time elapsed in Floyd-Warshall computations.
+    &#34;&#34;&#34;
+    countertime = []  # Storage for times
+    # Simulation with given interval
+    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):
+
+        counter = 0  # Time counter variable
+        for graph_number in range(n_graphs):  # Generate n_graphs to measure
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability=probability)
+
+            adjmatrix = dg_2_ma(mg)  # Obtain the adjacency matrix.
+
+            # Execute Floyd Warshall time measurement.
+            start = time.time()  # Start time counter
+            floyd_warshall(adjmatrix)
+            end = time.time()  # End time counter
+
+            counter += end - start  # Store time difference
+
+        countertime.append(counter / n_graphs)  # Append to given size times.
+
+    return countertime
+
+
+if __name__ == &#39;__main__&#39;:
+    graph = rand_weighted_multigraph(10)
+    matrix = dg_2_ma(graph)
+    print(matrix)
+    res = floyd_warshall(matrix)
+    print(res)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="grafos_09.dg_2_ma"><code class="name flex">
+<span>def <span class="ident">dg_2_ma</span></span>(<span>g)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the adjacency matrix of a given graph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>g: Given graph
+</code></pre>
+<p>Returns Adjacency matrix of the graph</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dg_2_ma(g):
+    &#34;&#34;&#34;
+    Computes the adjacency matrix of a given graph.
+
+    Parameters
+    ----------
+        g: Given graph
+    Returns Adjacency matrix of the graph
+    &#34;&#34;&#34;
+
+    n = len(g)  # Get |g|
+
+    adjmat = np.full((n, n), np.inf)  # Prepare matrix with NumPy
+
+    for node in np.arange(n):  # Iterates node index
+        adjmat[node][node] = 0  # Sets the value to same node to 0.
+        # Iterates through destinations
+        for destination, cost in g[node].items():
+            # Updates the matrix with destination cost.
+            adjmat[node][destination] = cost[0]
+
+    return adjmat</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.dijkstra_all_pairs"><code class="name flex">
+<span>def <span class="ident">dijkstra_all_pairs</span></span>(<span>g)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a matrix with all the results from
+Dijkstra Algorithm for every node in the given graph</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>g: Given graph
+</code></pre>
+<p>Returns Matrix with distances between two nodes represented in cells.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dijkstra_all_pairs(g):
+    &#34;&#34;&#34;
+    Generates a matrix with all the results from
+    Dijkstra Algorithm for every node in the given graph
+
+    Parameters
+    ----------
+        g: Given graph
+    Returns Matrix with distances between two nodes represented in cells.
+    &#34;&#34;&#34;
+    n = len(g)  # Get |g|
+    result = np.full((n, n), np.inf)  # Generates the NumPy Matrix
+
+    for node in np.arange(n):  # Traverses node index
+
+        distance, _ = dijkstra_mg(g, node)  # Gets the distance
+
+        for destination in np.arange(n):  # Traverses possible destinations
+            # Saves the distance in the correct cell.
+            result[node][destination] = distance[destination]
+
+    return result</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.dijkstra_mg"><code class="name flex">
+<span>def <span class="ident">dijkstra_mg</span></span>(<span>mg, u)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that applies Dijkstra algorithm for minimum
+distance computation from a node.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>mg: Multigraph (Dict of Dict of Dict).
+u: Selected node.
+</code></pre>
+<p>Returns Distance and Previous node dictionaries</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def dijkstra_mg(mg, u):
+    &#34;&#34;&#34;
+    Function that applies Dijkstra algorithm for minimum
+    distance computation from a node.
+
+    Parameters
+    ----------
+        mg: Multigraph (Dict of Dict of Dict).
+        u: Selected node.
+    Returns Distance and Previous node dictionaries
+    &#34;&#34;&#34;
+
+    # Previous node initialization
+    previous = {u: u}
+
+    # Distance dictionary creation and initialization
+    distance = {v: np.inf for v in mg}
+    distance[u] = 0
+
+    # Visited dictionary creation and initialization
+    visited = {v: False for v in mg}
+
+    # Priority queue object creation.
+    q = PriorityQueue()
+    q.put((0, u))
+
+    # Dijkstra algorithm implementation.
+    while not q.empty():
+
+        _, current = q.get()  # Obtains next node from the queue.
+        if not visited[current]:  # Checks if we need to visit this node.
+
+            visited[current] = True  # Marks the node as visited.
+            # Iterates through every destiny from current node.
+            for dest, routes in mg[current].items():
+                # Iterates through every edge to destiny.
+                for route in routes:
+
+                    # Stores direct and traveling distance for comparison
+                    current_distance = distance[dest]
+                    traveling_distance = distance[current]
+                    traveling_distance += mg[current][dest][route]
+
+                    # If (destiny node has not been visited +
+                    # current distance is higher than the traveling distance)
+                    if not visited[dest] and \
+                            current_distance &gt; traveling_distance:
+                        # Update distance to the traveling distance
+                        distance[dest] = traveling_distance
+                        # Update previous node to destination as current node.
+                        previous[dest] = current
+                        # Inserts next node for Dijkstra.
+                        q.put((distance[dest], dest))
+
+    return distance, previous</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.edgeGeneration"><code class="name flex">
+<span>def <span class="ident">edgeGeneration</span></span>(<span>mg, fl_diag, probability, fl_unweighted, fl_directed)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Edge generation method, applying probability to computations
+for a given multigraph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>mg: Multigraph structure
+fl_diag: Allow/Deny self-connected edges
+probability: Edge probability
+fl_unweighted: Flag that signals if a graph is or isn't unweighted
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
+    &#34;&#34;&#34;
+    Edge generation method, applying probability to computations
+    for a given multigraph.
+
+    Parameters
+    ----------
+        mg: Multigraph structure
+        fl_diag: Allow/Deny self-connected edges
+        probability: Edge probability
+        fl_unweighted: Flag that signals if a graph is or isn&#39;t unweighted
+    &#34;&#34;&#34;
+
+    nodes = list(mg.get_nodes().keys())  # Nodes of the graph
+    for node in nodes:
+        # EDGE SELECTION
+
+        if not fl_diag:  # When disabled self-linked-edges
+            nodes.remove(node)
+
+        # NumPy chooses nodes to link
+        linked = np.random.choice(list(nodes),
+                                  mg.get_num_max_multiple_edges())
+
+        if not fl_diag:  # When disabled self-linked-edges
+            nodes.append(node)  # Return the node to list
+            nodes.sort()  # Sort the list
+
+        # EDGE CREATION
+
+        for lnode in linked:  # For every selected node
+            # Numpy randomly generates edges according to probability
+            if np.random.uniform() &lt; probability:
+                # Setting weight of the edge
+
+                if fl_unweighted:  # When disabled graph weight
+                    weight = 1
+                else:
+                    # Select a number between 0 and maximum weight with
+                    # uniform probability. Truncate to decimals.
+                    weight = round(np.random.uniform(0,
+                                                     mg.get_max_weight()),
+                                   mg.get_decimals())
+
+                mg.set_edge(node, lnode, weight)  # Creates each edge
+
+                if not fl_directed:  # If undirected graph, connect both nodes
+                    mg.set_edge(lnode, node, weight)</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.floyd_warshall"><code class="name flex">
+<span>def <span class="ident">floyd_warshall</span></span>(<span>ma_g)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>ma_g: Adjacency Matrix
+</code></pre>
+<p>Returns Matrix with minimum costs.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def floyd_warshall(ma_g):
+    &#34;&#34;&#34;
+    Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph.
+    
+    Parameters
+    ----------
+        ma_g: Adjacency Matrix
+    Returns Matrix with minimum costs.
+    &#34;&#34;&#34;
+
+    result = np.copy(ma_g)  # Save matrix variable
+    n = len(ma_g)  # Store number of rows (square matrix)
+
+    for k in range(n):  # For every 1D
+        for i in range(n):  # For every 2D
+            for j in range(n):  # For every 3D
+                # Compare the cost with other paths
+                result[i][j] = min(result[i][j], result[i][k] + result[k][j])
+
+    return result</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.min_paths"><code class="name flex">
+<span>def <span class="ident">min_paths</span></span>(<span>d_prev)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculation of the path to traverse from the
+first node to every other node in the graph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>d_prev: Dictionary with previous nodes required to traverse.
+</code></pre>
+<p>Returns Dictionary with lists of shortest path to all node from origin</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def min_paths(d_prev):
+    &#34;&#34;&#34;
+    Calculation of the path to traverse from the
+    first node to every other node in the graph.
+
+    Parameters
+    ----------
+        d_prev: Dictionary with previous nodes required to traverse.
+    Returns Dictionary with lists of shortest path to all node from origin
+    &#34;&#34;&#34;
+    d_path = {}  # Dictionary Initialization
+
+    for vertex in d_prev:
+        # Get the previous node in the path to the selected node.
+        previous = [vertex, d_prev[vertex]]
+        i = 1
+        while previous[i] is not 0:  # While we haven&#39;t arrived the origin.
+            # Add the node we are traversing to the path.
+            previous.append(d_prev[previous[i]])
+            i += 1
+
+        previous.reverse()  # Reverse the path for data representation.
+        d_path[vertex] = previous  # Store the data into our dictionary
+
+    return d_path</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.print_adj_list_mg"><code class="name flex">
+<span>def <span class="ident">print_adj_list_mg</span></span>(<span>mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print the adjacency list for a given multigraph</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>mg: Multigraph to print
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_adj_list_mg(mg):
+    &#34;&#34;&#34;
+    Print the adjacency list for a given multigraph
+
+    Parameters
+    ----------
+        mg: Multigraph to print
+    &#34;&#34;&#34;
+
+    for key, value in mg.items():
+        print(str(key), end=&#34;&#34;)
+        for destiny in sorted(value.keys()):
+            print(&#34; - {}&#34;.format(destiny), end=&#34;&#34;)
+        print(&#34;&#34;)
+    print(&#34;&#34;)</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.rand_weighted_multigraph"><code class="name flex">
+<span>def <span class="ident">rand_weighted_multigraph</span></span>(<span>n_nodes, probability=0.6, num_max_multiple_edges=2, max_weight=50, decimals=0, fl_unweighted=False, fl_diag=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that generates a directed multigraph with given parameters.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_nodes: Number of nodes of the graph.
+probability: Probability of edges between nodes.
+num_max_multiple_edges: Maximum number of edges for each node.
+max_weight: Maximum weight of an edge.
+decimals: Number of decimal digits in weights.
+fl_unweighted: Flag for classifying weighted/unweighted graph.
+fl_diag: Flag for enabling/disabling self-linked nodes.
+</code></pre>
+<p>Returns Directed multigraph constructed with given parameters.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rand_weighted_multigraph(n_nodes, probability=0.6,
+                             num_max_multiple_edges=2,
+                             max_weight=50,
+                             decimals=0,
+                             fl_unweighted=False,
+                             fl_diag=True):
+    &#34;&#34;&#34;
+    Function that generates a directed multigraph with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Directed multigraph constructed with given parameters.
+    &#34;&#34;&#34;
+
+    fl_directed = True
+    # Creation of the Multigraph Object
+    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+    # Multigraph Random Generation
+    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
+
+    mg = mg.get_nodes()  # Gets Multigraph dictionary structure
+
+    return mg</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.rand_weighted_undirected_multigraph"><code class="name flex">
+<span>def <span class="ident">rand_weighted_undirected_multigraph</span></span>(<span>n_nodes, probability=0.2, num_max_multiple_edges=1, max_weight=50, decimals=0, fl_unweighted=False, fl_diag=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that generates an undirected multigraph with given parameters.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_nodes: Number of nodes of the graph.
+probability: Probability of edges between nodes.
+num_max_multiple_edges: Maximum number of edges for each node.
+max_weight: Maximum weight of an edge.
+decimals: Number of decimal digits in weights.
+fl_unweighted: Flag for classifying weighted/unweighted graph.
+fl_diag: Flag for enabling/disabling self-linked nodes.
+</code></pre>
+<p>Returns Undirected multigraph constructed with given parameters.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rand_weighted_undirected_multigraph(n_nodes,
+                                        probability=0.2,
+                                        num_max_multiple_edges=1,
+                                        max_weight=50,
+                                        decimals=0,
+                                        fl_unweighted=False,
+                                        fl_diag=True):
+    &#34;&#34;&#34;
+    Function that generates an undirected multigraph with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Undirected multigraph constructed with given parameters.
+    &#34;&#34;&#34;
+    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+    fl_directed = False
+    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
+    return mg.get_nodes()</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.time_dijkstra_mg"><code class="name flex">
+<span>def <span class="ident">time_dijkstra_mg</span></span>(<span>n_graphs, n_nodes_ini, n_nodes_fin, step, prob=0.2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generated a given number of described graphs and computes
+Dijkstra algorithm for every node for every graph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_graphs: Number of graphs used in the measurement.
+n_nodes_ini: Initial value for the number of nodes interval.
+n_nodes_fin: Final value for the number of nodes interval.
+step: Step between numbers of nodes in the interval.
+prob: Probability to generate edges between two given nodes.
+</code></pre>
+<p>Returns Mean of the time elapsed in Dijkstra computations.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def time_dijkstra_mg(n_graphs, n_nodes_ini, n_nodes_fin, step, prob=0.2):
+    &#34;&#34;&#34;
+    Generated a given number of described graphs and computes
+    Dijkstra algorithm for every node for every graph.
+
+    Parameters
+    ----------
+        n_graphs: Number of graphs used in the measurement.
+        n_nodes_ini: Initial value for the number of nodes interval.
+        n_nodes_fin: Final value for the number of nodes interval.
+        step: Step between numbers of nodes in the interval.
+        prob: Probability to generate edges between two given nodes.
+    Returns Mean of the time elapsed in Dijkstra computations.
+    &#34;&#34;&#34;
+    countertime = []  # Storage for times
+    # Simulation with given interval
+    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):
+        counter = 0
+        for graph_number in range(n_graphs):  # Generate n_graphs to measure
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability=prob)
+
+            start = time.time()  # Start time counter
+
+            # Compute Dijkstra for every node in the graph.
+            for node in mg.keys():
+                dijkstra_mg(mg, node)  # Compute Dijkstra for this node.
+            end = time.time()  # End time counter
+
+            counter += end - start  # Store result
+        # Save for this number of nodes
+        countertime.append(counter / (n_graphs * n_nodes))
+
+    return countertime</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.time_dijkstra_mg_all_pairs"><code class="name flex">
+<span>def <span class="ident">time_dijkstra_mg_all_pairs</span></span>(<span>n_graphs, n_nodes_ini, n_nodes_fin, step, num_max_multiple_edges=1, probability=0.5)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generated a given number of described graphs and
+computes Dijkstra All-Pairs for every node in every graph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_graphs: Number of graphs used in the measurement.
+n_nodes_ini: Initial value for the number of nodes interval.
+n_nodes_fin: Final value for the number of nodes interval.
+step: Step between numbers of nodes in the interval.
+num_max_multiple_edges: Maximum number of edges per node.
+probability: Probability to generate edges between two given nodes.
+</code></pre>
+<p>Returns Mean of the time elapsed in Dijkstra computations.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def time_dijkstra_mg_all_pairs(n_graphs,
+                               n_nodes_ini,
+                               n_nodes_fin,
+                               step,
+                               num_max_multiple_edges=1,
+                               probability=0.5):
+    &#34;&#34;&#34;
+    Generated a given number of described graphs and
+    computes Dijkstra All-Pairs for every node in every graph.
+
+    Parameters
+    ----------
+        n_graphs: Number of graphs used in the measurement.
+        n_nodes_ini: Initial value for the number of nodes interval.
+        n_nodes_fin: Final value for the number of nodes interval.
+        step: Step between numbers of nodes in the interval.
+        num_max_multiple_edges: Maximum number of edges per node.
+        probability: Probability to generate edges between two given nodes.
+    Returns Mean of the time elapsed in Dijkstra computations.
+    &#34;&#34;&#34;
+    countertime = []  # Storage for times
+    # Simulation with given interval
+    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):
+
+        counter = 0  # Time counter variable
+        for graph_number in range(n_graphs):  # Generate n_graphs to measure
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability,
+                                          num_max_multiple_edges)
+
+            start = time.time()  # Start time counter
+            dijkstra_all_pairs(mg)  # Compute Dijkstra for this node.
+            end = time.time()  # End time counter
+
+            counter += end - start  # Store time difference
+
+        countertime.append(counter / n_graphs)  # Append to given size times.
+
+    return countertime</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.time_floyd_warshall"><code class="name flex">
+<span>def <span class="ident">time_floyd_warshall</span></span>(<span>n_graphs, n_nodes_ini, n_nodes_fin, step, probability=0.5)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generated a given number of described graphs and
+computes Floyd_Warshall for every node in every graph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_graphs: Number of graphs used in the measurement.
+n_nodes_ini: Initial value for the number of nodes interval.
+n_nodes_fin: Final value for the number of nodes interval.
+step: Step between numbers of nodes in the interval.
+probability: Probability to generate edges between two given nodes.
+</code></pre>
+<p>Returns Mean of the time elapsed in Floyd-Warshall computations.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def time_floyd_warshall(n_graphs,
+                        n_nodes_ini,
+                        n_nodes_fin,
+                        step,
+                        probability=0.5):
+    &#34;&#34;&#34;
+    Generated a given number of described graphs and
+    computes Floyd_Warshall for every node in every graph.
+
+    Parameters
+    ----------
+        n_graphs: Number of graphs used in the measurement.
+        n_nodes_ini: Initial value for the number of nodes interval.
+        n_nodes_fin: Final value for the number of nodes interval.
+        step: Step between numbers of nodes in the interval.
+        probability: Probability to generate edges between two given nodes.
+    Returns Mean of the time elapsed in Floyd-Warshall computations.
+    &#34;&#34;&#34;
+    countertime = []  # Storage for times
+    # Simulation with given interval
+    for n_nodes in np.arange(n_nodes_ini, n_nodes_fin + 1, step):
+
+        counter = 0  # Time counter variable
+        for graph_number in range(n_graphs):  # Generate n_graphs to measure
+            # Graph generation
+            mg = rand_weighted_multigraph(n_nodes, probability=probability)
+
+            adjmatrix = dg_2_ma(mg)  # Obtain the adjacency matrix.
+
+            # Execute Floyd Warshall time measurement.
+            start = time.time()  # Start time counter
+            floyd_warshall(adjmatrix)
+            end = time.time()  # End time counter
+
+            counter += end - start  # Store time difference
+
+        countertime.append(counter / n_graphs)  # Append to given size times.
+
+    return countertime</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="grafos_09.Multigraph"><code class="flex name class">
+<span>class <span class="ident">Multigraph</span></span>
+<span>(</span><span>n_nodes, decimals, num_max_multiple_edges, max_weight)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class for multigraph representation.</p>
+<hr>
+<p>Its main purpose is to store all the variables needed
+during multigraph generation.</p>
+<p>Constructor method for a multigraph with given parameters.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_nodes: Total number of nodes of the graph.
+decimals: Decimal digits in weight.
+num_max_multiple_edges: Maximum number of edges for each node.
+max_weight: Maximum weight of an edge
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Multigraph:
+    &#34;&#34;&#34;
+    Class for multigraph representation.
+    ___________________________________
+    Its main purpose is to store all the variables needed
+    during multigraph generation.
+    &#34;&#34;&#34;
+
+    def __init__(self, n_nodes, decimals, num_max_multiple_edges, max_weight):
+        &#34;&#34;&#34;
+        Constructor method for a multigraph with given parameters.
+        
+        Parameters
+        ----------
+            n_nodes: Total number of nodes of the graph.
+            decimals: Decimal digits in weight.
+            num_max_multiple_edges: Maximum number of edges for each node.
+            max_weight: Maximum weight of an edge
+        &#34;&#34;&#34;
+
+        # Multigraph Creation
+        self.mg = {}
+        for node in range(n_nodes):
+            self.mg[node] = {}
+
+        # Setting of parameters
+        self.num_max_multiple_edges = num_max_multiple_edges
+        self.max_weight = max_weight
+
+        # Adjacency list creation
+        self.adjlist = {}
+
+        # Decimal digits
+        self.decimals = decimals
+
+    def get_nodes(self):
+        &#34;&#34;&#34;
+        Get list of nodes
+        &#34;&#34;&#34;
+        return self.mg
+
+    def get_edges(self, node):
+        &#34;&#34;&#34;
+        Gets the edges from a given node
+
+        Parameters
+        ----------
+             node: given node
+
+        Returns edges from given node.
+        &#34;&#34;&#34;
+        return self.mg[node]
+
+    def set_edge(self, node1, node2, cost):
+        &#34;&#34;&#34;
+        Creates an edge between two nodes with a given cost.
+
+        Parameters
+        ----------
+             node1: Origin node.
+             node2: Destination node.
+             cost: Edge cost.
+        &#34;&#34;&#34;
+
+        if (len(self.mg[node1]) &lt; 1) or (node2 not in self.mg[node1]):
+            self.mg[node1][node2] = {0: cost}
+        else:
+            self.mg[node1][node2][len(self.mg[node1][node2])] = cost
+
+    def get_num_max_multiple_edges(self):
+        &#34;&#34;&#34;
+        Gets the maximum number of edges for each node
+        in the current multigraph
+        &#34;&#34;&#34;
+        return self.num_max_multiple_edges
+
+    def get_decimals(self):
+        &#34;&#34;&#34;
+        Gets the decimal digits number
+        &#34;&#34;&#34;
+        return self.decimals
+
+    def get_max_weight(self):
+        &#34;&#34;&#34;
+        Gets the maximum weight of the graph.
+        &#34;&#34;&#34;
+        return self.max_weight
+
+    def __str__(self):
+        return str(self.mg)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="grafos_09.Multigraph.get_decimals"><code class="name flex">
+<span>def <span class="ident">get_decimals</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the decimal digits number</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_decimals(self):
+    &#34;&#34;&#34;
+    Gets the decimal digits number
+    &#34;&#34;&#34;
+    return self.decimals</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.Multigraph.get_edges"><code class="name flex">
+<span>def <span class="ident">get_edges</span></span>(<span>self, node)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the edges from a given node</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code> node: given node
+</code></pre>
+<p>Returns edges from given node.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_edges(self, node):
+    &#34;&#34;&#34;
+    Gets the edges from a given node
+
+    Parameters
+    ----------
+         node: given node
+
+    Returns edges from given node.
+    &#34;&#34;&#34;
+    return self.mg[node]</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.Multigraph.get_max_weight"><code class="name flex">
+<span>def <span class="ident">get_max_weight</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the maximum weight of the graph.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_max_weight(self):
+    &#34;&#34;&#34;
+    Gets the maximum weight of the graph.
+    &#34;&#34;&#34;
+    return self.max_weight</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.Multigraph.get_nodes"><code class="name flex">
+<span>def <span class="ident">get_nodes</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get list of nodes</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_nodes(self):
+    &#34;&#34;&#34;
+    Get list of nodes
+    &#34;&#34;&#34;
+    return self.mg</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.Multigraph.get_num_max_multiple_edges"><code class="name flex">
+<span>def <span class="ident">get_num_max_multiple_edges</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the maximum number of edges for each node
+in the current multigraph</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_num_max_multiple_edges(self):
+    &#34;&#34;&#34;
+    Gets the maximum number of edges for each node
+    in the current multigraph
+    &#34;&#34;&#34;
+    return self.num_max_multiple_edges</code></pre>
+</details>
+</dd>
+<dt id="grafos_09.Multigraph.set_edge"><code class="name flex">
+<span>def <span class="ident">set_edge</span></span>(<span>self, node1, node2, cost)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates an edge between two nodes with a given cost.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code> node1: Origin node.
+ node2: Destination node.
+ cost: Edge cost.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_edge(self, node1, node2, cost):
+    &#34;&#34;&#34;
+    Creates an edge between two nodes with a given cost.
+
+    Parameters
+    ----------
+         node1: Origin node.
+         node2: Destination node.
+         cost: Edge cost.
+    &#34;&#34;&#34;
+
+    if (len(self.mg[node1]) &lt; 1) or (node2 not in self.mg[node1]):
+        self.mg[node1][node2] = {0: cost}
+    else:
+        self.mg[node1][node2][len(self.mg[node1][node2])] = cost</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="grafos_09.dg_2_ma" href="#grafos_09.dg_2_ma">dg_2_ma</a></code></li>
+<li><code><a title="grafos_09.dijkstra_all_pairs" href="#grafos_09.dijkstra_all_pairs">dijkstra_all_pairs</a></code></li>
+<li><code><a title="grafos_09.dijkstra_mg" href="#grafos_09.dijkstra_mg">dijkstra_mg</a></code></li>
+<li><code><a title="grafos_09.edgeGeneration" href="#grafos_09.edgeGeneration">edgeGeneration</a></code></li>
+<li><code><a title="grafos_09.floyd_warshall" href="#grafos_09.floyd_warshall">floyd_warshall</a></code></li>
+<li><code><a title="grafos_09.min_paths" href="#grafos_09.min_paths">min_paths</a></code></li>
+<li><code><a title="grafos_09.print_adj_list_mg" href="#grafos_09.print_adj_list_mg">print_adj_list_mg</a></code></li>
+<li><code><a title="grafos_09.rand_weighted_multigraph" href="#grafos_09.rand_weighted_multigraph">rand_weighted_multigraph</a></code></li>
+<li><code><a title="grafos_09.rand_weighted_undirected_multigraph" href="#grafos_09.rand_weighted_undirected_multigraph">rand_weighted_undirected_multigraph</a></code></li>
+<li><code><a title="grafos_09.time_dijkstra_mg" href="#grafos_09.time_dijkstra_mg">time_dijkstra_mg</a></code></li>
+<li><code><a title="grafos_09.time_dijkstra_mg_all_pairs" href="#grafos_09.time_dijkstra_mg_all_pairs">time_dijkstra_mg_all_pairs</a></code></li>
+<li><code><a title="grafos_09.time_floyd_warshall" href="#grafos_09.time_floyd_warshall">time_floyd_warshall</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="grafos_09.Multigraph" href="#grafos_09.Multigraph">Multigraph</a></code></h4>
+<ul class="">
+<li><code><a title="grafos_09.Multigraph.get_decimals" href="#grafos_09.Multigraph.get_decimals">get_decimals</a></code></li>
+<li><code><a title="grafos_09.Multigraph.get_edges" href="#grafos_09.Multigraph.get_edges">get_edges</a></code></li>
+<li><code><a title="grafos_09.Multigraph.get_max_weight" href="#grafos_09.Multigraph.get_max_weight">get_max_weight</a></code></li>
+<li><code><a title="grafos_09.Multigraph.get_nodes" href="#grafos_09.Multigraph.get_nodes">get_nodes</a></code></li>
+<li><code><a title="grafos_09.Multigraph.get_num_max_multiple_edges" href="#grafos_09.Multigraph.get_num_max_multiple_edges">get_num_max_multiple_edges</a></code></li>
+<li><code><a title="grafos_09.Multigraph.set_edge" href="#grafos_09.Multigraph.set_edge">set_edge</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>
