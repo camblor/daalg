@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a1869c82-1803-4bfd-a159-87ca6c40727e" name="Default Changelist" comment="" />
+    <list default="true" id="a1869c82-1803-4bfd-a159-87ca6c40727e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/check_pract_1_2020.py" beforeDir="false" afterPath="$PROJECT_DIR$/check_pract_1_2020.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/grafos_09.py" beforeDir="false" afterPath="$PROJECT_DIR$/grafos_09.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/grafos_09.html" beforeDir="false" afterPath="$PROJECT_DIR$/html/grafos_09.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +23,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -31,9 +37,14 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="184" y="84" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601889511171">
-      <screen x="0" y="23" width="1440" height="799" />
+    <state x="262" y="85" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603634899336">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="262" y="85" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112/-1440.-289.1152.2008/2560.0.2048.1112@0.0.2048.1112" timestamp="1603634899336" />
     <state x="184" y="84" width="1071" height="700" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.799@0.23.1440.799" timestamp="1601889511171" />
+    <state x="533" y="201" key="SettingsEditor" timestamp="1603635027619">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="533" y="201" key="SettingsEditor/0.0.2048.1112/-1440.-289.1152.2008/2560.0.2048.1112@0.0.2048.1112" timestamp="1603635027619" />
   </component>
 </project>

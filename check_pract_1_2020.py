@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import grafos_2020 as my_gr
+import grafos_09 as gr
 import numpy as np
 import os
 import argparse
@@ -8,19 +10,18 @@ import textwrap
 from sklearn.linear_model import LinearRegression
 
 os.system("cp grafos_09.py grafos_2020.py")
-import grafos_09 as gr
-import grafos_2020 as my_gr
+
 
 def fit_plot(l, func_2_fit, size_ini, size_fin, step):
-    l_func_values =[func_2_fit(i) for i in range(size_ini, size_fin+1, step)]
+    l_func_values = [func_2_fit(i) for i in range(size_ini, size_fin+1, step)]
 
     lr_m = LinearRegression()
-    X = np.array(l_func_values).reshape( len(l_func_values), -1 )
+    X = np.array(l_func_values).reshape(len(l_func_values), -1)
     lr_m.fit(X, l)
     y_pred = lr_m.predict(X)
 
     #plt.plot(l, '*', y_pred, '-')
-    return y_pred #ajuste a l por l func_2_fit
+    return y_pred  # ajuste a l por l func_2_fit
 
 
 def n2_log_n(n):
@@ -39,7 +40,7 @@ def n3(n):
 #fit_plot(l_values, n2_log_n, 10, 500, 10)
 
 
-####################################### main
+# main
 def main(n_graphs,
          n_nodes_ini,
          n_nodes_fin,
@@ -55,20 +56,20 @@ def main(n_graphs,
     # check print y conversión de matriz de adyacencia
     print("\ncomprobamos funciones básicas en un grafo predefinido ..........")
     mg = {
-          0: {1: {0: 10}, 2: {0:1}},
-          1: {2: {0: 1}},
-          2: {3: {0: 1}},
-          3: {1: {0: 1}}
-         }
+        0: {1: {0: 10}, 2: {0: 1}},
+        1: {2: {0: 1}},
+        2: {3: {0: 1}},
+        3: {1: {0: 1}}
+    }
 
     gr.print_adj_list_mg(mg)
 
     g = {
-          0: {1: {0: 10}},
-          1: {2: {0: 1}},
-          2: {3: {0: 1}},
-          3: {1: {0: 1}}
-         }
+        0: {1: {0: 10}},
+        1: {2: {0: 1}},
+        2: {3: {0: 1}},
+        3: {1: {0: 1}}
+    }
 
     ma_g = gr.dg_2_ma(g)
     print("\nmatriz de adyacencia del grafo\n")
@@ -143,19 +144,19 @@ def main(n_graphs,
 
     _ = input("\npulsar Intro para continuar ....................\n")
 
-    ## timing dijkstra
+    # timing dijkstra
     #print("\ntiming dijkstra ....................")
     #
     #l_t = gr.time_dijkstra_mg(n_graphs, n_nodes_ini, n_nodes_fin, step, num_max_multiple_edges=num_max_multiple_edges, probability=probability)
     #t_pred = gr.fit_plot(l_t, n2_log_n, size_ini=n_nodes_ini, size_fin=n_nodes_fin, step=step)
     #
-    ##print((np.array(l_t) - t_pred) / np.array(l_t) * 100.)
+    #print((np.array(l_t) - t_pred) / np.array(l_t) * 100.)
     #
-    #_ = input("\npulsar Intro para continuar ....................\n")
+    _ = input("\npulsar Intro para continuar ....................\n")
     #
 
     print("\nDijkstra all pairs minimum distances ....................")
-    dist_dijkstra    = gr.dijkstra_all_pairs(mg)
+    dist_dijkstra = gr.dijkstra_all_pairs(mg)
     my_dist_dijkstra = my_gr.dijkstra_all_pairs(mg)
 
     print("all_dist_dijkstra\n", dist_dijkstra, '\n', my_dist_dijkstra)
@@ -164,7 +165,7 @@ def main(n_graphs,
     # check floyd warshall
     print("\nFloyd-Warshall all pairs minimum distances ....................")
     ma_g = gr.dg_2_ma(mg)
-    dist_fw    = gr.floyd_warshall(ma_g)
+    dist_fw = gr.floyd_warshall(ma_g)
     my_dist_fw = my_gr.floyd_warshall(ma_g)
 
     print("all_dist_fw\n", dist_fw, '\n', my_dist_fw)
@@ -173,13 +174,16 @@ def main(n_graphs,
 
     # check tiempos djikstra/fw
     print("\ntiming all pairs dijkstra ....................")
-    l_t_d = gr.time_dijkstra_mg_all_pairs(n_graphs, n_nodes_ini, n_nodes_fin, step, num_max_multiple_edges=num_max_multiple_edges, probability=probability)
-    t_pred_d = fit_plot(l_t_d, n3_log_n, size_ini=n_nodes_ini, size_fin=n_nodes_fin, step=step)
-
+    l_t_d = gr.time_dijkstra_mg_all_pairs(
+        n_graphs, n_nodes_ini, n_nodes_fin, step, num_max_multiple_edges=num_max_multiple_edges, probability=probability)
+    t_pred_d = fit_plot(l_t_d, n3_log_n, size_ini=n_nodes_ini,
+                        size_fin=n_nodes_fin, step=step)
 
     print("\ntiming Floyd-Warshall ....................")
-    l_t_f = gr.time_floyd_warshall(n_graphs, n_nodes_ini, n_nodes_fin, step, probability=probability)
-    t_pred_f = fit_plot(l_t_f, n3, size_ini=n_nodes_ini, size_fin=n_nodes_fin, step=step)
+    l_t_f = gr.time_floyd_warshall(
+        n_graphs, n_nodes_ini, n_nodes_fin, step, probability=probability)
+    t_pred_f = fit_plot(l_t_f, n3, size_ini=n_nodes_ini,
+                        size_fin=n_nodes_fin, step=step)
 
     print("\ntiempos_dijkstra_reales   ", np.array(l_t_d).round(4))
     print("tiempos_fw_reales         ", np.array(l_t_f).round(4))
@@ -204,13 +208,20 @@ if __name__ == '__main__':
         """)
     )
 
-    parser.add_argument("-ng", "--num_graphs", type=int, default=10, help="num grafos a generar en cada paso; default=10")
-    parser.add_argument("-ni", "--num_nodos_inicial", type=int, default=10, help="num inicial de nodos; default=10")
-    parser.add_argument("-nf", "--num_nodos_final", type=int, default=20, help="num final de nodos; default=20")
-    parser.add_argument("-s", "--step", type=int, default=5, help="paso; default=5")
-    parser.add_argument("-p", "--probability", type=float, default=0.5, help="probabilidad de conexión; default=0.5")
-    parser.add_argument("-me", "--max_edges", type=int, default=1, help="num max edges; default=1")
-    parser.add_argument("-mw", "--max_weight", type=float, default=10., help="max weight; default=10")
+    parser.add_argument("-ng", "--num_graphs", type=int, default=10,
+                        help="num grafos a generar en cada paso; default=10")
+    parser.add_argument("-ni", "--num_nodos_inicial", type=int,
+                        default=10, help="num inicial de nodos; default=10")
+    parser.add_argument("-nf", "--num_nodos_final", type=int,
+                        default=20, help="num final de nodos; default=20")
+    parser.add_argument("-s", "--step", type=int,
+                        default=5, help="paso; default=5")
+    parser.add_argument("-p", "--probability", type=float,
+                        default=0.5, help="probabilidad de conexión; default=0.5")
+    parser.add_argument("-me", "--max_edges", type=int,
+                        default=1, help="num max edges; default=1")
+    parser.add_argument("-mw", "--max_weight", type=float,
+                        default=10., help="max weight; default=10")
 
     args = parser.parse_args()
 
