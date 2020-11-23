@@ -219,6 +219,7 @@ def rand_weighted_undirected_multigraph(n_nodes,
 0.2 Auxiliary Functions: Adjacency and Incidency Lists.
 """
 
+
 def print_adj_list_mg(mg):
     """
     Print the adjacency list for a given multigraph
@@ -241,7 +242,7 @@ def print_adj_list_mg(mg):
 """
 
 
-def dfs(mg, visited, node):
+def depth_first_search(mg, visited, node):
     """
     Depth-first search for a given graph and initial node
 
@@ -254,8 +255,8 @@ def dfs(mg, visited, node):
     """
     visited[node] = True
     for i in mg[node]:
-        if visited[i] == False:
-            dfs(mg, visited, i)
+        if visited[i] is False:
+            depth_first_search(mg, visited, i)
 
 
 def connected_component(mg, connected_nodes):
@@ -271,7 +272,7 @@ def connected_component(mg, connected_nodes):
     visited = [False] * length
 
     # Component traversal.
-    dfs(mg, visited, connected_nodes[0])
+    depth_first_search(mg, visited, connected_nodes[0])
 
     # Connected component check.
     for node in connected_nodes:
@@ -301,7 +302,7 @@ def inc_adj_analysis(gsize, adj, inc, nonzero=None):
         adji = adj[i]
         inci = inc[i]
         # Connected component check storage
-        if nonzero != None:
+        if nonzero is not None:
             if inci != 0 or adji != 0:
                 nonzero.append(i)
 
@@ -311,23 +312,25 @@ def inc_adj_analysis(gsize, adj, inc, nonzero=None):
 
         # 1 more in than out
         elif inci+1 == adji:
-            if nodeA != None:
+            if nodeA is not None:
                 return False
             nodeA = i
 
         # 1 more out than in
         elif inci == adji+1:
-            if nodeB != None:
+            if nodeB is not None:
                 return False
-                
+
             nodeB = i
-        
+
         elif inci > adji+1 or adji > inci+1:
             return False
 
     return True
 
+
 """ I. Guardando y Leyendo grafos """
+
 
 def d_g_2_TGF(d_g, f_name):
     """
@@ -354,8 +357,15 @@ def d_g_2_TGF(d_g, f_name):
 
 
 def TGF_2_d_g(f_name):
+    """
+    Function that reads a given multigraph from a TGF file.
 
-    file1 = open(f_name, 'r') 
+    Parameters
+    ----------
+        f_name: Input file name.
+    Returns a multigraph created from TGF file data.
+    """
+    file1 = open(f_name, 'r')
     lines = file1.readlines()
     file1.close()
     nodesflag = True
@@ -431,7 +441,7 @@ def isthere_euler_path_directed_multigraph(d_mg):
     # All conditions satisfied
     return True
 
-#TODO
+
 def first_last_euler_path_directed_multigraph(d_mg):
     """
     Function that finds initial and final node of an eulerian path in mg.
@@ -441,8 +451,10 @@ def first_last_euler_path_directed_multigraph(d_mg):
         d_mg: Multigraph to analyze.
     Returns initial and final nodes as tuple of an eulerian path.
     """
-    end = None
+    first = None
     last = None
+    aux = None
+    print(d_mg)
 
     # Check if there is any eulerian path
     if not isthere_euler_path_directed_multigraph(d_mg):
@@ -458,22 +470,23 @@ def first_last_euler_path_directed_multigraph(d_mg):
         adji = adj[i]
 
         # Any initial in connected component
-        if (inci != 0 or adji != 0) and end == None :
-            end = i
-        elif inci == adji + 1:
-            end = i
+        if inci == adji + 1:
+            last = i
+        
+        if (inci != 0 or adji != 0) and aux is None:
+            aux = i
 
         # Neccesary last vertex
-        if adji == inci+1 and last == None:
-            last = i
-
-        if end != None and last != None:
-            return (last, end)
-
+        if adji == inci+1 and last is None:
+            first = i
+    if not first:
+        first = aux
+    if not last:
+        last = aux
     # Return Initial and Final nodes
-    return (last, end)
+    return (first, last)
 
-#TODO
+
 def euler_walk_directed_multigraph(u, d_mg):
     """
     Function that eulerianly traverses multigraphs.
@@ -491,22 +504,22 @@ def euler_walk_directed_multigraph(u, d_mg):
     while True:
         # Get edges from current node
         edges = d_mg[current_node]
-        
+
         # If there are no more possible movements exit
         if not edges:
             visited.append(current_node)
             break
-        
+
         edge_iterator = iter(edges.keys())
         first_edge = next(edge_iterator)
         if len(list((edges.values()))[0]) > 1:
             edge_iterator = iter(d_mg[current_node][first_edge].keys())
             first_edge2 = next(edge_iterator)
             d_mg[current_node][first_edge].pop(first_edge2)
-        
+
         elif len(list((edges.values()))[0]) == 1:
             d_mg[current_node].pop(first_edge)
-        
+
         # Append visited node to the walk and change to next node
         visited.append(current_node)
         current_node = first_edge
@@ -580,8 +593,8 @@ def euler_path_directed_multigraph(d_mg):
 
     nodes = first_last_euler_path_directed_multigraph(d_mg)
 
-    visited = euler_walk_directed_multigraph(nodes[1], mg)
-    
+    visited = euler_walk_directed_multigraph(nodes[0], mg)
+
     while remaining_edges(mg):
         origin = next_first_node(visited, mg)
         tmp = euler_walk_directed_multigraph(origin, mg)
@@ -632,7 +645,7 @@ def isthere_euler_circuit_directed_multigraph(d_mg):
         return False
 
     # Connected Component: Depth first traversal
-    dfs(d_mg, visited, visited[nonzero[0]])
+    depth_first_search(d_mg, visited, visited[nonzero[0]])
 
     # Connected Component: Verification
     for node in nonzero:
@@ -661,6 +674,11 @@ def euler_circuit_directed_multigraph(d_mg, u=0):
     return circuit
 
 
+"""
+III. Secuenciación de lecturas
+"""
+
+
 def random_sequence(len_seq):
     """
     Function that generates a protein sequence of selected length.
@@ -676,6 +694,7 @@ def random_sequence(len_seq):
         sequence.append(random.choice(proteins))
     return ''.join(sequence)
 
+
 def spectrum(sequence, len_read):
     """
     Function that returns unordered spectrum of a sequence.
@@ -687,12 +706,13 @@ def spectrum(sequence, len_read):
     Returns unordered spectrum of a sequence.
     """
     spectrum = []
-    seq = [char for char in sequence] 
-    
+    seq = [char for char in sequence]
+
     for i in range(len(seq) - len_read + 1):
         item = seq[i:i+len_read]
         spectrum.append(item)
     return spectrum
+
 
 def spectrum_2(spectr):
     """
@@ -700,7 +720,7 @@ def spectrum_2(spectr):
 
     Parameters
     ----------
-        spectr: l-spectrum 
+        spectr: l-spectrum
     Returns Associated (l-1) spectrum.
     """
     spectrum = []
@@ -720,13 +740,14 @@ def spectrum_2(spectr):
     # Return l-1 spectrum
     return spectrum
 
+
 def spectrum_2_graph(spectr):
     """
     Function that returns a multigraph associated to l-spectrum.
 
     Parameters
     ----------
-        spectr: l-spectrum 
+        spectr: l-spectrum
     Returns Multigraph associated to the (l-1)spectrum.
     """
     spectr2 = spectrum_2(spectr)
@@ -746,6 +767,7 @@ def spectrum_2_graph(spectr):
     # Multigraph generated
     return mg.get_nodes()
 
+
 def path_2_sequence(l_path, spectrum_2):
     """
     Function that returns a sequence from a given path.
@@ -761,7 +783,7 @@ def path_2_sequence(l_path, spectrum_2):
     length = len(spectrum_2[0])
 
     # Generates the first characters from the path
-    
+
     sequence = ''.join(spectrum_2[l_path[0]])
 
     # Iteration and protein addition to the sequence
@@ -775,9 +797,10 @@ def path_2_sequence(l_path, spectrum_2):
 
         # Iteration
         i += 1
-    
+
     # Returns full sequence reconstruction
     return sequence
+
 
 def spectrum_2_sequence(spectr):
     """
@@ -799,9 +822,10 @@ def spectrum_2_sequence(spectr):
     path = euler_path_directed_multigraph(mg)
     if not path:
         return None
-    
+
     # If there is any path, return the sequence
     return path_2_sequence(path, spectr2)
+
 
 def check_sequencing(len_seq, len_read):
     """
@@ -816,88 +840,59 @@ def check_sequencing(len_seq, len_read):
 
     # Random sequence generation
     sequence = random_sequence(len_seq)
-    
+
     # Sequence spectrum generation
     spectr = spectrum(sequence, len_read)
 
     # Reconstruction by spectrum
     reconstructed = spectrum_2_sequence(spectr)
-    
+
     spectr_rec = spectrum(reconstructed, len_read)
     # Verification of reconstruction
-    if spectr != spectr_rec:
+    if sorted(spectr) != sorted(spectr_rec):
         return False
-    
+
     # Everything works
     return True
 
 
-g = {
-    0: {1: {0: 49.0}},
-    1: {2: {0: 17.0}},
-    2: {3: {0: 20.0}},
-    3: {0: {0: 30.0}, 4: {0: 10.0}},
-    4: {3: {0: 10.0}}
-}
+def proteins_graph_estimation(len_seq):
+    """
+    Estimates vertex and edges number aswell as sparsity factor for
+    protein sequencing graphs depending on different read sizes.
 
-newgraph = {
-    0: {1: {0:1, 1:2}},
-    1: {2: {0:1, 1:2}},
-    2: {0: {0:1}}
-}
+    Parameters
+    ----------
+        len_seq: Sequence generation length
+    Returns study results.
+    """
+    sequence = random_sequence(len_seq)
+    results = []
+
+    # Different read sizes iterations
+    for len_read in range(len_seq)[4:]:
+
+        # Graph generation
+        spectr = spectrum(sequence, len_read)
+        graph = spectrum_2_graph(spectr)
+        n_nodes = len(graph)
+        n_edges = 0
+
+        # Edge number finding
+        for destinations in graph.values():
+            for edges in destinations.values():
+                n_edges += len(edges)
+        # Sparsity factor calculation
+        sparsity_factor = n_edges / (n_nodes * (n_nodes-1))
+
+        # Storage
+        results.append((len_read, len(graph), n_edges, sparsity_factor))
+
+    # Returning study results
+    return results
 
 
-# EULER PATH CHECK
-#booleaneuler = isthere_euler_path_directed_multigraph(g)
-# print(booleaneuler)
-#inc, adj = adj_inc_directed_multigraph(g)
+mg = TGF_2_d_g("tgf_test_path.txt")
+print(mg)
 
-
-#mg = rand_weighted_multigraph(100, 0.8)
-#d_g_2_TGF(mg, "save.d")
-#mg = TGF_2_d_g("save.d")
-#print(mg)
-
-# euler init and end
-#test = first_last_euler_path_directed_multigraph(g)
-# print(test)
-
-# euler walk
-#g_copy = copy.deepcopy(g)
-#variable = euler_walk_directed_multigraph(0, g_copy)
-#print(variable)
-
-#var2 = next_first_node(variable, g_copy)
-# print(var2)
-
-# path stitch
-#list1 = [0, 1, 5, 6, 1, 0, 2, 3, 4, 0]
-#list2 = [6, 2, 4, 5]
-#resultado = path_stitch(list1, list2)
-#print(resultado)
-
-#asd = euler_path_directed_multigraph(g)
-#print(asd)
-
-#asd = isthere_euler_circuit_directed_multigraph(g)
-# print(asd)
-
-#asd = euler_circuit_directed_multigraph(g)
-# print(asd)
-
-#sequence = random_sequence(20)
-# print(sequence)
-#spectr = spectrum(sequence, 5)
-#print(spectr)
-#spectrum2 = spectrum_2(spectrum)
-#print(spectrum2)
-
-#test = spectrum_2_graph(spectrum)
-#print(test)
-
-#test = spectrum_2_sequence(spectrum)
-#print(test)
-
-final = check_sequencing(10, 3)
-print(final)
-
+print(first_last_euler_path_directed_multigraph(mg))

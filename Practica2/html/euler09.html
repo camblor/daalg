@@ -1,0 +1,2392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>euler09 API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>euler09</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import sys
+import copy
+import random
+
+&#34;&#34;&#34;
+0.0 Auxiliary Class: Multigraph.
+&#34;&#34;&#34;
+
+
+class Multigraph:
+    &#34;&#34;&#34;
+    Class for multigraph representation.
+    ___________________________________
+    Its main purpose is to store all the variables needed
+    during multigraph generation.
+    &#34;&#34;&#34;
+
+    def __init__(self, n_nodes, decimals, num_max_multiple_edges, max_weight):
+        &#34;&#34;&#34;
+        Constructor method for a multigraph with given parameters.
+
+        Parameters
+        ----------
+            n_nodes: Total number of nodes of the graph.
+            decimals: Decimal digits in weight.
+            num_max_multiple_edges: Maximum number of edges for each node.
+            max_weight: Maximum weight of an edge
+        &#34;&#34;&#34;
+
+        # Multigraph Creation
+        self.mg = {}
+        for node in range(n_nodes):
+            self.mg[node] = {}
+
+        # Setting of parameters
+        self.num_max_multiple_edges = num_max_multiple_edges
+        self.max_weight = max_weight
+
+        # Adjacency list creation
+        self.adjlist = {}
+
+        # Decimal digits
+        self.decimals = decimals
+
+    def get_nodes(self):
+        &#34;&#34;&#34;
+        Get list of nodes
+        &#34;&#34;&#34;
+        return self.mg
+
+    def get_edges(self, node):
+        &#34;&#34;&#34;
+        Gets the edges from a given node
+
+        Parameters
+        ----------
+             node: given node
+
+        Returns edges from given node.
+        &#34;&#34;&#34;
+        return self.mg[node]
+
+    def set_edge(self, node1, node2, cost):
+        &#34;&#34;&#34;
+        Creates an edge between two nodes with a given cost.
+
+        Parameters
+        ----------
+             node1: Origin node.
+             node2: Destination node.
+             cost: Edge cost.
+        &#34;&#34;&#34;
+
+        if (len(self.mg[node1]) &lt; 1) or (node2 not in self.mg[node1]):
+            self.mg[node1][node2] = {0: cost}
+        else:
+            self.mg[node1][node2][len(self.mg[node1][node2])] = cost
+
+    def get_num_max_multiple_edges(self):
+        &#34;&#34;&#34;
+        Gets the maximum number of edges for each node
+        in the current multigraph
+        &#34;&#34;&#34;
+        return self.num_max_multiple_edges
+
+    def get_decimals(self):
+        &#34;&#34;&#34;
+        Gets the decimal digits number
+        &#34;&#34;&#34;
+        return self.decimals
+
+    def get_max_weight(self):
+        &#34;&#34;&#34;
+        Gets the maximum weight of the graph.
+        &#34;&#34;&#34;
+        return self.max_weight
+
+    def __str__(self):
+        return str(self.mg)
+
+
+&#34;&#34;&#34;
+0.1 Auxiliary Functions: Random Multigraph Generation.
+&#34;&#34;&#34;
+
+
+def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
+    &#34;&#34;&#34;
+    Edge generation method, applying probability to computations
+    for a given multigraph.
+
+    Parameters
+    ----------
+        mg: Multigraph structure
+        fl_diag: Allow/Deny self-connected edges
+        probability: Edge probability
+        fl_unweighted: Flag that signals if a graph is or isn&#39;t unweighted
+    &#34;&#34;&#34;
+
+    nodes = list(mg.get_nodes().keys())  # Nodes of the graph
+    for node in nodes:
+        # EDGE SELECTION
+
+        if not fl_diag:  # When disabled self-linked-edges
+            nodes.remove(node)
+
+        # NumPy chooses nodes to link
+        linked = np.random.choice(list(nodes),
+                                  mg.get_num_max_multiple_edges())
+
+        if not fl_diag:  # When disabled self-linked-edges
+            nodes.append(node)  # Return the node to list
+            nodes.sort()  # Sort the list
+
+        # EDGE CREATION
+
+        for lnode in linked:  # For every selected node
+            # Numpy randomly generates edges according to probability
+            if np.random.uniform() &lt; probability:
+                # Setting weight of the edge
+
+                if fl_unweighted:  # When disabled graph weight
+                    weight = 1
+                else:
+                    # Select a number between 0 and maximum weight with
+                    # uniform probability. Truncate to decimals.
+                    weight = round(np.random.uniform(0,
+                                                     mg.get_max_weight()),
+                                   mg.get_decimals())
+
+                mg.set_edge(node, lnode, weight)  # Creates each edge
+
+                if not fl_directed:  # If undirected graph, connect both nodes
+                    mg.set_edge(lnode, node, weight)
+
+
+def rand_weighted_multigraph(n_nodes, probability=0.6,
+                             num_max_multiple_edges=2,
+                             max_weight=50,
+                             decimals=0,
+                             fl_unweighted=False,
+                             fl_diag=True):
+    &#34;&#34;&#34;
+    Function that generates a directed multigraph with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Directed multigraph constructed with given parameters.
+    &#34;&#34;&#34;
+
+    fl_directed = True
+    # Creation of the Multigraph Object
+    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+
+    # Multigraph Random Generation
+    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
+
+    mg = mg.get_nodes()  # Gets Multigraph dictionary structure
+
+    return mg
+
+
+def rand_weighted_undirected_multigraph(n_nodes,
+                                        probability=0.2,
+                                        num_max_multiple_edges=1,
+                                        max_weight=50,
+                                        decimals=0,
+                                        fl_unweighted=False,
+                                        fl_diag=True):
+    &#34;&#34;&#34;
+    Function that generates an undirected multigraph with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Undirected multigraph constructed with given parameters.
+    &#34;&#34;&#34;
+    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+    fl_directed = False
+    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
+    return mg.get_nodes()
+
+
+&#34;&#34;&#34;
+0.2 Auxiliary Functions: Adjacency and Incidency Lists.
+&#34;&#34;&#34;
+
+
+def print_adj_list_mg(mg):
+    &#34;&#34;&#34;
+    Print the adjacency list for a given multigraph
+
+    Parameters
+    ----------
+        mg: Multigraph to print
+    &#34;&#34;&#34;
+
+    for key, value in mg.items():
+        print(str(key), end=&#34;&#34;)
+        for destiny in sorted(value.keys()):
+            print(&#34; - {}&#34;.format(destiny), end=&#34;&#34;)
+        print(&#34;&#34;)
+    print(&#34;&#34;)
+
+
+&#34;&#34;&#34;
+0.3 Auxiliary Functions: DFS, Connectivity and Adjacency/Incidency lists.
+&#34;&#34;&#34;
+
+
+def depth_first_search(mg, visited, node):
+    &#34;&#34;&#34;
+    Depth-first search for a given graph and initial node
+
+    Parameters
+    ----------
+        mg: Multigraph.
+        visited: List for visited nodes.
+        node: Initial node.
+    Mark as visited all nodes traversed during DFS.
+    &#34;&#34;&#34;
+    visited[node] = True
+    for i in mg[node]:
+        if visited[i] is False:
+            depth_first_search(mg, visited, i)
+
+
+def connected_component(mg, connected_nodes):
+    &#34;&#34;&#34;
+    Function that checks if a given graph is connected
+
+    Parameters
+    ----------
+        mg: Multigraph.
+    Returns true or false depending on connected condition of the graph.
+    &#34;&#34;&#34;
+    length = len(mg)
+    visited = [False] * length
+
+    # Component traversal.
+    depth_first_search(mg, visited, connected_nodes[0])
+
+    # Connected component check.
+    for node in connected_nodes:
+        if not visited[node]:
+            return False
+
+    # All nonzero in-out nodes verified as connected component.
+    return True
+
+
+def inc_adj_analysis(gsize, adj, inc, nonzero=None):
+    &#34;&#34;&#34;
+    Mathematical check function for eulerian paths.
+
+    Parameters
+    ----------
+        gsize: Graph size.
+        adj: Adjacency list of the graph.
+        inc: Incidency list of the graph.
+    Returns true or false depending on equalities for eulerian paths.
+    &#34;&#34;&#34;
+    nodeA = None
+    nodeB = None
+
+    # Adjacency/Indidency vertex analysis
+    for i in range(gsize):
+        adji = adj[i]
+        inci = inc[i]
+        # Connected component check storage
+        if nonzero is not None:
+            if inci != 0 or adji != 0:
+                nonzero.append(i)
+
+        # Every other vertex in == out
+        if nodeA and nodeB and inci != adji:
+            return False
+
+        # 1 more in than out
+        elif inci+1 == adji:
+            if nodeA is not None:
+                return False
+            nodeA = i
+
+        # 1 more out than in
+        elif inci == adji+1:
+            if nodeB is not None:
+                return False
+
+            nodeB = i
+
+        elif inci &gt; adji+1 or adji &gt; inci+1:
+            return False
+
+    return True
+
+
+&#34;&#34;&#34; I. Guardando y Leyendo grafos &#34;&#34;&#34;
+
+
+def d_g_2_TGF(d_g, f_name):
+    &#34;&#34;&#34;
+    Function that stores a given multigraph into a file.
+
+    Parameters
+    ----------
+        d_g: Multigraph.
+        f_name: Destination file name.
+    Returns the multigraph into the file.
+    &#34;&#34;&#34;
+    original_stdout = sys.stdout
+
+    with open(f_name, &#39;w+&#39;) as f:
+        sys.stdout = f
+        for node in d_g.keys():
+            print(node)
+        print(&#34;#&#34;)
+        for node, edges in d_g.items():
+            for destination, edges in edges.items():
+                for _, weight in edges.items():
+                    print(node, destination, float(weight))
+        sys.stdout = original_stdout
+
+
+def TGF_2_d_g(f_name):
+    &#34;&#34;&#34;
+    Function that reads a given multigraph from a TGF file.
+
+    Parameters
+    ----------
+        f_name: Input file name.
+    Returns a multigraph created from TGF file data.
+    &#34;&#34;&#34;
+    file1 = open(f_name, &#39;r&#39;)
+    lines = file1.readlines()
+    file1.close()
+    nodesflag = True
+
+    n_nodes = 0
+    for line in lines:
+        read = line[:-1]
+
+        if &#39;#&#39; in read:
+            nodesflag = False
+            mg = Multigraph(n_nodes, 2, n_nodes, 100)
+            continue
+
+        if nodesflag:
+            n_nodes += 1
+        else:
+            edge = line.split(&#39; &#39;)
+            if edge == [&#39;&#39;]:
+                break
+            mg.set_edge(int(edge[0]), int(edge[1]), float(edge[2]))
+
+    return mg.get_nodes()
+
+
+&#34;&#34;&#34;
+II. Caminos eulerianos en multigrafos dirigidos
+&#34;&#34;&#34;
+
+
+def adj_inc_directed_multigraph(mg):
+    &#34;&#34;&#34;
+    Function that returns adjacency and incidency lists for every vertex in mg
+
+    Parameters
+    ----------
+        mg: Multigraph.
+    Returns Adjacency and Incidency lists for every vertex.
+    &#34;&#34;&#34;
+
+    adj = []
+    inc_tmp = [[] for i in mg]
+    for origin, edges in mg.items():
+        adj_temp = 0
+        for destiny in sorted(edges):
+            for _ in edges[destiny]:
+                adj_temp += 1
+                inc_tmp[destiny].append(origin)
+        adj.append(adj_temp)
+
+    inc = [len(i) for i in inc_tmp]
+    return inc, adj
+
+
+def isthere_euler_path_directed_multigraph(d_mg):
+    &#34;&#34;&#34;
+    Function that checks if there is an eulerian path in the multigraph.
+
+    Parameters
+    ----------
+        d_mg: Multigraph.
+    Returns True or False depending on eulerian path existance in mg.
+    &#34;&#34;&#34;
+    gsize = len(d_mg)
+    inc, adj = adj_inc_directed_multigraph(d_mg)
+    nonzero = []
+
+    # Incidency and Adjacency list analysis
+    if not inc_adj_analysis(gsize, adj, inc, nonzero):
+        return False
+    # Finding connected components: Component connectivity
+    if not connected_component(d_mg, nonzero):
+        return False
+    # All conditions satisfied
+    return True
+
+
+def first_last_euler_path_directed_multigraph(d_mg):
+    &#34;&#34;&#34;
+    Function that finds initial and final node of an eulerian path in mg.
+
+    Parameters
+    ----------
+        d_mg: Multigraph to analyze.
+    Returns initial and final nodes as tuple of an eulerian path.
+    &#34;&#34;&#34;
+    first = None
+    last = None
+    aux = None
+    print(d_mg)
+
+    # Check if there is any eulerian path
+    if not isthere_euler_path_directed_multigraph(d_mg):
+        return ()
+
+    # Get Incidency and Adjacency Lists
+    inc, adj = adj_inc_directed_multigraph(d_mg)
+
+    # Get first item in the connected component
+    # Also check if we can find any last vertex
+    for i in range(len(d_mg)):
+        inci = inc[i]
+        adji = adj[i]
+
+        # Any initial in connected component
+        if inci == adji + 1:
+            last = i
+        
+        if (inci != 0 or adji != 0) and aux is None:
+            aux = i
+
+        # Neccesary last vertex
+        if adji == inci+1 and last is None:
+            first = i
+    if not first:
+        first = aux
+    if not last:
+        last = aux
+    # Return Initial and Final nodes
+    return (first, last)
+
+
+def euler_walk_directed_multigraph(u, d_mg):
+    &#34;&#34;&#34;
+    Function that eulerianly traverses multigraphs.
+
+    Parameters
+    ----------
+        u: Initial node to begin the path
+        d_mg: Multigraph to work with.
+    Returns traversed nodes of the eulerianly traversed path.
+    &#34;&#34;&#34;
+
+    current_node = u
+    visited = []
+
+    while True:
+        # Get edges from current node
+        edges = d_mg[current_node]
+
+        # If there are no more possible movements exit
+        if not edges:
+            visited.append(current_node)
+            break
+
+        edge_iterator = iter(edges.keys())
+        first_edge = next(edge_iterator)
+        if len(list((edges.values()))[0]) &gt; 1:
+            edge_iterator = iter(d_mg[current_node][first_edge].keys())
+            first_edge2 = next(edge_iterator)
+            d_mg[current_node][first_edge].pop(first_edge2)
+
+        elif len(list((edges.values()))[0]) == 1:
+            d_mg[current_node].pop(first_edge)
+
+        # Append visited node to the walk and change to next node
+        visited.append(current_node)
+        current_node = first_edge
+    return visited
+
+
+def next_first_node(l_path, d_mg):
+    &#34;&#34;&#34;
+    Function that finds next node to reset eulerian traversal.
+
+    Parameters
+    ----------
+        l_path: Traversed nodes during eulerian walk.
+        d_mg: Multigraph to work with.
+    Returns node to reset eulerian traversal.
+    &#34;&#34;&#34;
+
+    for node in l_path:
+        if d_mg[node]:
+            return node
+
+    return None
+
+
+def path_stitch(path1, path2):
+    &#34;&#34;&#34;
+    Function that pastes paths .
+
+    Parameters
+    ----------
+        path1: Main path to be pasted into.
+        path2: Additional path to be pasted into the main one.
+    Returns joined paths.
+    &#34;&#34;&#34;
+    stick = path2[0]
+    ind = path1.index(stick)
+    result = path1[:ind+1] + path2[1:] + path1[ind+1:]
+    return result
+
+
+def remaining_edges(mg):
+    &#34;&#34;&#34;
+    Function that checks if there is any remaining edge in the multigraph.
+
+    Parameters
+    ----------
+        mg: Multigraph.
+    Returns the boolean evaluation of edge existance condition.
+    &#34;&#34;&#34;
+    for edges in mg.values():
+        if edges:
+            return True
+
+    return False
+
+
+def euler_path_directed_multigraph(d_mg):
+    &#34;&#34;&#34;
+    Function that tries to find an euler path in a given directed multigraph.
+
+    Parameters
+    ----------
+        d_mg: Directed multigraph.
+    Returns an euler path for the given multigraph if possible.
+    &#34;&#34;&#34;
+    mg = copy.deepcopy(d_mg)
+    visited = []
+
+    if not isthere_euler_path_directed_multigraph(d_mg):
+        return None
+
+    nodes = first_last_euler_path_directed_multigraph(d_mg)
+
+    visited = euler_walk_directed_multigraph(nodes[0], mg)
+
+    while remaining_edges(mg):
+        origin = next_first_node(visited, mg)
+        tmp = euler_walk_directed_multigraph(origin, mg)
+        visited = path_stitch(visited, tmp)
+
+    return visited
+
+
+def vertex_degree_check(adj, inc, nonzero):
+    &#34;&#34;&#34;
+    Function that checks adjacency and incidency equality as stores component.
+
+    Parameters
+    ----------
+        d_mg: Directed multigraph.
+    Returns boolean evaluation for the equality condition.
+    &#34;&#34;&#34;
+    for i in range(len(adj)):
+        inci = inc[i]
+        adji = adj[i]
+
+        # Connected component check storage
+        if adji != 0 or inci != 0:
+            nonzero.append(i)
+
+        # Incidency must be equal to Adjacency
+        if adji != inci:
+            return False
+
+    return True
+
+
+def isthere_euler_circuit_directed_multigraph(d_mg):
+    &#34;&#34;&#34;
+    Function that tries to find an euler circuit in a given multigraph.
+
+    Parameters
+    ----------
+        d_mg: Directed multigraph.
+    Returns boolean evaluation for euler path existance for given multigraph.
+    &#34;&#34;&#34;
+    adj, inc = adj_inc_directed_multigraph(d_mg)
+    visited = [False] * len(d_mg)
+    nonzero = []
+
+    # Incidency and Adjacency Equality
+    if not vertex_degree_check(adj, inc, nonzero):
+        return False
+
+    # Connected Component: Depth first traversal
+    depth_first_search(d_mg, visited, visited[nonzero[0]])
+
+    # Connected Component: Verification
+    for node in nonzero:
+        if not visited[node]:
+            return False
+
+    # Conditions satisfied
+    return True
+
+
+def euler_circuit_directed_multigraph(d_mg, u=0):
+    &#34;&#34;&#34;
+    Function that tries to find an eulerian circuit in given multigraph.
+
+    Parameters
+    ----------
+        d_mg: Size of the desired sequence
+        u: Initial circuit vertex
+    Returns euler circuit in given multigraph if existing, otherwise None.
+    &#34;&#34;&#34;
+    if not isthere_euler_circuit_directed_multigraph(d_mg):
+        return None
+
+    circuit = euler_path_directed_multigraph(d_mg)
+
+    return circuit
+
+
+&#34;&#34;&#34;
+III. Secuenciación de lecturas
+&#34;&#34;&#34;
+
+
+def random_sequence(len_seq):
+    &#34;&#34;&#34;
+    Function that generates a protein sequence of selected length.
+
+    Parameters
+    ----------
+        len_seq: Size of the desired sequence
+    Returns random protein sequence.
+    &#34;&#34;&#34;
+    proteins = [&#39;A&#39;, &#39;C&#39;, &#39;G&#39;, &#39;T&#39;]
+    sequence = []
+    for _ in range(len_seq):
+        sequence.append(random.choice(proteins))
+    return &#39;&#39;.join(sequence)
+
+
+def spectrum(sequence, len_read):
+    &#34;&#34;&#34;
+    Function that returns unordered spectrum of a sequence.
+
+    Parameters
+    ----------
+        sequence: Input sequence
+        len_read: Read size
+    Returns unordered spectrum of a sequence.
+    &#34;&#34;&#34;
+    spectrum = []
+    seq = [char for char in sequence]
+
+    for i in range(len(seq) - len_read + 1):
+        item = seq[i:i+len_read]
+        spectrum.append(item)
+    return spectrum
+
+
+def spectrum_2(spectr):
+    &#34;&#34;&#34;
+    Function that returns the l-1 spectrum associated to the l-spectrum.
+
+    Parameters
+    ----------
+        spectr: l-spectrum
+    Returns Associated (l-1) spectrum.
+    &#34;&#34;&#34;
+    spectrum = []
+    length = len(spectr[0]) - 1
+
+    # Iterate spectrum
+    for proteins in spectr:
+        # Iterate protein
+        for i in range(len(proteins)-length+1):
+            # Divide protein
+            prot = proteins[i:i+length]
+
+            # Store as unique (set)
+            if prot not in spectrum:
+                spectrum.append(prot)
+
+    # Return l-1 spectrum
+    return spectrum
+
+
+def spectrum_2_graph(spectr):
+    &#34;&#34;&#34;
+    Function that returns a multigraph associated to l-spectrum.
+
+    Parameters
+    ----------
+        spectr: l-spectrum
+    Returns Multigraph associated to the (l-1)spectrum.
+    &#34;&#34;&#34;
+    spectr2 = spectrum_2(spectr)
+    n_nodes = len(spectr2)
+    length = len(spectr2[0])
+    mg = Multigraph(n_nodes, 0, n_nodes-1, 1)
+    # Iterates every item in l-spectrum as node
+    for i in range(n_nodes):
+        protein = spectr2[i]
+        # Iterates every possible connection
+        for j in range(n_nodes):
+            destiny = spectr2[j]
+            # Connects in l-1 graph if they can be connected in l-spectrum
+            for k in spectr:
+                if protein == k[:length] and destiny == k[-(length):]:
+                    mg.set_edge(i, j, 1)
+    # Multigraph generated
+    return mg.get_nodes()
+
+
+def path_2_sequence(l_path, spectrum_2):
+    &#34;&#34;&#34;
+    Function that returns a sequence from a given path.
+
+    Parameters
+    ----------
+        l_path: Eulerian path
+        spectrum_2: l-1 Spectrum
+    Returns protein sequence.
+    &#34;&#34;&#34;
+
+    # Gets l-1
+    length = len(spectrum_2[0])
+
+    # Generates the first characters from the path
+
+    sequence = &#39;&#39;.join(spectrum_2[l_path[0]])
+
+    # Iteration and protein addition to the sequence
+    i = 1
+    while i &lt; len(l_path):
+        # Interpretation
+        spectrum_str = &#39;&#39;.join(spectrum_2[l_path[i]])
+
+        # Addition
+        sequence += spectrum_str[length-1:]
+
+        # Iteration
+        i += 1
+
+    # Returns full sequence reconstruction
+    return sequence
+
+
+def spectrum_2_sequence(spectr):
+    &#34;&#34;&#34;
+    Function that returns a sequence from a given path.
+
+    Parameters
+    ----------
+        l_path: Eulerian path
+        spectrum_2: l-1 Spectrum
+    Returns protein sequence.
+    &#34;&#34;&#34;
+    # Gets l-1 spectrum
+    spectr2 = spectrum_2(spectr)
+
+    # Generates multigraph from spectrum
+    mg = spectrum_2_graph(spectr)
+
+    # Finds eulerian path
+    path = euler_path_directed_multigraph(mg)
+    if not path:
+        return None
+
+    # If there is any path, return the sequence
+    return path_2_sequence(path, spectr2)
+
+
+def check_sequencing(len_seq, len_read):
+    &#34;&#34;&#34;
+    Checks if our protein sequencing algorithms work fine.
+
+    Parameters
+    ----------
+        len_seq: Sequence generation length
+        len_read: Sequence read length
+    Returns Boolean evaluation for protein sequence reconstruction.
+    &#34;&#34;&#34;
+
+    # Random sequence generation
+    sequence = random_sequence(len_seq)
+
+    # Sequence spectrum generation
+    spectr = spectrum(sequence, len_read)
+
+    # Reconstruction by spectrum
+    reconstructed = spectrum_2_sequence(spectr)
+
+    spectr_rec = spectrum(reconstructed, len_read)
+    # Verification of reconstruction
+    if sorted(spectr) != sorted(spectr_rec):
+        return False
+
+    # Everything works
+    return True
+
+
+def proteins_graph_estimation(len_seq):
+    &#34;&#34;&#34;
+    Estimates vertex and edges number aswell as sparsity factor for
+    protein sequencing graphs depending on different read sizes.
+
+    Parameters
+    ----------
+        len_seq: Sequence generation length
+    Returns study results.
+    &#34;&#34;&#34;
+    sequence = random_sequence(len_seq)
+    results = []
+
+    # Different read sizes iterations
+    for len_read in range(len_seq)[4:]:
+
+        # Graph generation
+        spectr = spectrum(sequence, len_read)
+        graph = spectrum_2_graph(spectr)
+        n_nodes = len(graph)
+        n_edges = 0
+
+        # Edge number finding
+        for destinations in graph.values():
+            for edges in destinations.values():
+                n_edges += len(edges)
+        # Sparsity factor calculation
+        sparsity_factor = n_edges / (n_nodes * (n_nodes-1))
+
+        # Storage
+        results.append((len_read, len(graph), n_edges, sparsity_factor))
+
+    # Returning study results
+    return results</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="euler09.TGF_2_d_g"><code class="name flex">
+<span>def <span class="ident">TGF_2_d_g</span></span>(<span>f_name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that reads a given multigraph from a TGF file.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>f_name: Input file name.
+</code></pre>
+<p>Returns a multigraph created from TGF file data.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def TGF_2_d_g(f_name):
+    &#34;&#34;&#34;
+    Function that reads a given multigraph from a TGF file.
+
+    Parameters
+    ----------
+        f_name: Input file name.
+    Returns a multigraph created from TGF file data.
+    &#34;&#34;&#34;
+    file1 = open(f_name, &#39;r&#39;)
+    lines = file1.readlines()
+    file1.close()
+    nodesflag = True
+
+    n_nodes = 0
+    for line in lines:
+        read = line[:-1]
+
+        if &#39;#&#39; in read:
+            nodesflag = False
+            mg = Multigraph(n_nodes, 2, n_nodes, 100)
+            continue
+
+        if nodesflag:
+            n_nodes += 1
+        else:
+            edge = line.split(&#39; &#39;)
+            if edge == [&#39;&#39;]:
+                break
+            mg.set_edge(int(edge[0]), int(edge[1]), float(edge[2]))
+
+    return mg.get_nodes()</code></pre>
+</details>
+</dd>
+<dt id="euler09.adj_inc_directed_multigraph"><code class="name flex">
+<span>def <span class="ident">adj_inc_directed_multigraph</span></span>(<span>mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns adjacency and incidency lists for every vertex in mg</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>mg: Multigraph.
+</code></pre>
+<p>Returns Adjacency and Incidency lists for every vertex.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def adj_inc_directed_multigraph(mg):
+    &#34;&#34;&#34;
+    Function that returns adjacency and incidency lists for every vertex in mg
+
+    Parameters
+    ----------
+        mg: Multigraph.
+    Returns Adjacency and Incidency lists for every vertex.
+    &#34;&#34;&#34;
+
+    adj = []
+    inc_tmp = [[] for i in mg]
+    for origin, edges in mg.items():
+        adj_temp = 0
+        for destiny in sorted(edges):
+            for _ in edges[destiny]:
+                adj_temp += 1
+                inc_tmp[destiny].append(origin)
+        adj.append(adj_temp)
+
+    inc = [len(i) for i in inc_tmp]
+    return inc, adj</code></pre>
+</details>
+</dd>
+<dt id="euler09.check_sequencing"><code class="name flex">
+<span>def <span class="ident">check_sequencing</span></span>(<span>len_seq, len_read)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks if our protein sequencing algorithms work fine.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>len_seq: Sequence generation length
+len_read: Sequence read length
+</code></pre>
+<p>Returns Boolean evaluation for protein sequence reconstruction.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_sequencing(len_seq, len_read):
+    &#34;&#34;&#34;
+    Checks if our protein sequencing algorithms work fine.
+
+    Parameters
+    ----------
+        len_seq: Sequence generation length
+        len_read: Sequence read length
+    Returns Boolean evaluation for protein sequence reconstruction.
+    &#34;&#34;&#34;
+
+    # Random sequence generation
+    sequence = random_sequence(len_seq)
+
+    # Sequence spectrum generation
+    spectr = spectrum(sequence, len_read)
+
+    # Reconstruction by spectrum
+    reconstructed = spectrum_2_sequence(spectr)
+
+    spectr_rec = spectrum(reconstructed, len_read)
+    # Verification of reconstruction
+    if sorted(spectr) != sorted(spectr_rec):
+        return False
+
+    # Everything works
+    return True</code></pre>
+</details>
+</dd>
+<dt id="euler09.connected_component"><code class="name flex">
+<span>def <span class="ident">connected_component</span></span>(<span>mg, connected_nodes)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that checks if a given graph is connected</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>mg: Multigraph.
+</code></pre>
+<p>Returns true or false depending on connected condition of the graph.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def connected_component(mg, connected_nodes):
+    &#34;&#34;&#34;
+    Function that checks if a given graph is connected
+
+    Parameters
+    ----------
+        mg: Multigraph.
+    Returns true or false depending on connected condition of the graph.
+    &#34;&#34;&#34;
+    length = len(mg)
+    visited = [False] * length
+
+    # Component traversal.
+    depth_first_search(mg, visited, connected_nodes[0])
+
+    # Connected component check.
+    for node in connected_nodes:
+        if not visited[node]:
+            return False
+
+    # All nonzero in-out nodes verified as connected component.
+    return True</code></pre>
+</details>
+</dd>
+<dt id="euler09.d_g_2_TGF"><code class="name flex">
+<span>def <span class="ident">d_g_2_TGF</span></span>(<span>d_g, f_name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that stores a given multigraph into a file.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>d_g: Multigraph.
+f_name: Destination file name.
+</code></pre>
+<p>Returns the multigraph into the file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def d_g_2_TGF(d_g, f_name):
+    &#34;&#34;&#34;
+    Function that stores a given multigraph into a file.
+
+    Parameters
+    ----------
+        d_g: Multigraph.
+        f_name: Destination file name.
+    Returns the multigraph into the file.
+    &#34;&#34;&#34;
+    original_stdout = sys.stdout
+
+    with open(f_name, &#39;w+&#39;) as f:
+        sys.stdout = f
+        for node in d_g.keys():
+            print(node)
+        print(&#34;#&#34;)
+        for node, edges in d_g.items():
+            for destination, edges in edges.items():
+                for _, weight in edges.items():
+                    print(node, destination, float(weight))
+        sys.stdout = original_stdout</code></pre>
+</details>
+</dd>
+<dt id="euler09.depth_first_search"><code class="name flex">
+<span>def <span class="ident">depth_first_search</span></span>(<span>mg, visited, node)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Depth-first search for a given graph and initial node</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>mg: Multigraph.
+visited: List for visited nodes.
+node: Initial node.
+</code></pre>
+<p>Mark as visited all nodes traversed during DFS.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def depth_first_search(mg, visited, node):
+    &#34;&#34;&#34;
+    Depth-first search for a given graph and initial node
+
+    Parameters
+    ----------
+        mg: Multigraph.
+        visited: List for visited nodes.
+        node: Initial node.
+    Mark as visited all nodes traversed during DFS.
+    &#34;&#34;&#34;
+    visited[node] = True
+    for i in mg[node]:
+        if visited[i] is False:
+            depth_first_search(mg, visited, i)</code></pre>
+</details>
+</dd>
+<dt id="euler09.edgeGeneration"><code class="name flex">
+<span>def <span class="ident">edgeGeneration</span></span>(<span>mg, fl_diag, probability, fl_unweighted, fl_directed)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Edge generation method, applying probability to computations
+for a given multigraph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>mg: Multigraph structure
+fl_diag: Allow/Deny self-connected edges
+probability: Edge probability
+fl_unweighted: Flag that signals if a graph is or isn't unweighted
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed):
+    &#34;&#34;&#34;
+    Edge generation method, applying probability to computations
+    for a given multigraph.
+
+    Parameters
+    ----------
+        mg: Multigraph structure
+        fl_diag: Allow/Deny self-connected edges
+        probability: Edge probability
+        fl_unweighted: Flag that signals if a graph is or isn&#39;t unweighted
+    &#34;&#34;&#34;
+
+    nodes = list(mg.get_nodes().keys())  # Nodes of the graph
+    for node in nodes:
+        # EDGE SELECTION
+
+        if not fl_diag:  # When disabled self-linked-edges
+            nodes.remove(node)
+
+        # NumPy chooses nodes to link
+        linked = np.random.choice(list(nodes),
+                                  mg.get_num_max_multiple_edges())
+
+        if not fl_diag:  # When disabled self-linked-edges
+            nodes.append(node)  # Return the node to list
+            nodes.sort()  # Sort the list
+
+        # EDGE CREATION
+
+        for lnode in linked:  # For every selected node
+            # Numpy randomly generates edges according to probability
+            if np.random.uniform() &lt; probability:
+                # Setting weight of the edge
+
+                if fl_unweighted:  # When disabled graph weight
+                    weight = 1
+                else:
+                    # Select a number between 0 and maximum weight with
+                    # uniform probability. Truncate to decimals.
+                    weight = round(np.random.uniform(0,
+                                                     mg.get_max_weight()),
+                                   mg.get_decimals())
+
+                mg.set_edge(node, lnode, weight)  # Creates each edge
+
+                if not fl_directed:  # If undirected graph, connect both nodes
+                    mg.set_edge(lnode, node, weight)</code></pre>
+</details>
+</dd>
+<dt id="euler09.euler_circuit_directed_multigraph"><code class="name flex">
+<span>def <span class="ident">euler_circuit_directed_multigraph</span></span>(<span>d_mg, u=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that tries to find an eulerian circuit in given multigraph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>d_mg: Size of the desired sequence
+u: Initial circuit vertex
+</code></pre>
+<p>Returns euler circuit in given multigraph if existing, otherwise None.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def euler_circuit_directed_multigraph(d_mg, u=0):
+    &#34;&#34;&#34;
+    Function that tries to find an eulerian circuit in given multigraph.
+
+    Parameters
+    ----------
+        d_mg: Size of the desired sequence
+        u: Initial circuit vertex
+    Returns euler circuit in given multigraph if existing, otherwise None.
+    &#34;&#34;&#34;
+    if not isthere_euler_circuit_directed_multigraph(d_mg):
+        return None
+
+    circuit = euler_path_directed_multigraph(d_mg)
+
+    return circuit</code></pre>
+</details>
+</dd>
+<dt id="euler09.euler_path_directed_multigraph"><code class="name flex">
+<span>def <span class="ident">euler_path_directed_multigraph</span></span>(<span>d_mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that tries to find an euler path in a given directed multigraph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>d_mg: Directed multigraph.
+</code></pre>
+<p>Returns an euler path for the given multigraph if possible.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def euler_path_directed_multigraph(d_mg):
+    &#34;&#34;&#34;
+    Function that tries to find an euler path in a given directed multigraph.
+
+    Parameters
+    ----------
+        d_mg: Directed multigraph.
+    Returns an euler path for the given multigraph if possible.
+    &#34;&#34;&#34;
+    mg = copy.deepcopy(d_mg)
+    visited = []
+
+    if not isthere_euler_path_directed_multigraph(d_mg):
+        return None
+
+    nodes = first_last_euler_path_directed_multigraph(d_mg)
+
+    visited = euler_walk_directed_multigraph(nodes[0], mg)
+
+    while remaining_edges(mg):
+        origin = next_first_node(visited, mg)
+        tmp = euler_walk_directed_multigraph(origin, mg)
+        visited = path_stitch(visited, tmp)
+
+    return visited</code></pre>
+</details>
+</dd>
+<dt id="euler09.euler_walk_directed_multigraph"><code class="name flex">
+<span>def <span class="ident">euler_walk_directed_multigraph</span></span>(<span>u, d_mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that eulerianly traverses multigraphs.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>u: Initial node to begin the path
+d_mg: Multigraph to work with.
+</code></pre>
+<p>Returns traversed nodes of the eulerianly traversed path.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def euler_walk_directed_multigraph(u, d_mg):
+    &#34;&#34;&#34;
+    Function that eulerianly traverses multigraphs.
+
+    Parameters
+    ----------
+        u: Initial node to begin the path
+        d_mg: Multigraph to work with.
+    Returns traversed nodes of the eulerianly traversed path.
+    &#34;&#34;&#34;
+
+    current_node = u
+    visited = []
+
+    while True:
+        # Get edges from current node
+        edges = d_mg[current_node]
+
+        # If there are no more possible movements exit
+        if not edges:
+            visited.append(current_node)
+            break
+
+        edge_iterator = iter(edges.keys())
+        first_edge = next(edge_iterator)
+        if len(list((edges.values()))[0]) &gt; 1:
+            edge_iterator = iter(d_mg[current_node][first_edge].keys())
+            first_edge2 = next(edge_iterator)
+            d_mg[current_node][first_edge].pop(first_edge2)
+
+        elif len(list((edges.values()))[0]) == 1:
+            d_mg[current_node].pop(first_edge)
+
+        # Append visited node to the walk and change to next node
+        visited.append(current_node)
+        current_node = first_edge
+    return visited</code></pre>
+</details>
+</dd>
+<dt id="euler09.first_last_euler_path_directed_multigraph"><code class="name flex">
+<span>def <span class="ident">first_last_euler_path_directed_multigraph</span></span>(<span>d_mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that finds initial and final node of an eulerian path in mg.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>d_mg: Multigraph to analyze.
+</code></pre>
+<p>Returns initial and final nodes as tuple of an eulerian path.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def first_last_euler_path_directed_multigraph(d_mg):
+    &#34;&#34;&#34;
+    Function that finds initial and final node of an eulerian path in mg.
+
+    Parameters
+    ----------
+        d_mg: Multigraph to analyze.
+    Returns initial and final nodes as tuple of an eulerian path.
+    &#34;&#34;&#34;
+    first = None
+    last = None
+    aux = None
+    print(d_mg)
+
+    # Check if there is any eulerian path
+    if not isthere_euler_path_directed_multigraph(d_mg):
+        return ()
+
+    # Get Incidency and Adjacency Lists
+    inc, adj = adj_inc_directed_multigraph(d_mg)
+
+    # Get first item in the connected component
+    # Also check if we can find any last vertex
+    for i in range(len(d_mg)):
+        inci = inc[i]
+        adji = adj[i]
+
+        # Any initial in connected component
+        if inci == adji + 1:
+            last = i
+        
+        if (inci != 0 or adji != 0) and aux is None:
+            aux = i
+
+        # Neccesary last vertex
+        if adji == inci+1 and last is None:
+            first = i
+    if not first:
+        first = aux
+    if not last:
+        last = aux
+    # Return Initial and Final nodes
+    return (first, last)</code></pre>
+</details>
+</dd>
+<dt id="euler09.inc_adj_analysis"><code class="name flex">
+<span>def <span class="ident">inc_adj_analysis</span></span>(<span>gsize, adj, inc, nonzero=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Mathematical check function for eulerian paths.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>gsize: Graph size.
+adj: Adjacency list of the graph.
+inc: Incidency list of the graph.
+</code></pre>
+<p>Returns true or false depending on equalities for eulerian paths.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inc_adj_analysis(gsize, adj, inc, nonzero=None):
+    &#34;&#34;&#34;
+    Mathematical check function for eulerian paths.
+
+    Parameters
+    ----------
+        gsize: Graph size.
+        adj: Adjacency list of the graph.
+        inc: Incidency list of the graph.
+    Returns true or false depending on equalities for eulerian paths.
+    &#34;&#34;&#34;
+    nodeA = None
+    nodeB = None
+
+    # Adjacency/Indidency vertex analysis
+    for i in range(gsize):
+        adji = adj[i]
+        inci = inc[i]
+        # Connected component check storage
+        if nonzero is not None:
+            if inci != 0 or adji != 0:
+                nonzero.append(i)
+
+        # Every other vertex in == out
+        if nodeA and nodeB and inci != adji:
+            return False
+
+        # 1 more in than out
+        elif inci+1 == adji:
+            if nodeA is not None:
+                return False
+            nodeA = i
+
+        # 1 more out than in
+        elif inci == adji+1:
+            if nodeB is not None:
+                return False
+
+            nodeB = i
+
+        elif inci &gt; adji+1 or adji &gt; inci+1:
+            return False
+
+    return True</code></pre>
+</details>
+</dd>
+<dt id="euler09.isthere_euler_circuit_directed_multigraph"><code class="name flex">
+<span>def <span class="ident">isthere_euler_circuit_directed_multigraph</span></span>(<span>d_mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that tries to find an euler circuit in a given multigraph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>d_mg: Directed multigraph.
+</code></pre>
+<p>Returns boolean evaluation for euler path existance for given multigraph.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def isthere_euler_circuit_directed_multigraph(d_mg):
+    &#34;&#34;&#34;
+    Function that tries to find an euler circuit in a given multigraph.
+
+    Parameters
+    ----------
+        d_mg: Directed multigraph.
+    Returns boolean evaluation for euler path existance for given multigraph.
+    &#34;&#34;&#34;
+    adj, inc = adj_inc_directed_multigraph(d_mg)
+    visited = [False] * len(d_mg)
+    nonzero = []
+
+    # Incidency and Adjacency Equality
+    if not vertex_degree_check(adj, inc, nonzero):
+        return False
+
+    # Connected Component: Depth first traversal
+    depth_first_search(d_mg, visited, visited[nonzero[0]])
+
+    # Connected Component: Verification
+    for node in nonzero:
+        if not visited[node]:
+            return False
+
+    # Conditions satisfied
+    return True</code></pre>
+</details>
+</dd>
+<dt id="euler09.isthere_euler_path_directed_multigraph"><code class="name flex">
+<span>def <span class="ident">isthere_euler_path_directed_multigraph</span></span>(<span>d_mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that checks if there is an eulerian path in the multigraph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>d_mg: Multigraph.
+</code></pre>
+<p>Returns True or False depending on eulerian path existance in mg.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def isthere_euler_path_directed_multigraph(d_mg):
+    &#34;&#34;&#34;
+    Function that checks if there is an eulerian path in the multigraph.
+
+    Parameters
+    ----------
+        d_mg: Multigraph.
+    Returns True or False depending on eulerian path existance in mg.
+    &#34;&#34;&#34;
+    gsize = len(d_mg)
+    inc, adj = adj_inc_directed_multigraph(d_mg)
+    nonzero = []
+
+    # Incidency and Adjacency list analysis
+    if not inc_adj_analysis(gsize, adj, inc, nonzero):
+        return False
+    # Finding connected components: Component connectivity
+    if not connected_component(d_mg, nonzero):
+        return False
+    # All conditions satisfied
+    return True</code></pre>
+</details>
+</dd>
+<dt id="euler09.next_first_node"><code class="name flex">
+<span>def <span class="ident">next_first_node</span></span>(<span>l_path, d_mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that finds next node to reset eulerian traversal.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>l_path: Traversed nodes during eulerian walk.
+d_mg: Multigraph to work with.
+</code></pre>
+<p>Returns node to reset eulerian traversal.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def next_first_node(l_path, d_mg):
+    &#34;&#34;&#34;
+    Function that finds next node to reset eulerian traversal.
+
+    Parameters
+    ----------
+        l_path: Traversed nodes during eulerian walk.
+        d_mg: Multigraph to work with.
+    Returns node to reset eulerian traversal.
+    &#34;&#34;&#34;
+
+    for node in l_path:
+        if d_mg[node]:
+            return node
+
+    return None</code></pre>
+</details>
+</dd>
+<dt id="euler09.path_2_sequence"><code class="name flex">
+<span>def <span class="ident">path_2_sequence</span></span>(<span>l_path, spectrum_2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns a sequence from a given path.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>l_path: Eulerian path
+spectrum_2: l-1 Spectrum
+</code></pre>
+<p>Returns protein sequence.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def path_2_sequence(l_path, spectrum_2):
+    &#34;&#34;&#34;
+    Function that returns a sequence from a given path.
+
+    Parameters
+    ----------
+        l_path: Eulerian path
+        spectrum_2: l-1 Spectrum
+    Returns protein sequence.
+    &#34;&#34;&#34;
+
+    # Gets l-1
+    length = len(spectrum_2[0])
+
+    # Generates the first characters from the path
+
+    sequence = &#39;&#39;.join(spectrum_2[l_path[0]])
+
+    # Iteration and protein addition to the sequence
+    i = 1
+    while i &lt; len(l_path):
+        # Interpretation
+        spectrum_str = &#39;&#39;.join(spectrum_2[l_path[i]])
+
+        # Addition
+        sequence += spectrum_str[length-1:]
+
+        # Iteration
+        i += 1
+
+    # Returns full sequence reconstruction
+    return sequence</code></pre>
+</details>
+</dd>
+<dt id="euler09.path_stitch"><code class="name flex">
+<span>def <span class="ident">path_stitch</span></span>(<span>path1, path2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that pastes paths .</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>path1: Main path to be pasted into.
+path2: Additional path to be pasted into the main one.
+</code></pre>
+<p>Returns joined paths.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def path_stitch(path1, path2):
+    &#34;&#34;&#34;
+    Function that pastes paths .
+
+    Parameters
+    ----------
+        path1: Main path to be pasted into.
+        path2: Additional path to be pasted into the main one.
+    Returns joined paths.
+    &#34;&#34;&#34;
+    stick = path2[0]
+    ind = path1.index(stick)
+    result = path1[:ind+1] + path2[1:] + path1[ind+1:]
+    return result</code></pre>
+</details>
+</dd>
+<dt id="euler09.print_adj_list_mg"><code class="name flex">
+<span>def <span class="ident">print_adj_list_mg</span></span>(<span>mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print the adjacency list for a given multigraph</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>mg: Multigraph to print
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_adj_list_mg(mg):
+    &#34;&#34;&#34;
+    Print the adjacency list for a given multigraph
+
+    Parameters
+    ----------
+        mg: Multigraph to print
+    &#34;&#34;&#34;
+
+    for key, value in mg.items():
+        print(str(key), end=&#34;&#34;)
+        for destiny in sorted(value.keys()):
+            print(&#34; - {}&#34;.format(destiny), end=&#34;&#34;)
+        print(&#34;&#34;)
+    print(&#34;&#34;)</code></pre>
+</details>
+</dd>
+<dt id="euler09.proteins_graph_estimation"><code class="name flex">
+<span>def <span class="ident">proteins_graph_estimation</span></span>(<span>len_seq)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Estimates vertex and edges number aswell as sparsity factor for
+protein sequencing graphs depending on different read sizes.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>len_seq: Sequence generation length
+</code></pre>
+<p>Returns study results.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def proteins_graph_estimation(len_seq):
+    &#34;&#34;&#34;
+    Estimates vertex and edges number aswell as sparsity factor for
+    protein sequencing graphs depending on different read sizes.
+
+    Parameters
+    ----------
+        len_seq: Sequence generation length
+    Returns study results.
+    &#34;&#34;&#34;
+    sequence = random_sequence(len_seq)
+    results = []
+
+    # Different read sizes iterations
+    for len_read in range(len_seq)[4:]:
+
+        # Graph generation
+        spectr = spectrum(sequence, len_read)
+        graph = spectrum_2_graph(spectr)
+        n_nodes = len(graph)
+        n_edges = 0
+
+        # Edge number finding
+        for destinations in graph.values():
+            for edges in destinations.values():
+                n_edges += len(edges)
+        # Sparsity factor calculation
+        sparsity_factor = n_edges / (n_nodes * (n_nodes-1))
+
+        # Storage
+        results.append((len_read, len(graph), n_edges, sparsity_factor))
+
+    # Returning study results
+    return results</code></pre>
+</details>
+</dd>
+<dt id="euler09.rand_weighted_multigraph"><code class="name flex">
+<span>def <span class="ident">rand_weighted_multigraph</span></span>(<span>n_nodes, probability=0.6, num_max_multiple_edges=2, max_weight=50, decimals=0, fl_unweighted=False, fl_diag=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that generates a directed multigraph with given parameters.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_nodes: Number of nodes of the graph.
+probability: Probability of edges between nodes.
+num_max_multiple_edges: Maximum number of edges for each node.
+max_weight: Maximum weight of an edge.
+decimals: Number of decimal digits in weights.
+fl_unweighted: Flag for classifying weighted/unweighted graph.
+fl_diag: Flag for enabling/disabling self-linked nodes.
+</code></pre>
+<p>Returns Directed multigraph constructed with given parameters.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rand_weighted_multigraph(n_nodes, probability=0.6,
+                             num_max_multiple_edges=2,
+                             max_weight=50,
+                             decimals=0,
+                             fl_unweighted=False,
+                             fl_diag=True):
+    &#34;&#34;&#34;
+    Function that generates a directed multigraph with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Directed multigraph constructed with given parameters.
+    &#34;&#34;&#34;
+
+    fl_directed = True
+    # Creation of the Multigraph Object
+    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+
+    # Multigraph Random Generation
+    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
+
+    mg = mg.get_nodes()  # Gets Multigraph dictionary structure
+
+    return mg</code></pre>
+</details>
+</dd>
+<dt id="euler09.rand_weighted_undirected_multigraph"><code class="name flex">
+<span>def <span class="ident">rand_weighted_undirected_multigraph</span></span>(<span>n_nodes, probability=0.2, num_max_multiple_edges=1, max_weight=50, decimals=0, fl_unweighted=False, fl_diag=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that generates an undirected multigraph with given parameters.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_nodes: Number of nodes of the graph.
+probability: Probability of edges between nodes.
+num_max_multiple_edges: Maximum number of edges for each node.
+max_weight: Maximum weight of an edge.
+decimals: Number of decimal digits in weights.
+fl_unweighted: Flag for classifying weighted/unweighted graph.
+fl_diag: Flag for enabling/disabling self-linked nodes.
+</code></pre>
+<p>Returns Undirected multigraph constructed with given parameters.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rand_weighted_undirected_multigraph(n_nodes,
+                                        probability=0.2,
+                                        num_max_multiple_edges=1,
+                                        max_weight=50,
+                                        decimals=0,
+                                        fl_unweighted=False,
+                                        fl_diag=True):
+    &#34;&#34;&#34;
+    Function that generates an undirected multigraph with given parameters.
+
+    Parameters
+    ----------
+        n_nodes: Number of nodes of the graph.
+        probability: Probability of edges between nodes.
+        num_max_multiple_edges: Maximum number of edges for each node.
+        max_weight: Maximum weight of an edge.
+        decimals: Number of decimal digits in weights.
+        fl_unweighted: Flag for classifying weighted/unweighted graph.
+        fl_diag: Flag for enabling/disabling self-linked nodes.
+    Returns Undirected multigraph constructed with given parameters.
+    &#34;&#34;&#34;
+    mg = Multigraph(n_nodes, decimals, num_max_multiple_edges, max_weight)
+    fl_directed = False
+    edgeGeneration(mg, fl_diag, probability, fl_unweighted, fl_directed)
+    return mg.get_nodes()</code></pre>
+</details>
+</dd>
+<dt id="euler09.random_sequence"><code class="name flex">
+<span>def <span class="ident">random_sequence</span></span>(<span>len_seq)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that generates a protein sequence of selected length.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>len_seq: Size of the desired sequence
+</code></pre>
+<p>Returns random protein sequence.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def random_sequence(len_seq):
+    &#34;&#34;&#34;
+    Function that generates a protein sequence of selected length.
+
+    Parameters
+    ----------
+        len_seq: Size of the desired sequence
+    Returns random protein sequence.
+    &#34;&#34;&#34;
+    proteins = [&#39;A&#39;, &#39;C&#39;, &#39;G&#39;, &#39;T&#39;]
+    sequence = []
+    for _ in range(len_seq):
+        sequence.append(random.choice(proteins))
+    return &#39;&#39;.join(sequence)</code></pre>
+</details>
+</dd>
+<dt id="euler09.remaining_edges"><code class="name flex">
+<span>def <span class="ident">remaining_edges</span></span>(<span>mg)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that checks if there is any remaining edge in the multigraph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>mg: Multigraph.
+</code></pre>
+<p>Returns the boolean evaluation of edge existance condition.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def remaining_edges(mg):
+    &#34;&#34;&#34;
+    Function that checks if there is any remaining edge in the multigraph.
+
+    Parameters
+    ----------
+        mg: Multigraph.
+    Returns the boolean evaluation of edge existance condition.
+    &#34;&#34;&#34;
+    for edges in mg.values():
+        if edges:
+            return True
+
+    return False</code></pre>
+</details>
+</dd>
+<dt id="euler09.spectrum"><code class="name flex">
+<span>def <span class="ident">spectrum</span></span>(<span>sequence, len_read)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns unordered spectrum of a sequence.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>sequence: Input sequence
+len_read: Read size
+</code></pre>
+<p>Returns unordered spectrum of a sequence.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def spectrum(sequence, len_read):
+    &#34;&#34;&#34;
+    Function that returns unordered spectrum of a sequence.
+
+    Parameters
+    ----------
+        sequence: Input sequence
+        len_read: Read size
+    Returns unordered spectrum of a sequence.
+    &#34;&#34;&#34;
+    spectrum = []
+    seq = [char for char in sequence]
+
+    for i in range(len(seq) - len_read + 1):
+        item = seq[i:i+len_read]
+        spectrum.append(item)
+    return spectrum</code></pre>
+</details>
+</dd>
+<dt id="euler09.spectrum_2"><code class="name flex">
+<span>def <span class="ident">spectrum_2</span></span>(<span>spectr)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns the l-1 spectrum associated to the l-spectrum.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>spectr: l-spectrum
+</code></pre>
+<p>Returns Associated (l-1) spectrum.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def spectrum_2(spectr):
+    &#34;&#34;&#34;
+    Function that returns the l-1 spectrum associated to the l-spectrum.
+
+    Parameters
+    ----------
+        spectr: l-spectrum
+    Returns Associated (l-1) spectrum.
+    &#34;&#34;&#34;
+    spectrum = []
+    length = len(spectr[0]) - 1
+
+    # Iterate spectrum
+    for proteins in spectr:
+        # Iterate protein
+        for i in range(len(proteins)-length+1):
+            # Divide protein
+            prot = proteins[i:i+length]
+
+            # Store as unique (set)
+            if prot not in spectrum:
+                spectrum.append(prot)
+
+    # Return l-1 spectrum
+    return spectrum</code></pre>
+</details>
+</dd>
+<dt id="euler09.spectrum_2_graph"><code class="name flex">
+<span>def <span class="ident">spectrum_2_graph</span></span>(<span>spectr)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns a multigraph associated to l-spectrum.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>spectr: l-spectrum
+</code></pre>
+<p>Returns Multigraph associated to the (l-1)spectrum.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def spectrum_2_graph(spectr):
+    &#34;&#34;&#34;
+    Function that returns a multigraph associated to l-spectrum.
+
+    Parameters
+    ----------
+        spectr: l-spectrum
+    Returns Multigraph associated to the (l-1)spectrum.
+    &#34;&#34;&#34;
+    spectr2 = spectrum_2(spectr)
+    n_nodes = len(spectr2)
+    length = len(spectr2[0])
+    mg = Multigraph(n_nodes, 0, n_nodes-1, 1)
+    # Iterates every item in l-spectrum as node
+    for i in range(n_nodes):
+        protein = spectr2[i]
+        # Iterates every possible connection
+        for j in range(n_nodes):
+            destiny = spectr2[j]
+            # Connects in l-1 graph if they can be connected in l-spectrum
+            for k in spectr:
+                if protein == k[:length] and destiny == k[-(length):]:
+                    mg.set_edge(i, j, 1)
+    # Multigraph generated
+    return mg.get_nodes()</code></pre>
+</details>
+</dd>
+<dt id="euler09.spectrum_2_sequence"><code class="name flex">
+<span>def <span class="ident">spectrum_2_sequence</span></span>(<span>spectr)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that returns a sequence from a given path.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>l_path: Eulerian path
+spectrum_2: l-1 Spectrum
+</code></pre>
+<p>Returns protein sequence.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def spectrum_2_sequence(spectr):
+    &#34;&#34;&#34;
+    Function that returns a sequence from a given path.
+
+    Parameters
+    ----------
+        l_path: Eulerian path
+        spectrum_2: l-1 Spectrum
+    Returns protein sequence.
+    &#34;&#34;&#34;
+    # Gets l-1 spectrum
+    spectr2 = spectrum_2(spectr)
+
+    # Generates multigraph from spectrum
+    mg = spectrum_2_graph(spectr)
+
+    # Finds eulerian path
+    path = euler_path_directed_multigraph(mg)
+    if not path:
+        return None
+
+    # If there is any path, return the sequence
+    return path_2_sequence(path, spectr2)</code></pre>
+</details>
+</dd>
+<dt id="euler09.vertex_degree_check"><code class="name flex">
+<span>def <span class="ident">vertex_degree_check</span></span>(<span>adj, inc, nonzero)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function that checks adjacency and incidency equality as stores component.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>d_mg: Directed multigraph.
+</code></pre>
+<p>Returns boolean evaluation for the equality condition.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def vertex_degree_check(adj, inc, nonzero):
+    &#34;&#34;&#34;
+    Function that checks adjacency and incidency equality as stores component.
+
+    Parameters
+    ----------
+        d_mg: Directed multigraph.
+    Returns boolean evaluation for the equality condition.
+    &#34;&#34;&#34;
+    for i in range(len(adj)):
+        inci = inc[i]
+        adji = adj[i]
+
+        # Connected component check storage
+        if adji != 0 or inci != 0:
+            nonzero.append(i)
+
+        # Incidency must be equal to Adjacency
+        if adji != inci:
+            return False
+
+    return True</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="euler09.Multigraph"><code class="flex name class">
+<span>class <span class="ident">Multigraph</span></span>
+<span>(</span><span>n_nodes, decimals, num_max_multiple_edges, max_weight)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class for multigraph representation.</p>
+<hr>
+<p>Its main purpose is to store all the variables needed
+during multigraph generation.</p>
+<p>Constructor method for a multigraph with given parameters.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_nodes: Total number of nodes of the graph.
+decimals: Decimal digits in weight.
+num_max_multiple_edges: Maximum number of edges for each node.
+max_weight: Maximum weight of an edge
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Multigraph:
+    &#34;&#34;&#34;
+    Class for multigraph representation.
+    ___________________________________
+    Its main purpose is to store all the variables needed
+    during multigraph generation.
+    &#34;&#34;&#34;
+
+    def __init__(self, n_nodes, decimals, num_max_multiple_edges, max_weight):
+        &#34;&#34;&#34;
+        Constructor method for a multigraph with given parameters.
+
+        Parameters
+        ----------
+            n_nodes: Total number of nodes of the graph.
+            decimals: Decimal digits in weight.
+            num_max_multiple_edges: Maximum number of edges for each node.
+            max_weight: Maximum weight of an edge
+        &#34;&#34;&#34;
+
+        # Multigraph Creation
+        self.mg = {}
+        for node in range(n_nodes):
+            self.mg[node] = {}
+
+        # Setting of parameters
+        self.num_max_multiple_edges = num_max_multiple_edges
+        self.max_weight = max_weight
+
+        # Adjacency list creation
+        self.adjlist = {}
+
+        # Decimal digits
+        self.decimals = decimals
+
+    def get_nodes(self):
+        &#34;&#34;&#34;
+        Get list of nodes
+        &#34;&#34;&#34;
+        return self.mg
+
+    def get_edges(self, node):
+        &#34;&#34;&#34;
+        Gets the edges from a given node
+
+        Parameters
+        ----------
+             node: given node
+
+        Returns edges from given node.
+        &#34;&#34;&#34;
+        return self.mg[node]
+
+    def set_edge(self, node1, node2, cost):
+        &#34;&#34;&#34;
+        Creates an edge between two nodes with a given cost.
+
+        Parameters
+        ----------
+             node1: Origin node.
+             node2: Destination node.
+             cost: Edge cost.
+        &#34;&#34;&#34;
+
+        if (len(self.mg[node1]) &lt; 1) or (node2 not in self.mg[node1]):
+            self.mg[node1][node2] = {0: cost}
+        else:
+            self.mg[node1][node2][len(self.mg[node1][node2])] = cost
+
+    def get_num_max_multiple_edges(self):
+        &#34;&#34;&#34;
+        Gets the maximum number of edges for each node
+        in the current multigraph
+        &#34;&#34;&#34;
+        return self.num_max_multiple_edges
+
+    def get_decimals(self):
+        &#34;&#34;&#34;
+        Gets the decimal digits number
+        &#34;&#34;&#34;
+        return self.decimals
+
+    def get_max_weight(self):
+        &#34;&#34;&#34;
+        Gets the maximum weight of the graph.
+        &#34;&#34;&#34;
+        return self.max_weight
+
+    def __str__(self):
+        return str(self.mg)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="euler09.Multigraph.get_decimals"><code class="name flex">
+<span>def <span class="ident">get_decimals</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the decimal digits number</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_decimals(self):
+    &#34;&#34;&#34;
+    Gets the decimal digits number
+    &#34;&#34;&#34;
+    return self.decimals</code></pre>
+</details>
+</dd>
+<dt id="euler09.Multigraph.get_edges"><code class="name flex">
+<span>def <span class="ident">get_edges</span></span>(<span>self, node)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the edges from a given node</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code> node: given node
+</code></pre>
+<p>Returns edges from given node.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_edges(self, node):
+    &#34;&#34;&#34;
+    Gets the edges from a given node
+
+    Parameters
+    ----------
+         node: given node
+
+    Returns edges from given node.
+    &#34;&#34;&#34;
+    return self.mg[node]</code></pre>
+</details>
+</dd>
+<dt id="euler09.Multigraph.get_max_weight"><code class="name flex">
+<span>def <span class="ident">get_max_weight</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the maximum weight of the graph.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_max_weight(self):
+    &#34;&#34;&#34;
+    Gets the maximum weight of the graph.
+    &#34;&#34;&#34;
+    return self.max_weight</code></pre>
+</details>
+</dd>
+<dt id="euler09.Multigraph.get_nodes"><code class="name flex">
+<span>def <span class="ident">get_nodes</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get list of nodes</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_nodes(self):
+    &#34;&#34;&#34;
+    Get list of nodes
+    &#34;&#34;&#34;
+    return self.mg</code></pre>
+</details>
+</dd>
+<dt id="euler09.Multigraph.get_num_max_multiple_edges"><code class="name flex">
+<span>def <span class="ident">get_num_max_multiple_edges</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the maximum number of edges for each node
+in the current multigraph</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_num_max_multiple_edges(self):
+    &#34;&#34;&#34;
+    Gets the maximum number of edges for each node
+    in the current multigraph
+    &#34;&#34;&#34;
+    return self.num_max_multiple_edges</code></pre>
+</details>
+</dd>
+<dt id="euler09.Multigraph.set_edge"><code class="name flex">
+<span>def <span class="ident">set_edge</span></span>(<span>self, node1, node2, cost)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates an edge between two nodes with a given cost.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code> node1: Origin node.
+ node2: Destination node.
+ cost: Edge cost.
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_edge(self, node1, node2, cost):
+    &#34;&#34;&#34;
+    Creates an edge between two nodes with a given cost.
+
+    Parameters
+    ----------
+         node1: Origin node.
+         node2: Destination node.
+         cost: Edge cost.
+    &#34;&#34;&#34;
+
+    if (len(self.mg[node1]) &lt; 1) or (node2 not in self.mg[node1]):
+        self.mg[node1][node2] = {0: cost}
+    else:
+        self.mg[node1][node2][len(self.mg[node1][node2])] = cost</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="euler09.TGF_2_d_g" href="#euler09.TGF_2_d_g">TGF_2_d_g</a></code></li>
+<li><code><a title="euler09.adj_inc_directed_multigraph" href="#euler09.adj_inc_directed_multigraph">adj_inc_directed_multigraph</a></code></li>
+<li><code><a title="euler09.check_sequencing" href="#euler09.check_sequencing">check_sequencing</a></code></li>
+<li><code><a title="euler09.connected_component" href="#euler09.connected_component">connected_component</a></code></li>
+<li><code><a title="euler09.d_g_2_TGF" href="#euler09.d_g_2_TGF">d_g_2_TGF</a></code></li>
+<li><code><a title="euler09.depth_first_search" href="#euler09.depth_first_search">depth_first_search</a></code></li>
+<li><code><a title="euler09.edgeGeneration" href="#euler09.edgeGeneration">edgeGeneration</a></code></li>
+<li><code><a title="euler09.euler_circuit_directed_multigraph" href="#euler09.euler_circuit_directed_multigraph">euler_circuit_directed_multigraph</a></code></li>
+<li><code><a title="euler09.euler_path_directed_multigraph" href="#euler09.euler_path_directed_multigraph">euler_path_directed_multigraph</a></code></li>
+<li><code><a title="euler09.euler_walk_directed_multigraph" href="#euler09.euler_walk_directed_multigraph">euler_walk_directed_multigraph</a></code></li>
+<li><code><a title="euler09.first_last_euler_path_directed_multigraph" href="#euler09.first_last_euler_path_directed_multigraph">first_last_euler_path_directed_multigraph</a></code></li>
+<li><code><a title="euler09.inc_adj_analysis" href="#euler09.inc_adj_analysis">inc_adj_analysis</a></code></li>
+<li><code><a title="euler09.isthere_euler_circuit_directed_multigraph" href="#euler09.isthere_euler_circuit_directed_multigraph">isthere_euler_circuit_directed_multigraph</a></code></li>
+<li><code><a title="euler09.isthere_euler_path_directed_multigraph" href="#euler09.isthere_euler_path_directed_multigraph">isthere_euler_path_directed_multigraph</a></code></li>
+<li><code><a title="euler09.next_first_node" href="#euler09.next_first_node">next_first_node</a></code></li>
+<li><code><a title="euler09.path_2_sequence" href="#euler09.path_2_sequence">path_2_sequence</a></code></li>
+<li><code><a title="euler09.path_stitch" href="#euler09.path_stitch">path_stitch</a></code></li>
+<li><code><a title="euler09.print_adj_list_mg" href="#euler09.print_adj_list_mg">print_adj_list_mg</a></code></li>
+<li><code><a title="euler09.proteins_graph_estimation" href="#euler09.proteins_graph_estimation">proteins_graph_estimation</a></code></li>
+<li><code><a title="euler09.rand_weighted_multigraph" href="#euler09.rand_weighted_multigraph">rand_weighted_multigraph</a></code></li>
+<li><code><a title="euler09.rand_weighted_undirected_multigraph" href="#euler09.rand_weighted_undirected_multigraph">rand_weighted_undirected_multigraph</a></code></li>
+<li><code><a title="euler09.random_sequence" href="#euler09.random_sequence">random_sequence</a></code></li>
+<li><code><a title="euler09.remaining_edges" href="#euler09.remaining_edges">remaining_edges</a></code></li>
+<li><code><a title="euler09.spectrum" href="#euler09.spectrum">spectrum</a></code></li>
+<li><code><a title="euler09.spectrum_2" href="#euler09.spectrum_2">spectrum_2</a></code></li>
+<li><code><a title="euler09.spectrum_2_graph" href="#euler09.spectrum_2_graph">spectrum_2_graph</a></code></li>
+<li><code><a title="euler09.spectrum_2_sequence" href="#euler09.spectrum_2_sequence">spectrum_2_sequence</a></code></li>
+<li><code><a title="euler09.vertex_degree_check" href="#euler09.vertex_degree_check">vertex_degree_check</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="euler09.Multigraph" href="#euler09.Multigraph">Multigraph</a></code></h4>
+<ul class="">
+<li><code><a title="euler09.Multigraph.get_decimals" href="#euler09.Multigraph.get_decimals">get_decimals</a></code></li>
+<li><code><a title="euler09.Multigraph.get_edges" href="#euler09.Multigraph.get_edges">get_edges</a></code></li>
+<li><code><a title="euler09.Multigraph.get_max_weight" href="#euler09.Multigraph.get_max_weight">get_max_weight</a></code></li>
+<li><code><a title="euler09.Multigraph.get_nodes" href="#euler09.Multigraph.get_nodes">get_nodes</a></code></li>
+<li><code><a title="euler09.Multigraph.get_num_max_multiple_edges" href="#euler09.Multigraph.get_num_max_multiple_edges">get_num_max_multiple_edges</a></code></li>
+<li><code><a title="euler09.Multigraph.set_edge" href="#euler09.Multigraph.set_edge">set_edge</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>
