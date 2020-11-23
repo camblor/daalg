@@ -10,7 +10,7 @@ import argparse
 
 from sklearn.linear_model import LinearRegression
 
-import euler09 as eu20
+import euler_secuencias_2020 as eu20
 
 ############################################################################## funciones auxiliares
     
@@ -69,7 +69,6 @@ def check_pr_2():
             2: {0: {0:1}, 3: {0:1}}, 
             3: {1: {0:1}, 2: {0:1}}
            }
-    
     
     d_g_test_circ = eu20.TGF_2_d_g("tgf_test_circ.txt")
     eu20.print_adj_list_mg(d_g_test_circ)
