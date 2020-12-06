@@ -454,7 +454,6 @@ def first_last_euler_path_directed_multigraph(d_mg):
     first = None
     last = None
     aux = None
-    print(d_mg)
 
     # Check if there is any eulerian path
     if not isthere_euler_path_directed_multigraph(d_mg):
@@ -472,7 +471,6 @@ def first_last_euler_path_directed_multigraph(d_mg):
         # Any initial in connected component
         if inci == adji + 1:
             last = i
-        
         if (inci != 0 or adji != 0) and aux is None:
             aux = i
 
