@@ -1,5 +1,6 @@
 import numpy as np
 
+#TODO devolver tabla con 0s añadidos y calcular mediante logaritmo
 def get_minimum_power(n):
     """
     Calculation of minimum power of 2 greater than n.
@@ -137,7 +138,12 @@ def rand_numero(num_digits, base=10):
         base: Base.
     Returns random integer with num_digits digits in base base.
     """
-    print(num_digits)
+
+    # Random polynomial generation
+    polynomial = rand_polinomio(num_digits, base)
+
+    # Transformation from random polynomial to number (random aswell)
+    return poli_2_num(polynomial)
 
 def num_2_poli(num, base=10):
     """
@@ -150,7 +156,13 @@ def num_2_poli(num, base=10):
         base: Base.
     Returns integer list with polynomial coefficients.
     """
-    print(num)
+    poli = []
+    while num > 0:
+        num, poli_part = divmod(num, base)
+
+        poli.append(poli_part)
+
+    return poli
 
 def mult_polinomios_fft(l_pol_1, l_pol_2, fft_func=fft):
     """
@@ -163,13 +175,28 @@ def mult_polinomios_fft(l_pol_1, l_pol_2, fft_func=fft):
         fft_func: FFT function.
     Returns product of input polynomials through fft_funct.
     """
-    print(l_pol_1, l_pol_2)
+    # Degree calculation
+    degree = len(l_pol_1) + len(l_pol_2) - 1
 
-def mult_numeros_fft(n_enteros, 
-                        num_digits_ini, 
-                        num_digits_fin, 
-                        step, 
-                        fft_func=fft):
+    # Adjust of FFT input TODO
+    poli1 = _len2k(l_pol_1, degree)
+    poli2 = _len2k(l_pol_2, degree)
+
+    # Fast Fourier transformates
+    coefficient1=fft_func(poli1)
+    coefficient2=fft_func(poli2)
+
+    # Coefficient multiplication (SECOND STEP)
+    for i in range(len(coefficient1)):
+        coefficient1[i] *= coefficient2[i]
+
+    # Inversion algorithm with FFT (FINAL STEP)
+    output = invert_fft(coefficient1, fft_func=fft_func)
+
+    # Round and return NumPy Array
+    return np.rint(output)
+
+def mult_numeros_fft(num1, num2, fft_func=fft):
     """
     Calculation of the product of two polynomials with FFT.
 
@@ -182,7 +209,9 @@ def mult_numeros_fft(n_enteros,
         fft_func: FFT function.
     Returns product of input polynomials through fft_funct.
     """
-    print(n_enteros)
+    poli_num1 = num_2_poli(num1)
+    poli_num2 = num_2_poli(num2)
+    return poli_2_num(mult_polinomios_fft(poli_num1, poli_num2))
 
 def time_fft(n_tablas, 
                         num_coefs_ini, 
