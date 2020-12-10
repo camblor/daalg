@@ -1,7 +1,8 @@
 import numpy as np
+import time
+import math
 
-#TODO devolver tabla con 0s añadidos y calcular mediante logaritmo
-def get_minimum_power(n):
+def get_minimum_power(t):
     """
     Calculation of minimum power of 2 greater than n.
 
@@ -10,10 +11,18 @@ def get_minimum_power(n):
         n: input number to calculate with.
     Returns Minimum power of 2 greater than n.
     """
-    minpow = 1
-    while minpow < n:
-        minpow *= 2
-    return minpow
+    length = len(t)
+    minpow = 2 ** math.ceil(math.log(length, 2))
+
+    # Power of 2 case
+    fft_input = t
+
+    # Not power of 2 case: Appending 0's
+    if minpow > length:
+        for _ in range(minpow-length):
+            fft_input = np.append(fft_input, [0])
+
+    return minpow, fft_input
 
 def fft(t):
     """
@@ -35,14 +44,11 @@ def fft(t):
     result = np.array([])    
 
     # Minimum power of 2 + 0's appending
-    minpow = get_minimum_power(length)
-
-    # Power of 2 case
-    fft_input = t
+    minpow, fft_input = get_minimum_power(t)
 
     # Not power of 2 case: Appending 0's
     if minpow > length:
-        for i in range(minpow-length):
+        for _ in range(minpow-length):
             fft_input = np.append(fft_input, [0])
         
     # Base case with unique value
@@ -50,15 +56,17 @@ def fft(t):
         return fft_input
     
     # Get odd and even elements
-    for element, i in zip(t, range(length)):
+    for element, i in zip(fft_input, range(minpow)):
         if i % 2 == 0:
             pares.append(element)
         else:
             impares.append(element)
 
+
     # Recursive call
     f_e = fft(pares)
     f_o = fft(impares)
+    
 
     # 2 ^ K-1
     previous2power = int(minpow/2)
@@ -175,12 +183,10 @@ def mult_polinomios_fft(l_pol_1, l_pol_2, fft_func=fft):
         fft_func: FFT function.
     Returns product of input polynomials through fft_funct.
     """
-    # Degree calculation
-    degree = len(l_pol_1) + len(l_pol_2) - 1
 
-    # Adjust of FFT input TODO
-    poli1 = _len2k(l_pol_1, degree)
-    poli2 = _len2k(l_pol_2, degree)
+    # Adjust of FFT input
+    _, poli1 = get_minimum_power(l_pol_1)
+    _, poli2 = get_minimum_power(l_pol_2)
 
     # Fast Fourier transformates
     coefficient1=fft_func(poli1)
@@ -230,7 +236,19 @@ def time_fft(n_tablas,
         fft_func: FFT function.
     Returns list with mean times of FFT function.
     """
-    print(n_tablas)
+    times = []
+    for coeficientes in np.arange(num_coefs_ini, num_coefs_fin, step):
+        count = 0
+        for _ in range(n_tablas):
+            poly = rand_polinomio(coeficientes)
+            initial_time = time.time()
+            fft(poly)
+            final_time = time.time()
+            count += final_time - initial_time
+        
+        times.append(count / n_tablas)
+
+    return times
 
 def time_mult_polinomios_fft(n_pairs, 
                         num_coefs_ini, 
@@ -249,7 +267,22 @@ def time_mult_polinomios_fft(n_pairs,
         fft_func: FFT function.
     Returns list with mean times of FFT function.
     """
-    print(n_pairs)
+    times = []
+    for coeficientes in np.arange(num_coefs_ini, num_coefs_fin, step):
+        count = 0
+        for _ in range(n_pairs):
+            poly1 = rand_polinomio(coeficientes)
+            poly2 = rand_polinomio(coeficientes)
+            fft_poly1 = fft(poly1)
+            fft_poly2 = fft(poly2)
+            initial_time = time.time()
+            mult_polinomios_fft(fft_poly1, fft_poly2)
+            final_time = time.time()
+            count += final_time - initial_time
+        
+        times.append(count / n_pairs)
+
+    return times
 
 def time_mult_numeros_fft(n_enteros, 
                         num_coefs_ini, 
@@ -268,18 +301,47 @@ def time_mult_numeros_fft(n_enteros,
         fft_func: FFT function.
     Returns list with mean times of FFT function.
     """
-    print(n_enteros)
+    times = []
+    for coeficientes in np.arange(num_coefs_ini, num_coefs_fin, step):
+        count = 0
+        for _ in range(n_enteros):
+            poly1 = rand_polinomio(coeficientes)
+            poly2 = rand_polinomio(coeficientes)
+            num1 = poli_2_num(poly1)
+            num2 = poli_2_num(poly2)
+            initial_time = time.time()
+            mult_numeros_fft(num1, num2)
+            final_time = time.time()
+            count += final_time - initial_time
+        
+        times.append(count / n_enteros)
+
+    return times
 
 def floyd_warshall(ma_g):
     """
-    Floyd-Warshall algorithm implementation .
+    Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph.
 
     Parameters
     ----------
-        ma_g: Numpy Adjacency matrix.
-    Returns lists with distances and list with previous nodes.
+        ma_g: Adjacency Matrix
+    Returns Matrix with minimum costs.
     """
-    print(ma_g)
+
+    result = np.copy(ma_g)  # Save matrix variable
+    n = len(ma_g)  # Store number of rows (square matrix)
+    prev = np.zeros(shape=(n,n)) # Previous path
+
+    for k in range(n):  # For every 1D
+        for i in range(n):  # For every 2D
+            for j in range(n):  # For every 3D
+                # Compare the cost with other paths
+                if result[i][j] > result[i][k] + result[k][j]:
+                    result[i][j] = result[i][k] + result[k][j]
+                    prev[i][j] = k
+                result[i][j] = min(result[i][j], result[i][k] + result[k][j])
+
+    return result
 
 def bellman_ford(ma_g):
     """
@@ -292,6 +354,7 @@ def bellman_ford(ma_g):
     """
     print(ma_g)
 
+
 def max_length_common_subsequence(str_1, str_2):
     """
     Calculation of maximum common partial sequences Matrix.
@@ -302,7 +365,22 @@ def max_length_common_subsequence(str_1, str_2):
         str_2: Second string as input.
     Returns matrix with lengths of maximum common partial sequences.
     """
-    print(str_1, str_2)
+    m = len(str_1)
+    n = len(str_2)
+    L = np.zeros(shape=(m+1, n+1))
+  
+    # Following steps build L[m+1][n+1] in bottom up fashion. Note 
+    # that L[i][j] contains length of LCS of X[0..i-1] and Y[0..j-1]  
+    for i in range(m+1): 
+        for j in range(n+1): 
+            if i == 0 or j == 0: 
+                L[i][j] = 0
+            elif X[i-1] == Y[j-1]: 
+                L[i][j] = L[i-1][j-1] + 1
+            else: 
+                L[i][j] = max(L[i-1][j], L[i][j-1])
+
+    return L
 
 def find_max_common_subsequence(str_1, str_2):
     """
@@ -314,7 +392,39 @@ def find_max_common_subsequence(str_1, str_2):
         str_2: Second string as input.
     Returns possible maximum length common subsequence.
     """
-    print(str_1, str_2)
+    L = max_length_common_subsequence(str_1, str_2)
+    m = len(str_1)
+    n = len(str_2)
+    # Following code is used to print LCS 
+    index = int(L[m][n]) 
+  
+    # Create a character array to store the lcs string 
+    lcs = [""] * index
+    lcs[index-1] = "" 
+
+  
+    # Start from the right-most-bottom-most corner and 
+    # one by one store characters in lcs[] 
+    i = m 
+    j = n 
+    while i > 0 and j > 0: 
+  
+        # If current character in X[] and Y are same, then 
+        # current character is part of LCS 
+        if X[i-1] == Y[j-1]: 
+            lcs[index-1] = X[i-1] 
+            i-=1
+            j-=1
+            index-=1
+  
+        # If not same, then find the larger of two and 
+        # go in the direction of larger value 
+        elif L[i-1][j] > L[i][j-1]: 
+            i-=1
+        else: 
+            j-=1
+  
+    print ("Longest Common Subsequence:", "".join(lcs))
 
 
 prueba = fft(np.array([1, 2, 1, 0]))
@@ -328,3 +438,15 @@ print("random:", randompoly)
 hola = poli_2_num(randompoly)
 print(hola)
 
+print(time_mult_polinomios_fft(10, 5, 40, 5))
+
+# Longest subsequence
+X = "biscuit"
+Y = "suitcase"
+print("Lengths (i,j) of LCS are ")
+print (max_length_common_subsequence(X, Y)) 
+
+# Driver program 
+X = "AGGTAB"
+Y = "GXTXAYB"
+find_max_common_subsequence(X, Y) 
