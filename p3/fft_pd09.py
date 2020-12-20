@@ -172,6 +172,7 @@ def num_2_poli(num, base=10):
 
     return poli
 
+# TODO listas de enteros de python
 def mult_polinomios_fft(l_pol_1, l_pol_2, fft_func=fft):
     """
     Calculation of the product of two polynomials with FFT.
