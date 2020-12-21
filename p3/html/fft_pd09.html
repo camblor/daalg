@@ -1,0 +1,1368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>fft_pd09 API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>fft_pd09</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np
+import time
+import math
+
+
+def get_minimum_power(n):
+    &#34;&#34;&#34;
+    Calculation of minimum power of 2 greater than n.
+
+    Parameters
+    ----------
+        n: Length to get minimum power of 2.
+    Returns Minimum power of 2 greater than n.
+    &#34;&#34;&#34;
+    return 2 ** math.ceil(math.log(n, 2))
+
+
+def append_zeros(t):
+    &#34;&#34;&#34;
+    Appending of 0 values to table.
+
+    Parameters
+    ----------
+        t: Table to append 0&#39;s to.
+    Returns table with 0&#39;s appended until len is minpow.
+    &#34;&#34;&#34;
+    n = len(t)
+    minpow = get_minimum_power(n)
+
+    fft_input = np.array(t)
+    zeros = np.array([0] * (minpow-n))
+
+    return np.append(fft_input, zeros)
+
+
+def recursive_fft(t):
+    &#34;&#34;&#34;
+    Calculation of FFT from a NumPy array. Recursive implementation.
+
+    Parameters
+    ----------
+        t: Table.
+    Returns Fast Fourier Transform of input.
+    &#34;&#34;&#34;
+    # FFT RETURN VARIABLE
+    result = np.array([])
+
+    # Get table length (Is power of 2)
+    length = len(t)
+    prev2k = math.ceil(length / 2)
+
+    # Base case with unique value
+    if length &lt;= 1:
+        return t
+
+    # Separate into index even and odds
+    even, odds = t[::2], t[1::2]
+
+    # Recursive call
+    f_e = recursive_fft(even)
+    f_o = recursive_fft(odds)
+
+    for i in range(length):
+        # First Transformate Operand
+        first = f_e[i % prev2k]
+
+        # Second Transformate Operand
+        tmp1 = (2 * np.pi * 1j) * (i / length)
+        tmp2 = f_o[i % prev2k]
+        second = np.exp(tmp1) * tmp2
+
+        # Transformate result storage
+        result = np.append(result, first + second)
+
+    return result
+
+
+def fft(t):
+    &#34;&#34;&#34;
+    Calculation of FFT from a NumPy array.
+
+    Parameters
+    ----------
+        t: Table.
+    Returns Fast Fourier Transform of input.
+    &#34;&#34;&#34;
+
+    # Minimum power of 2 + 0&#39;s appending
+    fft_input = append_zeros(t)
+
+    # Call to recursive function∫
+    fft_output = recursive_fft(fft_input)
+
+    # Output returnal
+    return fft_output
+
+
+def invert_fft(t, fft_func=fft):
+    &#34;&#34;&#34;
+    Application of inversion algorithm of DFT.
+
+    Parameters
+    ----------
+        t: Table.
+        fft_func: FFT implementation function.
+    Returns random protein sequence.
+    &#34;&#34;&#34;
+    k = len(t)
+
+    # Conjugate input
+    conjugate = np.conj(t)
+
+    # Compute DFT
+    transformate = fft_func(conjugate)
+
+    # Invert DFT
+    output = [np.conj(n) / k for n in transformate]
+
+    return output
+
+
+def rand_polinomio(long=2**10, base=10):
+    &#34;&#34;&#34;
+    Random polynomial generation algorithm.
+
+    Parameters
+    ----------
+        long: Polynomial length indication.
+    Returns random polynomial of length long.
+    &#34;&#34;&#34;
+
+    # Base argument restriction
+    if base &lt; 2 or base &gt; 10:
+        return None
+
+    # Direct return of int generation
+    return np.random.randint(base, size=long).astype(type(int()))
+
+
+def poli_2_num(l_pol, base=10):
+    &#34;&#34;&#34;
+    Calculation of resulting int from polynomial evaluation in base base.
+    Usage of Horner&#39;s rule.
+
+    Parameters
+    ----------
+        l_pol: Polynomial input.
+        base: Base.
+    Returns polynomial evaluation in base base.
+    &#34;&#34;&#34;
+    ret = int(0)
+    for i in range(len(l_pol)):
+        ret += int(np.real(l_pol[i]*pow(base, i)))
+    return ret
+
+
+def rand_numero(num_digits, base=10):
+    &#34;&#34;&#34;
+    Random integer generation with num_digits digits.
+
+    Parameters
+    ----------
+        num_digits: Number of digits of the generated number.
+        base: Base.
+    Returns random integer with num_digits digits in base base.
+    &#34;&#34;&#34;
+
+    # Random polynomial generation
+    polynomial = rand_polinomio(num_digits, base)
+
+    # Transformation from random polynomial to number (random aswell)
+    return poli_2_num(polynomial)
+
+
+def num_2_poli(num, base=10):
+    &#34;&#34;&#34;
+    Calculation of integer list with polynomial coefficients equivalent to
+    integer num representation in base base. Increasing order.
+
+    Parameters
+    ----------
+        num: Integer input.
+        base: Base.
+    Returns integer list with polynomial coefficients.
+    &#34;&#34;&#34;
+    poli = np.array([])
+    while num &gt; 0:
+        num, poli_part = divmod(num, base)
+
+        poli = np.append(poli, poli_part)
+
+    return poli.astype(type(int()))
+
+
+def padding_mult(l_pol_1, l_pol_2):
+    &#34;&#34;&#34;
+    0s padding to generate the fft multiplication array.
+
+    Parameters
+    ----------
+        l_pol_1: Array 1.
+        l_pol_2: Array 2.
+    Returns both arrays with appended 0&#39;s.
+    &#34;&#34;&#34;
+    # Get final length
+    length = len(l_pol_1)+len(l_pol_2)-1
+
+    # Get power of 2
+    minpow = get_minimum_power(length)
+
+    # Append to first array
+    nzeros = minpow - len(l_pol_1)
+    zerosarr = np.array([0]*nzeros)
+    p1 = np.concatenate((l_pol_1, zerosarr), axis=0)
+
+    # Append to first array
+    nzeros = minpow - len(l_pol_2)
+    zerosarr = np.array([0]*nzeros)
+    p2 = np.concatenate((l_pol_2, zerosarr), axis=0)
+
+    return p1, p2
+
+
+def mult_polinomios_fft(l_pol_1, l_pol_2, fft_func=fft):
+    &#34;&#34;&#34;
+    Calculation of the product of two polynomials with FFT.
+
+    Parameters
+    ----------
+        l_pol_1: First polynomial input.
+        l_pol_2: Second polynomial input.
+        fft_func: FFT function.
+    Returns product of input polynomials through fft_funct.
+    &#34;&#34;&#34;
+
+    # Adjust of FFT input
+    poli1, poli2 = padding_mult(l_pol_1, l_pol_2)
+
+    # Fast Fourier transformates
+    coefficient1 = fft_func(poli1)
+    coefficient2 = fft_func(poli2)
+
+    # Coefficient multiplication (SECOND STEP)
+    res = [i*j for i, j in zip(coefficient1, coefficient2)]
+
+    # Inversion algorithm with FFT (FINAL STEP)
+    output = invert_fft(res, fft_func=fft_func)
+    output = [int(np.real(i)) for i in np.rint(output)]
+
+    # Round and return NumPy Array
+    return output
+
+
+def mult_numeros_fft(num1, num2, fft_func=fft):
+    &#34;&#34;&#34;
+    Calculation of the product of two polynomials with FFT.
+
+    Parameters
+    ----------
+        n_enteros: Number of integer pairs.
+        num_digits_ini: First value of the range.
+        num_digits_fin: Final value of the range.
+        step: Step between selected range.
+        fft_func: FFT function.
+    Returns product of input polynomials through fft_funct.
+    &#34;&#34;&#34;
+    # Transform to polynomials
+    poli_num1 = num_2_poli(num1)
+    poli_num2 = num_2_poli(num2)
+
+    # Reset to numbers after multiplication
+    return poli_2_num(mult_polinomios_fft(poli_num1, poli_num2))
+
+
+def time_fft(n_tablas,
+             num_coefs_ini,
+             num_coefs_fin,
+             step,
+             fft_func=fft):
+    &#34;&#34;&#34;
+    Generation of n_tables and mean calculation.
+
+    Parameters
+    ----------
+        n_tablas: Number of tables to operate with.
+        num_coefs_ini: First value of the range.
+        num_coefs_fin: Final value of the range.
+        step: Step between selected range.
+        fft_func: FFT function.
+    Returns list with mean times of FFT function.
+    &#34;&#34;&#34;
+    times = []
+    for coeficientes in np.arange(num_coefs_ini, num_coefs_fin, step):
+        count = 0
+        for _ in range(n_tablas):
+            poly = rand_polinomio(coeficientes)
+            initial_time = time.time()
+            fft(poly)
+            final_time = time.time()
+            count += final_time - initial_time
+
+        times.append(count / n_tablas)
+
+    return times
+
+
+def time_mult_polinomios_fft(n_pairs,
+                             num_coefs_ini,
+                             num_coefs_fin,
+                             step,
+                             fft_func=fft):
+    &#34;&#34;&#34;
+    Generation of n_pairs integer tables and mean calculation.
+
+    Parameters
+    ----------
+        n_pairs: Number of integer pairs to operate with.
+        num_coefs_ini: First value of the range.
+        num_coefs_fin: Final value of the range.
+        step: Step between selected range.
+        fft_func: FFT function.
+    Returns list with mean times of FFT function.
+    &#34;&#34;&#34;
+    times = []
+    for coeficientes in np.arange(num_coefs_ini, num_coefs_fin, step):
+        count = 0
+        for _ in range(n_pairs):
+            poly1 = rand_polinomio(coeficientes)
+            poly2 = rand_polinomio(coeficientes)
+            fft_poly1 = fft(poly1)
+            fft_poly2 = fft(poly2)
+            initial_time = time.time()
+            mult_polinomios_fft(fft_poly1, fft_poly2)
+            final_time = time.time()
+            count += final_time - initial_time
+
+        times.append(count / n_pairs)
+
+    return times
+
+
+def time_mult_numeros_fft(n_enteros,
+                          num_coefs_ini,
+                          num_coefs_fin,
+                          step,
+                          fft_func=fft):
+    &#34;&#34;&#34;
+    Generation of n_enteros integer tables and mean calculation.
+
+    Parameters
+    ----------
+        n_enteros: Number of tables to operate with.
+        num_coefs_ini: First value of the range.
+        num_coefs_fin: Final value of the range.
+        step: Step between selected range.
+        fft_func: FFT function.
+    Returns list with mean times of FFT function.
+    &#34;&#34;&#34;
+    times = []
+    for coeficientes in np.arange(num_coefs_ini, num_coefs_fin, step):
+        count = 0
+        for _ in range(n_enteros):
+            poly1 = rand_polinomio(coeficientes)
+            poly2 = rand_polinomio(coeficientes)
+            num1 = poli_2_num(poly1)
+            num2 = poli_2_num(poly2)
+            initial_time = time.time()
+            mult_numeros_fft(num1, num2)
+            final_time = time.time()
+            count += final_time - initial_time
+
+        times.append(count / n_enteros)
+
+    return times
+
+
+def floyd_warshall(ma_g):
+    &#34;&#34;&#34;
+    Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph.
+
+    Parameters
+    ----------
+        ma_g: Adjacency Matrix
+    Returns Matrix with minimum costs.
+    &#34;&#34;&#34;
+
+    result = np.copy(ma_g)  # Save matrix variable
+    n = len(ma_g)  # Store number of rows (square matrix)
+    prev = np.zeros(shape=(n, n))  # Previous path
+
+    # Previous array initialization
+    for i in np.arange(n):
+        prev[i][i] = i
+        for j in np.arange(n):
+            if result[i][j] != np.inf:
+                prev[i][j] = i
+
+    for k in range(n):  # For every 1D
+        for i in range(n):  # For every 2D
+            for j in range(n):  # For every 3D
+                # Compare the cost with other paths
+                if result[i][j] &gt; result[i][k] + result[k][j]:
+                    result[i][j] = result[i][k] + result[k][j]
+                    # Previous update
+                    prev[i][j] = k
+
+    return result, prev
+
+
+def bellman_ford(u, ma_g):
+    &#34;&#34;&#34;
+    Bellman-Ford algorithm implementation .
+
+    Parameters
+    ----------
+        ma_g: Numpy Adjacency matrix.
+    Returns lists with distances from u to other and list with previous nodes.
+    &#34;&#34;&#34;
+    # Get length
+    length = len(ma_g)
+
+    # Initialize arrays
+    dist = np.array([np.inf for _ in range(length)])
+    dist[u] = 0
+    prev = np.array([i for i in range(length)])
+
+    # Algorithm implementation (k-1 times)
+    for k in range(length-1):
+        for i in range(length):
+            for j in range(length):
+                # There is an edge u -&gt; i
+                if ma_g[i][j] != np.inf:
+                    found = dist[i] + ma_g[i][j]
+                    # Update procedure
+                    if dist[j] &gt; found:
+                        dist[j] = found
+                        prev[j] = i
+
+    # Output returnal
+    return dist, prev
+
+
+def max_length_common_subsequence(str_1, str_2):
+    &#34;&#34;&#34;
+    Calculation of maximum common partial sequences Matrix.
+
+    Parameters
+    ----------
+        str_1: First string as input.
+        str_2: Second string as input.
+    Returns matrix with lengths of maximum common partial sequences.
+    &#34;&#34;&#34;
+    m = len(str_1)
+    n = len(str_2)
+    L = np.zeros(shape=(m+1, n+1))
+
+    # Counting maximum sequence length
+    for i in range(m+1):
+        for j in range(n+1):
+            if i == 0 or j == 0:
+                L[i][j] = 0
+            elif str_1[i-1] == str_2[j-1]:
+                L[i][j] = L[i-1][j-1] + 1
+            else:
+                L[i][j] = max(L[i-1][j], L[i][j-1])
+
+    return L
+
+
+def find_max_common_subsequence(str_1, str_2):
+    &#34;&#34;&#34;
+    Search of possible maximum length common subsequence in given input.
+
+    Parameters
+    ----------
+        str_1: First string as input.
+        str_2: Second string as input.
+    Returns possible maximum length common subsequence.
+    &#34;&#34;&#34;
+    L = max_length_common_subsequence(str_1, str_2)
+    m = len(str_1)
+    n = len(str_2)
+    index = int(L[m][n])
+
+    # Create a character array to store the lcs string
+    lcs = [&#34;&#34;] * index
+    lcs[index-1] = &#34;&#34;
+
+    # Start from the right-bottom-most corner and
+    # store characters in lcs[]
+    i = m
+    j = n
+    while i &gt; 0 and j &gt; 0:
+        # If current character str_1[] and str_2 are same
+        # character is part of LCS
+        if str_1[i-1] == str_2[j-1]:
+            lcs[index-1] = str_1[i-1]
+            i -= 1
+            j -= 1
+            index -= 1
+
+        # If not same, find the larger and
+        # go in the direction of larger
+        elif L[i-1][j] &gt; L[i][j-1]:
+            i -= 1
+        else:
+            j -= 1
+
+    return &#34;&#34;.join(lcs)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="fft_pd09.append_zeros"><code class="name flex">
+<span>def <span class="ident">append_zeros</span></span>(<span>t)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Appending of 0 values to table.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>t: Table to append 0's to.
+</code></pre>
+<p>Returns table with 0's appended until len is minpow.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def append_zeros(t):
+    &#34;&#34;&#34;
+    Appending of 0 values to table.
+
+    Parameters
+    ----------
+        t: Table to append 0&#39;s to.
+    Returns table with 0&#39;s appended until len is minpow.
+    &#34;&#34;&#34;
+    n = len(t)
+    minpow = get_minimum_power(n)
+
+    fft_input = np.array(t)
+    zeros = np.array([0] * (minpow-n))
+
+    return np.append(fft_input, zeros)</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.bellman_ford"><code class="name flex">
+<span>def <span class="ident">bellman_ford</span></span>(<span>u, ma_g)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Bellman-Ford algorithm implementation .</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>ma_g: Numpy Adjacency matrix.
+</code></pre>
+<p>Returns lists with distances from u to other and list with previous nodes.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bellman_ford(u, ma_g):
+    &#34;&#34;&#34;
+    Bellman-Ford algorithm implementation .
+
+    Parameters
+    ----------
+        ma_g: Numpy Adjacency matrix.
+    Returns lists with distances from u to other and list with previous nodes.
+    &#34;&#34;&#34;
+    # Get length
+    length = len(ma_g)
+
+    # Initialize arrays
+    dist = np.array([np.inf for _ in range(length)])
+    dist[u] = 0
+    prev = np.array([i for i in range(length)])
+
+    # Algorithm implementation (k-1 times)
+    for k in range(length-1):
+        for i in range(length):
+            for j in range(length):
+                # There is an edge u -&gt; i
+                if ma_g[i][j] != np.inf:
+                    found = dist[i] + ma_g[i][j]
+                    # Update procedure
+                    if dist[j] &gt; found:
+                        dist[j] = found
+                        prev[j] = i
+
+    # Output returnal
+    return dist, prev</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.fft"><code class="name flex">
+<span>def <span class="ident">fft</span></span>(<span>t)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculation of FFT from a NumPy array.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>t: Table.
+</code></pre>
+<p>Returns Fast Fourier Transform of input.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fft(t):
+    &#34;&#34;&#34;
+    Calculation of FFT from a NumPy array.
+
+    Parameters
+    ----------
+        t: Table.
+    Returns Fast Fourier Transform of input.
+    &#34;&#34;&#34;
+
+    # Minimum power of 2 + 0&#39;s appending
+    fft_input = append_zeros(t)
+
+    # Call to recursive function∫
+    fft_output = recursive_fft(fft_input)
+
+    # Output returnal
+    return fft_output</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.find_max_common_subsequence"><code class="name flex">
+<span>def <span class="ident">find_max_common_subsequence</span></span>(<span>str_1, str_2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Search of possible maximum length common subsequence in given input.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>str_1: First string as input.
+str_2: Second string as input.
+</code></pre>
+<p>Returns possible maximum length common subsequence.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_max_common_subsequence(str_1, str_2):
+    &#34;&#34;&#34;
+    Search of possible maximum length common subsequence in given input.
+
+    Parameters
+    ----------
+        str_1: First string as input.
+        str_2: Second string as input.
+    Returns possible maximum length common subsequence.
+    &#34;&#34;&#34;
+    L = max_length_common_subsequence(str_1, str_2)
+    m = len(str_1)
+    n = len(str_2)
+    index = int(L[m][n])
+
+    # Create a character array to store the lcs string
+    lcs = [&#34;&#34;] * index
+    lcs[index-1] = &#34;&#34;
+
+    # Start from the right-bottom-most corner and
+    # store characters in lcs[]
+    i = m
+    j = n
+    while i &gt; 0 and j &gt; 0:
+        # If current character str_1[] and str_2 are same
+        # character is part of LCS
+        if str_1[i-1] == str_2[j-1]:
+            lcs[index-1] = str_1[i-1]
+            i -= 1
+            j -= 1
+            index -= 1
+
+        # If not same, find the larger and
+        # go in the direction of larger
+        elif L[i-1][j] &gt; L[i][j-1]:
+            i -= 1
+        else:
+            j -= 1
+
+    return &#34;&#34;.join(lcs)</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.floyd_warshall"><code class="name flex">
+<span>def <span class="ident">floyd_warshall</span></span>(<span>ma_g)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>ma_g: Adjacency Matrix
+</code></pre>
+<p>Returns Matrix with minimum costs.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def floyd_warshall(ma_g):
+    &#34;&#34;&#34;
+    Computes Floyd-Warshall algorithm for a given adjacency matrix of a graph.
+
+    Parameters
+    ----------
+        ma_g: Adjacency Matrix
+    Returns Matrix with minimum costs.
+    &#34;&#34;&#34;
+
+    result = np.copy(ma_g)  # Save matrix variable
+    n = len(ma_g)  # Store number of rows (square matrix)
+    prev = np.zeros(shape=(n, n))  # Previous path
+
+    # Previous array initialization
+    for i in np.arange(n):
+        prev[i][i] = i
+        for j in np.arange(n):
+            if result[i][j] != np.inf:
+                prev[i][j] = i
+
+    for k in range(n):  # For every 1D
+        for i in range(n):  # For every 2D
+            for j in range(n):  # For every 3D
+                # Compare the cost with other paths
+                if result[i][j] &gt; result[i][k] + result[k][j]:
+                    result[i][j] = result[i][k] + result[k][j]
+                    # Previous update
+                    prev[i][j] = k
+
+    return result, prev</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.get_minimum_power"><code class="name flex">
+<span>def <span class="ident">get_minimum_power</span></span>(<span>n)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculation of minimum power of 2 greater than n.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n: Length to get minimum power of 2.
+</code></pre>
+<p>Returns Minimum power of 2 greater than n.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_minimum_power(n):
+    &#34;&#34;&#34;
+    Calculation of minimum power of 2 greater than n.
+
+    Parameters
+    ----------
+        n: Length to get minimum power of 2.
+    Returns Minimum power of 2 greater than n.
+    &#34;&#34;&#34;
+    return 2 ** math.ceil(math.log(n, 2))</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.invert_fft"><code class="name flex">
+<span>def <span class="ident">invert_fft</span></span>(<span>t, fft_func=&lt;function fft&gt;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Application of inversion algorithm of DFT.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>t: Table.
+fft_func: FFT implementation function.
+</code></pre>
+<p>Returns random protein sequence.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def invert_fft(t, fft_func=fft):
+    &#34;&#34;&#34;
+    Application of inversion algorithm of DFT.
+
+    Parameters
+    ----------
+        t: Table.
+        fft_func: FFT implementation function.
+    Returns random protein sequence.
+    &#34;&#34;&#34;
+    k = len(t)
+
+    # Conjugate input
+    conjugate = np.conj(t)
+
+    # Compute DFT
+    transformate = fft_func(conjugate)
+
+    # Invert DFT
+    output = [np.conj(n) / k for n in transformate]
+
+    return output</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.max_length_common_subsequence"><code class="name flex">
+<span>def <span class="ident">max_length_common_subsequence</span></span>(<span>str_1, str_2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculation of maximum common partial sequences Matrix.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>str_1: First string as input.
+str_2: Second string as input.
+</code></pre>
+<p>Returns matrix with lengths of maximum common partial sequences.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def max_length_common_subsequence(str_1, str_2):
+    &#34;&#34;&#34;
+    Calculation of maximum common partial sequences Matrix.
+
+    Parameters
+    ----------
+        str_1: First string as input.
+        str_2: Second string as input.
+    Returns matrix with lengths of maximum common partial sequences.
+    &#34;&#34;&#34;
+    m = len(str_1)
+    n = len(str_2)
+    L = np.zeros(shape=(m+1, n+1))
+
+    # Counting maximum sequence length
+    for i in range(m+1):
+        for j in range(n+1):
+            if i == 0 or j == 0:
+                L[i][j] = 0
+            elif str_1[i-1] == str_2[j-1]:
+                L[i][j] = L[i-1][j-1] + 1
+            else:
+                L[i][j] = max(L[i-1][j], L[i][j-1])
+
+    return L</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.mult_numeros_fft"><code class="name flex">
+<span>def <span class="ident">mult_numeros_fft</span></span>(<span>num1, num2, fft_func=&lt;function fft&gt;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculation of the product of two polynomials with FFT.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_enteros: Number of integer pairs.
+num_digits_ini: First value of the range.
+num_digits_fin: Final value of the range.
+step: Step between selected range.
+fft_func: FFT function.
+</code></pre>
+<p>Returns product of input polynomials through fft_funct.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mult_numeros_fft(num1, num2, fft_func=fft):
+    &#34;&#34;&#34;
+    Calculation of the product of two polynomials with FFT.
+
+    Parameters
+    ----------
+        n_enteros: Number of integer pairs.
+        num_digits_ini: First value of the range.
+        num_digits_fin: Final value of the range.
+        step: Step between selected range.
+        fft_func: FFT function.
+    Returns product of input polynomials through fft_funct.
+    &#34;&#34;&#34;
+    # Transform to polynomials
+    poli_num1 = num_2_poli(num1)
+    poli_num2 = num_2_poli(num2)
+
+    # Reset to numbers after multiplication
+    return poli_2_num(mult_polinomios_fft(poli_num1, poli_num2))</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.mult_polinomios_fft"><code class="name flex">
+<span>def <span class="ident">mult_polinomios_fft</span></span>(<span>l_pol_1, l_pol_2, fft_func=&lt;function fft&gt;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculation of the product of two polynomials with FFT.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>l_pol_1: First polynomial input.
+l_pol_2: Second polynomial input.
+fft_func: FFT function.
+</code></pre>
+<p>Returns product of input polynomials through fft_funct.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mult_polinomios_fft(l_pol_1, l_pol_2, fft_func=fft):
+    &#34;&#34;&#34;
+    Calculation of the product of two polynomials with FFT.
+
+    Parameters
+    ----------
+        l_pol_1: First polynomial input.
+        l_pol_2: Second polynomial input.
+        fft_func: FFT function.
+    Returns product of input polynomials through fft_funct.
+    &#34;&#34;&#34;
+
+    # Adjust of FFT input
+    poli1, poli2 = padding_mult(l_pol_1, l_pol_2)
+
+    # Fast Fourier transformates
+    coefficient1 = fft_func(poli1)
+    coefficient2 = fft_func(poli2)
+
+    # Coefficient multiplication (SECOND STEP)
+    res = [i*j for i, j in zip(coefficient1, coefficient2)]
+
+    # Inversion algorithm with FFT (FINAL STEP)
+    output = invert_fft(res, fft_func=fft_func)
+    output = [int(np.real(i)) for i in np.rint(output)]
+
+    # Round and return NumPy Array
+    return output</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.num_2_poli"><code class="name flex">
+<span>def <span class="ident">num_2_poli</span></span>(<span>num, base=10)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculation of integer list with polynomial coefficients equivalent to
+integer num representation in base base. Increasing order.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>num: Integer input.
+base: Base.
+</code></pre>
+<p>Returns integer list with polynomial coefficients.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def num_2_poli(num, base=10):
+    &#34;&#34;&#34;
+    Calculation of integer list with polynomial coefficients equivalent to
+    integer num representation in base base. Increasing order.
+
+    Parameters
+    ----------
+        num: Integer input.
+        base: Base.
+    Returns integer list with polynomial coefficients.
+    &#34;&#34;&#34;
+    poli = np.array([])
+    while num &gt; 0:
+        num, poli_part = divmod(num, base)
+
+        poli = np.append(poli, poli_part)
+
+    return poli.astype(type(int()))</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.padding_mult"><code class="name flex">
+<span>def <span class="ident">padding_mult</span></span>(<span>l_pol_1, l_pol_2)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>0s padding to generate the fft multiplication array.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>l_pol_1: Array 1.
+l_pol_2: Array 2.
+</code></pre>
+<p>Returns both arrays with appended 0's.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def padding_mult(l_pol_1, l_pol_2):
+    &#34;&#34;&#34;
+    0s padding to generate the fft multiplication array.
+
+    Parameters
+    ----------
+        l_pol_1: Array 1.
+        l_pol_2: Array 2.
+    Returns both arrays with appended 0&#39;s.
+    &#34;&#34;&#34;
+    # Get final length
+    length = len(l_pol_1)+len(l_pol_2)-1
+
+    # Get power of 2
+    minpow = get_minimum_power(length)
+
+    # Append to first array
+    nzeros = minpow - len(l_pol_1)
+    zerosarr = np.array([0]*nzeros)
+    p1 = np.concatenate((l_pol_1, zerosarr), axis=0)
+
+    # Append to first array
+    nzeros = minpow - len(l_pol_2)
+    zerosarr = np.array([0]*nzeros)
+    p2 = np.concatenate((l_pol_2, zerosarr), axis=0)
+
+    return p1, p2</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.poli_2_num"><code class="name flex">
+<span>def <span class="ident">poli_2_num</span></span>(<span>l_pol, base=10)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculation of resulting int from polynomial evaluation in base base.
+Usage of Horner's rule.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>l_pol: Polynomial input.
+base: Base.
+</code></pre>
+<p>Returns polynomial evaluation in base base.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def poli_2_num(l_pol, base=10):
+    &#34;&#34;&#34;
+    Calculation of resulting int from polynomial evaluation in base base.
+    Usage of Horner&#39;s rule.
+
+    Parameters
+    ----------
+        l_pol: Polynomial input.
+        base: Base.
+    Returns polynomial evaluation in base base.
+    &#34;&#34;&#34;
+    ret = int(0)
+    for i in range(len(l_pol)):
+        ret += int(np.real(l_pol[i]*pow(base, i)))
+    return ret</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.rand_numero"><code class="name flex">
+<span>def <span class="ident">rand_numero</span></span>(<span>num_digits, base=10)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Random integer generation with num_digits digits.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>num_digits: Number of digits of the generated number.
+base: Base.
+</code></pre>
+<p>Returns random integer with num_digits digits in base base.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rand_numero(num_digits, base=10):
+    &#34;&#34;&#34;
+    Random integer generation with num_digits digits.
+
+    Parameters
+    ----------
+        num_digits: Number of digits of the generated number.
+        base: Base.
+    Returns random integer with num_digits digits in base base.
+    &#34;&#34;&#34;
+
+    # Random polynomial generation
+    polynomial = rand_polinomio(num_digits, base)
+
+    # Transformation from random polynomial to number (random aswell)
+    return poli_2_num(polynomial)</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.rand_polinomio"><code class="name flex">
+<span>def <span class="ident">rand_polinomio</span></span>(<span>long=1024, base=10)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Random polynomial generation algorithm.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>long: Polynomial length indication.
+</code></pre>
+<p>Returns random polynomial of length long.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rand_polinomio(long=2**10, base=10):
+    &#34;&#34;&#34;
+    Random polynomial generation algorithm.
+
+    Parameters
+    ----------
+        long: Polynomial length indication.
+    Returns random polynomial of length long.
+    &#34;&#34;&#34;
+
+    # Base argument restriction
+    if base &lt; 2 or base &gt; 10:
+        return None
+
+    # Direct return of int generation
+    return np.random.randint(base, size=long).astype(type(int()))</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.recursive_fft"><code class="name flex">
+<span>def <span class="ident">recursive_fft</span></span>(<span>t)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Calculation of FFT from a NumPy array. Recursive implementation.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>t: Table.
+</code></pre>
+<p>Returns Fast Fourier Transform of input.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def recursive_fft(t):
+    &#34;&#34;&#34;
+    Calculation of FFT from a NumPy array. Recursive implementation.
+
+    Parameters
+    ----------
+        t: Table.
+    Returns Fast Fourier Transform of input.
+    &#34;&#34;&#34;
+    # FFT RETURN VARIABLE
+    result = np.array([])
+
+    # Get table length (Is power of 2)
+    length = len(t)
+    prev2k = math.ceil(length / 2)
+
+    # Base case with unique value
+    if length &lt;= 1:
+        return t
+
+    # Separate into index even and odds
+    even, odds = t[::2], t[1::2]
+
+    # Recursive call
+    f_e = recursive_fft(even)
+    f_o = recursive_fft(odds)
+
+    for i in range(length):
+        # First Transformate Operand
+        first = f_e[i % prev2k]
+
+        # Second Transformate Operand
+        tmp1 = (2 * np.pi * 1j) * (i / length)
+        tmp2 = f_o[i % prev2k]
+        second = np.exp(tmp1) * tmp2
+
+        # Transformate result storage
+        result = np.append(result, first + second)
+
+    return result</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.time_fft"><code class="name flex">
+<span>def <span class="ident">time_fft</span></span>(<span>n_tablas, num_coefs_ini, num_coefs_fin, step, fft_func=&lt;function fft&gt;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generation of n_tables and mean calculation.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_tablas: Number of tables to operate with.
+num_coefs_ini: First value of the range.
+num_coefs_fin: Final value of the range.
+step: Step between selected range.
+fft_func: FFT function.
+</code></pre>
+<p>Returns list with mean times of FFT function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def time_fft(n_tablas,
+             num_coefs_ini,
+             num_coefs_fin,
+             step,
+             fft_func=fft):
+    &#34;&#34;&#34;
+    Generation of n_tables and mean calculation.
+
+    Parameters
+    ----------
+        n_tablas: Number of tables to operate with.
+        num_coefs_ini: First value of the range.
+        num_coefs_fin: Final value of the range.
+        step: Step between selected range.
+        fft_func: FFT function.
+    Returns list with mean times of FFT function.
+    &#34;&#34;&#34;
+    times = []
+    for coeficientes in np.arange(num_coefs_ini, num_coefs_fin, step):
+        count = 0
+        for _ in range(n_tablas):
+            poly = rand_polinomio(coeficientes)
+            initial_time = time.time()
+            fft(poly)
+            final_time = time.time()
+            count += final_time - initial_time
+
+        times.append(count / n_tablas)
+
+    return times</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.time_mult_numeros_fft"><code class="name flex">
+<span>def <span class="ident">time_mult_numeros_fft</span></span>(<span>n_enteros, num_coefs_ini, num_coefs_fin, step, fft_func=&lt;function fft&gt;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generation of n_enteros integer tables and mean calculation.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_enteros: Number of tables to operate with.
+num_coefs_ini: First value of the range.
+num_coefs_fin: Final value of the range.
+step: Step between selected range.
+fft_func: FFT function.
+</code></pre>
+<p>Returns list with mean times of FFT function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def time_mult_numeros_fft(n_enteros,
+                          num_coefs_ini,
+                          num_coefs_fin,
+                          step,
+                          fft_func=fft):
+    &#34;&#34;&#34;
+    Generation of n_enteros integer tables and mean calculation.
+
+    Parameters
+    ----------
+        n_enteros: Number of tables to operate with.
+        num_coefs_ini: First value of the range.
+        num_coefs_fin: Final value of the range.
+        step: Step between selected range.
+        fft_func: FFT function.
+    Returns list with mean times of FFT function.
+    &#34;&#34;&#34;
+    times = []
+    for coeficientes in np.arange(num_coefs_ini, num_coefs_fin, step):
+        count = 0
+        for _ in range(n_enteros):
+            poly1 = rand_polinomio(coeficientes)
+            poly2 = rand_polinomio(coeficientes)
+            num1 = poli_2_num(poly1)
+            num2 = poli_2_num(poly2)
+            initial_time = time.time()
+            mult_numeros_fft(num1, num2)
+            final_time = time.time()
+            count += final_time - initial_time
+
+        times.append(count / n_enteros)
+
+    return times</code></pre>
+</details>
+</dd>
+<dt id="fft_pd09.time_mult_polinomios_fft"><code class="name flex">
+<span>def <span class="ident">time_mult_polinomios_fft</span></span>(<span>n_pairs, num_coefs_ini, num_coefs_fin, step, fft_func=&lt;function fft&gt;)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generation of n_pairs integer tables and mean calculation.</p>
+<h2 id="parameters">Parameters</h2>
+<pre><code>n_pairs: Number of integer pairs to operate with.
+num_coefs_ini: First value of the range.
+num_coefs_fin: Final value of the range.
+step: Step between selected range.
+fft_func: FFT function.
+</code></pre>
+<p>Returns list with mean times of FFT function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def time_mult_polinomios_fft(n_pairs,
+                             num_coefs_ini,
+                             num_coefs_fin,
+                             step,
+                             fft_func=fft):
+    &#34;&#34;&#34;
+    Generation of n_pairs integer tables and mean calculation.
+
+    Parameters
+    ----------
+        n_pairs: Number of integer pairs to operate with.
+        num_coefs_ini: First value of the range.
+        num_coefs_fin: Final value of the range.
+        step: Step between selected range.
+        fft_func: FFT function.
+    Returns list with mean times of FFT function.
+    &#34;&#34;&#34;
+    times = []
+    for coeficientes in np.arange(num_coefs_ini, num_coefs_fin, step):
+        count = 0
+        for _ in range(n_pairs):
+            poly1 = rand_polinomio(coeficientes)
+            poly2 = rand_polinomio(coeficientes)
+            fft_poly1 = fft(poly1)
+            fft_poly2 = fft(poly2)
+            initial_time = time.time()
+            mult_polinomios_fft(fft_poly1, fft_poly2)
+            final_time = time.time()
+            count += final_time - initial_time
+
+        times.append(count / n_pairs)
+
+    return times</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="fft_pd09.append_zeros" href="#fft_pd09.append_zeros">append_zeros</a></code></li>
+<li><code><a title="fft_pd09.bellman_ford" href="#fft_pd09.bellman_ford">bellman_ford</a></code></li>
+<li><code><a title="fft_pd09.fft" href="#fft_pd09.fft">fft</a></code></li>
+<li><code><a title="fft_pd09.find_max_common_subsequence" href="#fft_pd09.find_max_common_subsequence">find_max_common_subsequence</a></code></li>
+<li><code><a title="fft_pd09.floyd_warshall" href="#fft_pd09.floyd_warshall">floyd_warshall</a></code></li>
+<li><code><a title="fft_pd09.get_minimum_power" href="#fft_pd09.get_minimum_power">get_minimum_power</a></code></li>
+<li><code><a title="fft_pd09.invert_fft" href="#fft_pd09.invert_fft">invert_fft</a></code></li>
+<li><code><a title="fft_pd09.max_length_common_subsequence" href="#fft_pd09.max_length_common_subsequence">max_length_common_subsequence</a></code></li>
+<li><code><a title="fft_pd09.mult_numeros_fft" href="#fft_pd09.mult_numeros_fft">mult_numeros_fft</a></code></li>
+<li><code><a title="fft_pd09.mult_polinomios_fft" href="#fft_pd09.mult_polinomios_fft">mult_polinomios_fft</a></code></li>
+<li><code><a title="fft_pd09.num_2_poli" href="#fft_pd09.num_2_poli">num_2_poli</a></code></li>
+<li><code><a title="fft_pd09.padding_mult" href="#fft_pd09.padding_mult">padding_mult</a></code></li>
+<li><code><a title="fft_pd09.poli_2_num" href="#fft_pd09.poli_2_num">poli_2_num</a></code></li>
+<li><code><a title="fft_pd09.rand_numero" href="#fft_pd09.rand_numero">rand_numero</a></code></li>
+<li><code><a title="fft_pd09.rand_polinomio" href="#fft_pd09.rand_polinomio">rand_polinomio</a></code></li>
+<li><code><a title="fft_pd09.recursive_fft" href="#fft_pd09.recursive_fft">recursive_fft</a></code></li>
+<li><code><a title="fft_pd09.time_fft" href="#fft_pd09.time_fft">time_fft</a></code></li>
+<li><code><a title="fft_pd09.time_mult_numeros_fft" href="#fft_pd09.time_mult_numeros_fft">time_mult_numeros_fft</a></code></li>
+<li><code><a title="fft_pd09.time_mult_polinomios_fft" href="#fft_pd09.time_mult_polinomios_fft">time_mult_polinomios_fft</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

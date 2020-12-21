@@ -202,7 +202,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     if args.pareja is not None:
-        f_path = "./p3" + args.pareja + "/fft_pd" + args.pareja + ".py"
+        f_path = "." + "/fft_pd" + args.pareja + ".py"
         if os.path.isfile(f_path):
             #str_comm = "cp ./p3" + args.pareja + "/fft_pd" + args.pareja + ".py  ./fft_pd.py"
             #str_comm = "cp euler" + args.pareja + ".py  ./euler.py"
