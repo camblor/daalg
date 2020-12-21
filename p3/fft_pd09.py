@@ -2,28 +2,75 @@ import numpy as np
 import time
 import math
 
-def get_minimum_power(t):
+def get_minimum_power(n):
     """
     Calculation of minimum power of 2 greater than n.
 
     Parameters
     ----------
-        n: input number to calculate with.
+        n: Length to get minimum power of 2.
     Returns Minimum power of 2 greater than n.
     """
+    return 2 ** math.ceil(math.log(n, 2))
+
+def append_zeros(t):
+    """
+    Appending of 0 values to table.
+
+    Parameters
+    ----------
+        t: Table to append 0's to.
+    Returns table with 0's appended until len is minpow.
+    """
+    n = len(t)
+    minpow = get_minimum_power(n)
+
+    fft_input = np.array(t)
+    zeros = np.array([0] * (minpow-n))
+
+    return np.append(fft_input, zeros)
+
+def recursive_fft(t):
+    """
+    Calculation of FFT from a NumPy array. Recursive implementation.
+
+    Parameters
+    ----------
+        t: Table.
+    Returns Fast Fourier Transform of input.
+    """
+    # FFT RETURN VARIABLE
+    result = np.array([])
+
+    # Get table length (Is power of 2)
     length = len(t)
-    minpow = 2 ** math.ceil(math.log(length, 2))
+    prev2k = math.ceil(length / 2)
 
-    # Power of 2 case
-    fft_input = t
+    # Base case with unique value
+    if length <= 1: 
+        return t
 
-    # Not power of 2 case: Appending 0's
-    if minpow > length:
-        for _ in range(minpow-length):
-            fft_input = np.append(fft_input, [0])
+    # Separate into index even and odds
+    even, odds = t[::2], t[1::2]
 
-    return minpow, fft_input
+    # Recursive call
+    f_e = recursive_fft(even)
+    f_o = recursive_fft(odds)
 
+    for i in range(length):
+        # First Transformate Operand
+        first = f_e[i % prev2k]
+        
+        #Second Transformate Operand
+        tmp1 = (2 * np.pi * 1j) * (i / length)
+        tmp2 = f_o[i % prev2k]
+        second = np.exp(tmp1) * tmp2
+
+        # Transformate result storage
+        result = np.append(result, first + second)
+
+    return result
+    
 def fft(t):
     """
     Calculation of FFT from a NumPy array.
@@ -33,58 +80,15 @@ def fft(t):
         t: Table.
     Returns Fast Fourier Transform of input.
     """
-    # Obtaining table length
-    length = len(t)
 
-    # FFT STORAGE VARIABLES
-    pares = []
-    impares = []
-
-    # FFT RETURN VARIABLE
-    result = np.array([])    
-
-    # Minimum power of 2 + 0's appending
-    minpow, fft_input = get_minimum_power(t)
-
-    # Not power of 2 case: Appending 0's
-    if minpow > length:
-        for _ in range(minpow-length):
-            fft_input = np.append(fft_input, [0])
-        
-    # Base case with unique value
-    if length <= 1: 
-        return fft_input
+    # Minimum power of 2 + 0's appending    
+    fft_input = append_zeros(t)
     
-    # Get odd and even elements
-    for element, i in zip(fft_input, range(minpow)):
-        if i % 2 == 0:
-            pares.append(element)
-        else:
-            impares.append(element)
+    # Call to recursive function∫
+    fft_output = recursive_fft(fft_input)
 
-
-    # Recursive call
-    f_e = fft(pares)
-    f_o = fft(impares)
-    
-
-    # 2 ^ K-1
-    previous2power = int(minpow/2)
-    
-    for i in range(minpow):
-        # First Transformate Operand
-        first = f_e[i % previous2power]
-        
-        #Second Transformate Operand
-        tmp1 = (2 * np.pi * 1j) * (i / minpow)
-        tmp2 = f_o[i % previous2power]
-        second = np.exp(tmp1) * tmp2
-
-        # Transformate result storage
-        result = np.append(result, np.round(first, 2) + np.round(second,2 ))
-
-    # Fast Fourier transform
-    return result
+    # Output returnal
+    return fft_output
 
 def invert_fft(t, fft_func=fft):
     """
@@ -96,10 +100,17 @@ def invert_fft(t, fft_func=fft):
         fft_func: FFT implementation function.
     Returns random protein sequence.
     """
+    k = len(t)
+
+    # Conjugate input
     conjugate = np.conj(t)
+
+    # Compute DFT
     transformate = fft_func(conjugate)
-    length = len(transformate)
-    output = np.conj(t)
+
+    # Invert DFT
+    output = [np.conj(n) / k for n in transformate]
+
     return output
 
 def rand_polinomio(long=2**10, base=10):
@@ -117,7 +128,7 @@ def rand_polinomio(long=2**10, base=10):
         return None
 
     # Direct return of int generation
-    return list(np.random.randint(base, size=long))
+    return np.random.randint(base, size=long).astype(type(int()))
 
 def poli_2_num(l_pol, base=10):
     """
@@ -130,11 +141,10 @@ def poli_2_num(l_pol, base=10):
         base: Base.
     Returns polynomial evaluation in base base.
     """
-    tmp=0
-    for coef in reversed(l_pol):
-        res=int(coef)+tmp
-        tmp=res*base
-    return res
+    ret = int(0)
+    for i in range(len(l_pol)):
+        ret += int(np.real(l_pol[i]*pow(base, i)))
+    return ret
 
 def rand_numero(num_digits, base=10):
     """
@@ -164,15 +174,42 @@ def num_2_poli(num, base=10):
         base: Base.
     Returns integer list with polynomial coefficients.
     """
-    poli = []
+    poli = np.array([])
     while num > 0:
         num, poli_part = divmod(num, base)
 
-        poli.append(poli_part)
+        poli = np.append(poli, poli_part)
 
-    return poli
+    return poli.astype(type(int()))
 
-# TODO listas de enteros de python
+def padding_mult(l_pol_1, l_pol_2):
+    """
+    0s padding to generate the fft multiplication array.
+
+    Parameters
+    ----------
+        l_pol_1: Array 1.
+        l_pol_2: Array 2.
+    Returns both arrays with appended 0's.
+    """
+    # Get final length
+    length = len(l_pol_1)+len(l_pol_2)-1
+
+    # Get power of 2
+    minpow = get_minimum_power(length)
+
+    # Append to first array
+    nzeros = minpow - len(l_pol_1)
+    zerosarr = np.array([0]*nzeros)
+    p1 = np.concatenate((l_pol_1,zerosarr),axis=0)
+
+    # Append to first array
+    nzeros = minpow - len(l_pol_2)
+    zerosarr = np.array([0]*nzeros)
+    p2 = np.concatenate((l_pol_2,zerosarr),axis=0)
+
+    return p1, p2
+
 def mult_polinomios_fft(l_pol_1, l_pol_2, fft_func=fft):
     """
     Calculation of the product of two polynomials with FFT.
@@ -186,22 +223,21 @@ def mult_polinomios_fft(l_pol_1, l_pol_2, fft_func=fft):
     """
 
     # Adjust of FFT input
-    _, poli1 = get_minimum_power(l_pol_1)
-    _, poli2 = get_minimum_power(l_pol_2)
+    poli1, poli2 = padding_mult(l_pol_1, l_pol_2)
 
     # Fast Fourier transformates
     coefficient1=fft_func(poli1)
     coefficient2=fft_func(poli2)
 
     # Coefficient multiplication (SECOND STEP)
-    for i in range(len(coefficient1)):
-        coefficient1[i] *= coefficient2[i]
-
+    res = [i*j for i,j in zip(coefficient1, coefficient2)]
+    
     # Inversion algorithm with FFT (FINAL STEP)
-    output = invert_fft(coefficient1, fft_func=fft_func)
+    output = invert_fft(res, fft_func=fft_func)
+    output = [int(np.real(i)) for i in np.rint(output)]
 
     # Round and return NumPy Array
-    return np.rint(output)
+    return output
 
 def mult_numeros_fft(num1, num2, fft_func=fft):
     """
@@ -216,8 +252,11 @@ def mult_numeros_fft(num1, num2, fft_func=fft):
         fft_func: FFT function.
     Returns product of input polynomials through fft_funct.
     """
+    # Transform to polynomials
     poli_num1 = num_2_poli(num1)
     poli_num2 = num_2_poli(num2)
+
+    # Reset to numbers after multiplication
     return poli_2_num(mult_polinomios_fft(poli_num1, poli_num2))
 
 def time_fft(n_tablas, 
@@ -333,18 +372,25 @@ def floyd_warshall(ma_g):
     n = len(ma_g)  # Store number of rows (square matrix)
     prev = np.zeros(shape=(n,n)) # Previous path
 
+    # Previous array initialization
+    for i in np.arange(n):
+        prev[i][i] = i
+        for j in np.arange(n):
+            if result[i][j] != np.inf:
+                prev[i][j] = i
+
     for k in range(n):  # For every 1D
         for i in range(n):  # For every 2D
             for j in range(n):  # For every 3D
                 # Compare the cost with other paths
                 if result[i][j] > result[i][k] + result[k][j]:
                     result[i][j] = result[i][k] + result[k][j]
+                    # Previous update
                     prev[i][j] = k
-                result[i][j] = min(result[i][j], result[i][k] + result[k][j])
 
-    return result
+    return result, prev
 
-def bellman_ford(ma_g):
+def bellman_ford(u, ma_g):
     """
     Bellman-Ford algorithm implementation .
 
@@ -353,8 +399,28 @@ def bellman_ford(ma_g):
         ma_g: Numpy Adjacency matrix.
     Returns lists with distances from u to other and list with previous nodes.
     """
-    print(ma_g)
+    # Get length
+    length = len(ma_g)
 
+    # Initialize arrays
+    dist = np.array([np.inf for _ in range(length)])
+    dist[u] = 0
+    prev = np.array([i for i in range(length)])
+
+    # Algorithm implementation (k-1 times)
+    for k in range(length-1):
+        for i in range(length):
+            for j in range(length):
+                # There is an edge u -> i
+                if ma_g[i][j] != np.inf:                    
+                    found = dist[i] + ma_g[i][j]
+                    # Update procedure
+                    if dist[j] > found:
+                        dist[j] = found
+                        prev[j] = i
+
+    # Output returnal
+    return dist, prev
 
 def max_length_common_subsequence(str_1, str_2):
     """
@@ -370,13 +436,12 @@ def max_length_common_subsequence(str_1, str_2):
     n = len(str_2)
     L = np.zeros(shape=(m+1, n+1))
   
-    # Following steps build L[m+1][n+1] in bottom up fashion. Note 
-    # that L[i][j] contains length of LCS of X[0..i-1] and Y[0..j-1]  
+    # Counting maximum sequence length 
     for i in range(m+1): 
         for j in range(n+1): 
             if i == 0 or j == 0: 
                 L[i][j] = 0
-            elif X[i-1] == Y[j-1]: 
+            elif str_1[i-1] == str_2[j-1]: 
                 L[i][j] = L[i-1][j-1] + 1
             else: 
                 L[i][j] = max(L[i-1][j], L[i][j-1])
@@ -396,7 +461,6 @@ def find_max_common_subsequence(str_1, str_2):
     L = max_length_common_subsequence(str_1, str_2)
     m = len(str_1)
     n = len(str_2)
-    # Following code is used to print LCS 
     index = int(L[m][n]) 
   
     # Create a character array to store the lcs string 
@@ -404,50 +468,24 @@ def find_max_common_subsequence(str_1, str_2):
     lcs[index-1] = "" 
 
   
-    # Start from the right-most-bottom-most corner and 
-    # one by one store characters in lcs[] 
+    # Start from the right-bottom-most corner and 
+    # store characters in lcs[] 
     i = m 
     j = n 
-    while i > 0 and j > 0: 
-  
-        # If current character in X[] and Y are same, then 
-        # current character is part of LCS 
-        if X[i-1] == Y[j-1]: 
-            lcs[index-1] = X[i-1] 
+    while i > 0 and j > 0:
+        # If current character str_1[] and str_2 are same 
+        # character is part of LCS 
+        if str_1[i-1] == str_2[j-1]: 
+            lcs[index-1] = str_1[i-1] 
             i-=1
             j-=1
             index-=1
   
-        # If not same, then find the larger of two and 
-        # go in the direction of larger value 
+        # If not same, find the larger and 
+        # go in the direction of larger 
         elif L[i-1][j] > L[i][j-1]: 
             i-=1
         else: 
             j-=1
-  
-    print ("Longest Common Subsequence:", "".join(lcs))
 
-
-prueba = fft(np.array([1, 2, 1, 0]))
-
-salida = invert_fft(np.array([1, 2, 1, 0]))
-print("prueba:", prueba)
-print("salida:", salida)
-randompoly = rand_polinomio(4)
-print("random:", randompoly)
-
-hola = poli_2_num(randompoly)
-print(hola)
-
-print(time_mult_polinomios_fft(10, 5, 40, 5))
-
-# Longest subsequence
-X = "biscuit"
-Y = "suitcase"
-print("Lengths (i,j) of LCS are ")
-print (max_length_common_subsequence(X, Y)) 
-
-# Driver program 
-X = "AGGTAB"
-Y = "GXTXAYB"
-find_max_common_subsequence(X, Y) 
+    return "".join(lcs)
