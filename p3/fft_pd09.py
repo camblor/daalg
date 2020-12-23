@@ -386,7 +386,8 @@ def floyd_warshall(ma_g):
 
     result = np.copy(ma_g)  # Save matrix variable
     n = len(ma_g)  # Store number of rows (square matrix)
-    prev = np.zeros(shape=(n, n))  # Previous path
+    prev = np.full((n, n), None)  # Previous path
+    
 
     # Previous array initialization
     for i in np.arange(n):
@@ -402,7 +403,7 @@ def floyd_warshall(ma_g):
                 if result[i][j] > result[i][k] + result[k][j]:
                     result[i][j] = result[i][k] + result[k][j]
                     # Previous update
-                    prev[i][j] = k
+                    prev[i][j] = prev[k][j]
 
     return result, prev
 
@@ -422,7 +423,8 @@ def bellman_ford(u, ma_g):
     # Initialize arrays
     dist = np.array([np.inf for _ in range(length)])
     dist[u] = 0
-    prev = np.array([i for i in range(length)])
+    prev = np.array([None for i in range(length)])
+    prev[u] = u
 
     # Algorithm implementation (k-1 times)
     for k in range(length-1):
